@@ -1,5 +1,8 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import RestrictedRoute from "../RestrictedRoute/RestrictedRoute.jsx";
+import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const SigninPage = lazy(() => import("../../pages/SigninPage/SigninPage"));
