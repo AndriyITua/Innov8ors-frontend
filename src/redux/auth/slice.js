@@ -1,6 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+// import { createSlice } from "@reduxjs/toolkit";
 
-// Стан даних про користувача
-const authSlise = createSlice({});
+// // Стан даних про користувача
+// const authSlise = createSlice({
+//   name: "auth",
+// });
 
-export const authReduser = authSlise.reducer;
+// export const authReduser = authSlise.reducer;
