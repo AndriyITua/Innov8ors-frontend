@@ -1,5 +1,5 @@
 import AuthForm from "../../components/AuthForm/AuthForm";
-import Container from "../../components/Container/Container";
+// import Container from "../../components/Container/Container";
 import css from "./SignupPage.module.css";
 
 export default function SignupPage() {
@@ -7,10 +7,10 @@ export default function SignupPage() {
     <>
       <p>Signup Page</p>
       <section className={css.signupSection}>
-        <Container>
+        <div className={css.container}>
           <h3 className={css.formText}>Sign Up</h3>
           <AuthForm />
-        </Container>
+        </div>
       </section>
     </>
   );
