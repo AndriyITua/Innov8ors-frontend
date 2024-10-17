@@ -4,6 +4,7 @@ import { useId } from "react";
 
 import css from "./AuthForm.module.css";
 import signupSchema from "../../validation/signupSchema";
+import { NavLink } from "react-router-dom";
 
 export default function AuthForm() {
   const emailFieldId = useId();
@@ -70,7 +71,9 @@ export default function AuthForm() {
           </button>
         </Form>
       </Formik>
-      {/* <NavLink>Sign in</NavLink> */}
+      <NavLink className={css.navlink} to="/signin">
+        Sign in
+      </NavLink>
     </>
   );
 }

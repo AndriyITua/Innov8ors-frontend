@@ -6,10 +6,12 @@ export default function SignupPage() {
   return (
     <>
       <p>Signup Page</p>
-      <Container>
-        <h3 className={css.formText}>Sign Up</h3>
-        <AuthForm />
-      </Container>
+      <section className={css.signupSection}>
+        <Container>
+          <h3 className={css.formText}>Sign Up</h3>
+          <AuthForm />
+        </Container>
+      </section>
     </>
   );
 }
