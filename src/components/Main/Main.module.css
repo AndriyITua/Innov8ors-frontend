@@ -1,0 +1,6 @@
+.welcomeSection {
+  background-image: url("../../assets/welcomePageImages/bg_mobile.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% auto;
+}

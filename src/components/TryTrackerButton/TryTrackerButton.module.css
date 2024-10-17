@@ -1,0 +1,28 @@
+.welcomeTryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  border-radius: 10px;
+  padding: 8px 30px;
+  width: 280px;
+  height: 36px;
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  background: var(--primary-color-blue);
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--primary-color-white);
+  border: none;
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.welcomeTryBtn:hover {
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.34);
+}
+.welcomeTryBtn:active {
+  box-shadow: none;
+}
