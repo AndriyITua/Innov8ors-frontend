@@ -42,7 +42,7 @@ export default function AuthForm() {
               Enter your email
             </label>
             <Field
-              className={css.input}
+              className={css.inputEmail}
               type="email"
               name="email"
               id={emailFieldId}
@@ -62,9 +62,9 @@ export default function AuthForm() {
                 id={passFieldId}
                 placeholder="Password"
               ></Field>
-              <p onClick={handleClick} className={css.eye}>
+              <span onClick={handleClick} className={css.eye}>
                 {show ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
-              </p>
+              </span>
             </div>
 
             <ErrorMessage
@@ -85,9 +85,9 @@ export default function AuthForm() {
                 id={repeatPassFieldId}
                 placeholder="Repeat password"
               />
-              <p onClick={handleClick} className={css.eye}>
+              <span onClick={handleClick} className={css.eye}>
                 {show ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
-              </p>
+              </span>
             </div>
 
             <ErrorMessage
@@ -105,12 +105,12 @@ export default function AuthForm() {
       <NavLink className={css.navlink} to="/signin">
         Sign in
       </NavLink>
-      <div className={css.bottleImage}>
+      {/* <div className={css.bottleImage}>
         <img
-          src="../../assets/signupPageImages/bottle-image.jpg"
+          src="../../assets/signupPageImages/bottle-signup.svg"
           alt="Water Bottle"
         />
-      </div>
+      </div> */}
     </>
   );
 }

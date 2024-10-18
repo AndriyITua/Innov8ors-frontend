@@ -11,6 +11,24 @@
     /* max-width: 280px; */
     width: 100%;
     height: 44px;
+    /* border: 1px solid var(--secondary-color-light-gray); */
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 10px;
+    background: var(--primary-color-white);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--secondary-color-light-blue);
+    border: hidden;
+    outline: none;
+
+    
+
+}
+.inputEmail {
+width: 100%;
+    height: 44px;
     border: 1px solid var(--secondary-color-light-gray);
     border-radius: 6px;
     padding: 12px 10px;
@@ -19,8 +37,7 @@
     font-size: 16px;
     line-height: 20px;
     color: var(--secondary-color-light-blue);
-    
-
+    outline: none;
 }
 
 
@@ -30,24 +47,38 @@
     width: 100%;
 }
 .eyeContainer {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    background-color: var(--primary-color-white);
+    outline: none;
+    padding-right: 12px;
+    
 }
 
 .eye {
     color: var(--primary-color-blue);
     cursor: pointer;
+    width: 16px;
+    height: 16px;
+    padding-right: 12px;
 }
 
 .input::placeholder {
     color: var(--secondary-color-light-blue);
 }
+.inputEmail::placeholder {
+    color: var(--secondary-color-light-blue);
+}
 
-.input[type="password"] {
+/* .input[type="password"] {
     font-family: 'password', sans-serif;
     -webkit-text-security: disc;
-}
+} */
+
 
 .input-error {
     border-color: var(--secondary-color-red);
@@ -99,6 +130,7 @@
     letter-spacing: 0%;
     text-align: left;
     color: var(--primary-color-blue);
+    /* margin-bottom: 184px; */
 }
 
 /* .bottleImage {
