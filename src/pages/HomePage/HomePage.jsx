@@ -1,5 +1,12 @@
 import css from "./HomePage.module.css";
+import WaterRatioPanel from "../../components/WaterRatioPanel/WaterRatioPanel";
 
 export default function HomePage() {
-  return <p>Home page</p>;
+  return <div>
+    <p>Home page</p>
+    <WaterRatioPanel/>
+  </div> 
+  
+    
+  
 }
