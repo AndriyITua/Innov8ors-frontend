@@ -80,7 +80,7 @@ export default function AuthForm() {
             <div className={css.eyeContainer}>
               <Field
                 className={css.input}
-                type="text"
+                type={show ? "text" : "password"}
                 name="repeat"
                 id={repeatPassFieldId}
                 placeholder="Repeat password"
