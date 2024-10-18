@@ -1,0 +1,23 @@
+@import "../../styles/variables.css";
+
+.section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  min-height: 100vh;
+
+  background-image: url("../../assets/signinPageImages/BottleBackground.png"),
+    url("../../assets/signinPageImages/BubblesBackground.png");
+
+  background-size: 280px, 320px;
+  background-repeat: no-repeat;
+  background-position: 20px 417px, 10px 48px;
+}
+
+.title {
+  text-align: left;
+  font-family: Roboto;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.23;
+  margin-bottom: 16px;
+}
