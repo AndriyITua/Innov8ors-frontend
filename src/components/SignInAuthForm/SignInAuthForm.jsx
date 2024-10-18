@@ -21,11 +21,10 @@ export default function SignInAuthForm() {
 
   const signInSchema = Yup.object().shape({
     email: Yup.string()
-      .matches(emailPattern, "Invalid email format")
+      .matches(emailPattern, "Format example@mail.com")
       .required("Required"),
     password: Yup.string()
-      .min(3, "Too Short!")
-      .max(50, "Too Long!")
+      .min(6, "Password should be at least 6 characters!")
       .required("Required"),
   });
 
