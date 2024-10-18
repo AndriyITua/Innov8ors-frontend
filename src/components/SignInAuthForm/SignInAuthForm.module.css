@@ -18,7 +18,7 @@
 
 .input {
   padding: 12px 10px;
-  min-width: 280px;
+  width: 280px;
   border-radius: 6px;
   border: 1px solid var(--secondary-color-light-gray);
   background-color: var(--primary-color-white);
@@ -40,6 +40,7 @@
 }
 
 .submitBtn {
+  width: 280px;
   padding: 8px 30px;
   border-radius: 10px;
   background-color: var(--primary-color-blue);
@@ -65,6 +66,7 @@
 
 .passwordWrapper {
   position: relative;
+  width: 280px;
 }
 
 .icon {

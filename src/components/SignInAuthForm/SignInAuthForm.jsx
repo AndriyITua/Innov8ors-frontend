@@ -1,12 +1,14 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+
+import { emailPattern } from "../../constants/index.js";
 
 import { HiOutlineEyeSlash } from "react-icons/hi2";
 import { HiOutlineEye } from "react-icons/hi2";
 
 import css from "./SignInAuthForm.module.css";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 
 export default function SignInAuthForm() {
   const [shouldPasswordBeShown, setShouldPasswordBeShown] = useState(false);
@@ -18,7 +20,9 @@ export default function SignInAuthForm() {
   };
 
   const signInSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email format").required("Required"),
+    email: Yup.string()
+      .matches(emailPattern, "Invalid email format")
+      .required("Required"),
     password: Yup.string()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
