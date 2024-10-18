@@ -18,3 +18,8 @@ background-size: 280px, 320px;
 background-repeat: no-repeat;
 background-position: 20px 375px, 0px 28px;
 }
+
+.signupSection {
+    padding-top: 24px;
+    padding-bottom: 20px;
+}

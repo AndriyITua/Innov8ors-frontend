@@ -1,11 +1,11 @@
-@import url(../../styles/variables.css);
+/* @import url(../../styles/variables.css); */
 
-.form {
+/* .form {
     display: flex;
     flex-direction: column;
     width: 280px;
     /* height: 304px; */
-}
+
 
 .input {
     /* max-width: 280px; */
@@ -80,9 +80,73 @@ width: 100%;
 } */
 
 
-.input-error {
-    border-color: var(--secondary-color-red);
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+}
 
+.input {
+    width: 100%;
+    height: 44px;
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 10px;
+    background: var(--primary-color-white);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--secondary-color-light-blue);
+    outline: none;
+}
+
+.inputEmail {
+    width: 100%;
+    height: 44px;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    padding: 12px 10px;
+    background: var(--primary-color-white);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--secondary-color-light-blue);
+    outline: none;
+}
+
+.inputContainer {
+    margin-bottom: 16px;
+    position: relative;
+    width: 100%;
+}
+
+.eyeContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    background-color: var(--primary-color-white);
+    outline: none;
+    padding-right: 12px;
+}
+
+.eye {
+    color: var(--primary-color-blue);
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    padding-right: 12px;
+}
+
+.input::placeholder,
+.inputEmail::placeholder {
+    color: var(--secondary-color-light-blue);
+}
+
+.inputError {
+    border-color: var(--secondary-color-red);
 }
 
 .button {
@@ -92,7 +156,6 @@ width: 100%;
     padding: 8px 30px;
     box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
     background-color: var(--primary-color-blue);
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.25;
@@ -112,13 +175,14 @@ width: 100%;
     line-height: 1.33;
 }
 
-
 .error {
     display: block;
-    position: absolute;
-    top: 100%;
-    font-size: 14px; 
+    /* position: absolute;
+    top: 100%; */
+    font-size: 14px;
     color: var(--secondary-color-red);
+    line-height: 18px;
+    margin-top: 4px;
 }
 
 .navlink {
@@ -127,13 +191,5 @@ width: 100%;
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
-    letter-spacing: 0%;
-    text-align: left;
     color: var(--primary-color-blue);
-    /* margin-bottom: 184px; */
 }
-
-/* .bottleImage {
-    width: 280px;
-    height: 210px;
-} */

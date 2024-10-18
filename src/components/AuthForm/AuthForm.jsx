@@ -36,71 +36,84 @@ export default function AuthForm() {
         onSubmit={handleSubmit}
         validationSchema={signupSchema}
       >
-        <Form className={css.form}>
-          <div className={css.inputContainer}>
-            <label className={css.label} htmlFor={emailFieldId}>
-              Enter your email
-            </label>
-            <Field
-              className={css.inputEmail}
-              type="email"
-              name="email"
-              id={emailFieldId}
-              placeholder="E-mail"
-            />
-            <ErrorMessage className={css.error} name="email" component="span" />
-          </div>
-          <div className={css.inputContainer}>
-            <label className={css.label} htmlFor={passFieldId}>
-              Enter your password
-            </label>
-            <div className={css.eyeContainer}>
+        {({ errors, touched }) => (
+          <Form className={css.form}>
+            <div className={css.inputContainer}>
+              <label className={css.label} htmlFor={emailFieldId}>
+                Enter your email
+              </label>
               <Field
-                className={css.input}
-                type={show ? "text" : "password"}
-                name="password"
-                id={passFieldId}
-                placeholder="Password"
-              ></Field>
-              <span onClick={handleClick} className={css.eye}>
-                {show ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
-              </span>
-            </div>
-
-            <ErrorMessage
-              className={css.error}
-              name="password"
-              component="span"
-            />
-          </div>
-          <div className={css.inputContainer}>
-            <label className={css.label} htmlFor={repeatPassFieldId}>
-              Repeat password
-            </label>
-            <div className={css.eyeContainer}>
-              <Field
-                className={css.input}
-                type={show ? "text" : "password"}
-                name="repeat"
-                id={repeatPassFieldId}
-                placeholder="Repeat password"
+                className={`${css.inputEmail} ${
+                  errors.email && touched.email ? css.inputError : ""
+                }`}
+                type="email"
+                name="email"
+                id={emailFieldId}
+                placeholder="E-mail"
               />
-              <span onClick={handleClick} className={css.eye}>
-                {show ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
-              </span>
+              <ErrorMessage
+                className={css.error}
+                name="email"
+                component="span"
+              />
             </div>
-
-            <ErrorMessage
-              className={css.error}
-              name="repeat"
-              component="span"
-            />
-          </div>
-
-          <button className={css.button} type="submit">
-            Sign Up
-          </button>
-        </Form>
+            <div className={css.inputContainer}>
+              <label className={css.label} htmlFor={passFieldId}>
+                Enter your password
+              </label>
+              <div
+                className={`${css.eyeContainer} ${
+                  errors.password && touched.password ? css.inputError : ""
+                }`}
+              >
+                <Field
+                  className={css.input}
+                  type={show ? "text" : "password"}
+                  name="password"
+                  id={passFieldId}
+                  placeholder="Password"
+                />
+                <span onClick={handleClick} className={css.eye}>
+                  {show ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
+                </span>
+              </div>
+              <ErrorMessage
+                className={css.error}
+                name="password"
+                component="span"
+              />
+            </div>
+            <div className={css.inputContainer}>
+              <label className={css.label} htmlFor={repeatPassFieldId}>
+                Repeat password
+              </label>
+              <div
+                className={`${css.eyeContainer} ${
+                  errors.repeat && touched.repeat ? css.inputError : ""
+                }`}
+              >
+                <Field
+                  className={css.input}
+                  type={show ? "text" : "password"}
+                  name="repeat"
+                  id={repeatPassFieldId}
+                  placeholder="Repeat password"
+                />
+                <span onClick={handleClick} className={css.eye}>
+                  {show ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
+                </span>
+              </div>
+              <ErrorMessage
+                className={css.error}
+                name="repeat"
+                component="span"
+              />
+            </div>
+            <button className={css.button} type="submit">
+              Sign Up
+            </button>
+          </Form>
+        )}
       </Formik>
       <NavLink className={css.navlink} to="/signin">
         Sign in
