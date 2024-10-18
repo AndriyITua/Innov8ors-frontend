@@ -15,11 +15,9 @@
   gap: 12px;
   border-radius: 10px;
   padding: 24px 16px;
-  width: 280px;
-  height: 416px;
   box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
   background: var(--secondary-color-smoke-white);
-  padding: 24px 16px;
+  padding: 24px 16px 10px;
 }
 .whyDrinkWaterList {
   padding-left: 0;

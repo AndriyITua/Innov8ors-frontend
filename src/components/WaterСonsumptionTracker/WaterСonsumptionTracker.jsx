@@ -1,7 +1,7 @@
 import css from "./WaterСonsumptionTracker.module.css";
 import { IoCalendarOutline } from "react-icons/io5";
 import { HiOutlinePresentationChartBar } from "react-icons/hi2";
-import { HiWrenchScrewdriver } from "react-icons/hi2";
+import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
 import TryTrackerButton from "../TryTrackerButton/TryTrackerButton";
 
 export default function WaterСonsumptionTracker() {
@@ -25,7 +25,7 @@ export default function WaterСonsumptionTracker() {
         </li>
         <li className={css.welcomeListItem}>
           <div className={css.svgBox}>
-            <HiWrenchScrewdriver className={css.welcomeSvg} />
+            <HiOutlineWrenchScrewdriver className={css.welcomeSvg} />
           </div>
           <p>Personal rate setting</p>
         </li>
