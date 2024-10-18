@@ -72,14 +72,15 @@ margin-top: 4px;
   }
   
   .line {
-    border: 1px solid var(--secondary-color---5);
+    /* border: px  ; */
     position: absolute;
     /* margin-bottom: 10px; */
-    top: -10px;
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
     width: 8px;
     color: #d7e3ff;
+    /* stroke-width: 5px */
   }
   .startEnd{
     font-family: var(--font-family);

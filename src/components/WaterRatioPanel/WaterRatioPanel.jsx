@@ -25,7 +25,7 @@ export default function WaterRatioPanel() {
                     <li className={css.lineContainer}> 
                         <PiLineVertical className={css.line}/>
                         <span className={css.startEnd}>0%</span>
-                        </li>
+                    </li>
                     <li className={css.lineContainer}>
                         <PiLineVertical className={css.line}/>
                         50%
