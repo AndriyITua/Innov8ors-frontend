@@ -105,12 +105,6 @@ export default function AuthForm() {
       <NavLink className={css.navlink} to="/signin">
         Sign in
       </NavLink>
-      {/* <div className={css.bottleImage}>
-        <img
-          src="../../assets/signupPageImages/bottle-signup.svg"
-          alt="Water Bottle"
-        />
-      </div> */}
     </>
   );
 }

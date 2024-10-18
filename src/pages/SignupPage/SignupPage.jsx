@@ -10,14 +10,6 @@ export default function SignupPage() {
           <h3 className={css.formText}>Sign Up</h3>
           <AuthForm />
         </div>
-        <div className={css.bottleImage}>
-          <img
-            src="../../assets/signupPageImages/bottle-signup.svg"
-            alt="Water Bottle"
-            width="280px"
-            height="210px"
-          />
-        </div>
       </section>
     </>
   );
