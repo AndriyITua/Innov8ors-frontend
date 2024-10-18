@@ -10,10 +10,12 @@
 
 .container {
 max-width: 320px;
+height: 680px;
 margin: 0 auto;
 padding: 0 20px;
-background-image: url(../../assets/signupPageImages/background-image.jpg);
-background-size: cover;
+background: url(../../assets/signupPageImages/bottle-signup.svg), url(../../assets/signupPageImages/background-image.jpg);
+background-size: 320px, 280px;
 background-repeat: no-repeat;
+background-position: 20px 450px, 20px 0px;
 
 }
