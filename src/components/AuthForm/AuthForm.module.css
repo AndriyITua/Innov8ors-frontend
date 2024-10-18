@@ -193,3 +193,7 @@ width: 100%;
     line-height: 20px;
     color: var(--primary-color-blue);
 }
+
+.navlink:hover {
+    color: var(--secondary-color-orange);
+}
