@@ -29,14 +29,14 @@ color: #407bff;
   .input::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: #fff; /* Колір повзунка */
     cursor: pointer;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     position: relative;
-    top: -5px; /* Зміщення повзунка, щоб був по центру треку */
+    top: -3px; /* Зміщення повзунка, щоб був по центру треку */
     border: 1px solid #407bff;
   }
   
@@ -47,6 +47,7 @@ color: #407bff;
   }
 
 .item{
+    min-width: 280px;
     height: 32px;
     padding: 0;
     display: flex;
@@ -90,7 +91,7 @@ color: #407bff;
   }
 
 .button{
-    border-radius: 10px;
+border-radius: 10px;
 padding: 6px 76px;
 width: 280px;
 height: 36px;
@@ -111,5 +112,5 @@ text-decoration: none;
 .icon{
     width:20px;
     height:20px;
-    stroke-width: 2px;
+    stroke-width: 1px;
 }

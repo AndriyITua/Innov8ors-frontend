@@ -36,7 +36,7 @@ export default function WaterRatioPanel() {
                         </li>
                 </ul>
             </div>
-            <button className={css.button}>
+            <button type="submit" className={css.button}>
                 <CiCirclePlus className={css.icon}/>
                 Add Water
             </button>

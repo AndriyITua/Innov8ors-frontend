@@ -3,7 +3,7 @@ import WaterRatioPanel from "../../components/WaterRatioPanel/WaterRatioPanel";
 
 export default function HomePage() {
   return <div>
-    <p>Home page</p>;
+    <p>Home page</p>
     <WaterRatioPanel/>
   </div> 
   
