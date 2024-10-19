@@ -17,6 +17,13 @@
   background-position: 20px 417px, -1px 30px;
 }
 
+@media (min-resolution: 192dpi) {
+  .container {
+    background-image: url("../../assets/signinPageImages/BottleBackground2x.png"),
+      url("../../assets/signinPageImages/BubblesBackground2x.png");
+  }
+}
+
 .title {
   text-align: left;
   font-family: Roboto;
