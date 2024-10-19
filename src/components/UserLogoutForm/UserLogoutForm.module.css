@@ -1,0 +1,30 @@
+.logoutForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.button {
+  height: 36px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 10px;
+  border: 1px solid #2c0b8e;
+  background: #407bff;
+}
+.button:hover {
+  background: #fff;
+  color: #2c0b8e;
+}
+
+.buttonList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
