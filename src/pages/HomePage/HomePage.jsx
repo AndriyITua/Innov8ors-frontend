@@ -10,6 +10,7 @@ export default function HomePage() {
           <section className={css.WaterRatio}>
             <WaterRatioPanel />
           </section>
+          <section className={css.TodayMonthWrap}></section>
         </Container>
       </section>
     </main>
