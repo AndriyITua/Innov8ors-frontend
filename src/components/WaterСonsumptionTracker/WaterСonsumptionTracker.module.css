@@ -28,24 +28,25 @@
   margin-bottom: 9px;
 }
 .welcomeSvg {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   color: var(--primary-color-blue);
 }
 .welcomeList {
   list-style-type: none;
-  padding: 3px;
+  padding-top: 3px;
+  padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 .welcomeListItem {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 .welcomeListItem:not(:last-child) {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .welcomeListItem p {
   font-size: 16px;
