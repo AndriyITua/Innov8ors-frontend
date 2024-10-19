@@ -5,16 +5,17 @@
   height: 1356px;
   background-image: url(../../assets/homePageImages/bgHomeMob.png),
     url(../../assets/homePageImages/bottleHomeMob.png);
-  background-size: 100% 100%, contain;
+  background-size: 320px, 310px;
   background-repeat: no-repeat, no-repeat;
   /* background-position: 0 52px, 0 106px; */
-  background-position: center, 0 56px;
+  background-position: center, center 60px;
   padding-bottom: 40px;
   overflow: hidden;
 }
 
 .WaterRatio {
   margin-top: 290px;
+  max-width: 280px;
 }
 
 .TodayMonthWrap {
