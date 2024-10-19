@@ -91,3 +91,21 @@
   border-color: var(--secondary-color-red);
   color: var(--secondary-color-red);
 }
+
+@media screen and (min-width: 768px) {
+  .input {
+    width: 336px;
+  }
+
+  .passwordWrapper {
+    width: 336px;
+  }
+
+  .submitBtn {
+    padding: 10px 30px;
+    width: 336px;
+
+    font-style: 18px;
+    line-height: 1.33;
+  }
+}
