@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -12,6 +12,18 @@ import css from "./SignInAuthForm.module.css";
 
 export default function SignInAuthForm() {
   const [shouldPasswordBeShown, setShouldPasswordBeShown] = useState(false);
+  const [password, setPassword] = useState("");
+  const [maskedPassword, setMaskedPassword] = useState("");
+
+  const handleChange = e => setPassword(e.target.value); //записуємо в стан пароль
+
+  useEffect(() => {
+    const masked = password
+      .split("")
+      .map(() => "*")
+      .join("");
+    setMaskedPassword(masked); // при введені паролю маскуємо його
+  }, [password, maskedPassword]);
 
   const handleSubmit = (values, actions) => {
     console.log("actions:", actions);
@@ -68,7 +80,9 @@ export default function SignInAuthForm() {
                 id="password"
                 name="password"
                 placeholder="Password"
-                type={shouldPasswordBeShown ? "text" : "password"}
+                type="text"
+                value={shouldPasswordBeShown ? password : maskedPassword} // показуємо або приховуємо пароль
+                onChange={handleChange}
               />
               {shouldPasswordBeShown ? (
                 <HiOutlineEye
