@@ -145,6 +145,10 @@ width: 100%;
     color: var(--secondary-color-light-blue);
 }
 
+.placeholderError::placeholder {
+    color: var(--secondary-color-red);
+}
+
 .inputError {
     border-color: var(--secondary-color-red);
 }

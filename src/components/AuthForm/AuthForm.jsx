@@ -44,7 +44,9 @@ export default function AuthForm() {
               </label>
               <Field
                 className={`${css.inputEmail} ${
-                  errors.email && touched.email ? css.inputError : ""
+                  errors.email && touched.email
+                    ? `${css.inputError} ${css.placeholderError}`
+                    : ""
                 }`}
                 type="email"
                 name="email"
@@ -63,7 +65,9 @@ export default function AuthForm() {
               </label>
               <div
                 className={`${css.eyeContainer} ${
-                  errors.password && touched.password ? css.inputError : ""
+                  errors.password && touched.password
+                    ? `${css.inputError} ${css.placeholderError}`
+                    : ""
                 }`}
               >
                 <Field
@@ -89,7 +93,9 @@ export default function AuthForm() {
               </label>
               <div
                 className={`${css.eyeContainer} ${
-                  errors.repeat && touched.repeat ? css.inputError : ""
+                  errors.repeat && touched.repeat
+                    ? `${css.inputError} ${css.placeholderError}`
+                    : ""
                 }`}
               >
                 <Field
