@@ -1,0 +1,34 @@
+@import "../../styles/variables.css";
+
+.section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.container {
+  min-height: 93vh;
+  margin: 0 auto;
+  max-width: 320px;
+  padding: 0 15px;
+  background-image: url("../../assets/signinPageImages/BottleBackground.png"),
+    url("../../assets/signinPageImages/BubblesBackground.png");
+  background-size: 280px, 320px;
+  background-repeat: no-repeat;
+  background-position: 20px 417px, -1px 30px;
+}
+
+@media (min-resolution: 192dpi) {
+  .container {
+    background-image: url("../../assets/signinPageImages/BottleBackground2x.png"),
+      url("../../assets/signinPageImages/BubblesBackground2x.png");
+  }
+}
+
+.title {
+  text-align: left;
+  font-family: Roboto;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.23;
+  margin-bottom: 16px;
+}
