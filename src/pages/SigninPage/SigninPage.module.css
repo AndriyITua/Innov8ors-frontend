@@ -1,7 +1,7 @@
 @import "../../styles/variables.css";
 
 .section {
-  padding-top: 24px;
+  /* padding-top: 40px; */
   padding-bottom: 24px;
 }
 
@@ -39,13 +39,14 @@
     padding-bottom: 16px;
   }
   .container {
-    max-width: 768px;
     padding: 0 32px;
+    padding-top: 14px;
+    max-width: 768px;
 
     background-image: url("../../assets/signinPageImages/BottleBackground-tablet.png"),
       url("../../assets/signinPageImages/BubblesBackground-tablet.png");
     background-size: 736px, 768px;
-    background-position: 65px 0, 0 -105px;
+    background-position: 65px 0, 0 -90px;
   }
 
   @media (min-resolution: 192dpi) {
