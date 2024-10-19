@@ -145,6 +145,7 @@ form {
 }
 
 .button {
+  width: 250px;
   height: 36px;
   color: #fff;
   padding: 5px 10px;

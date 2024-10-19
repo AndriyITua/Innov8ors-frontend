@@ -65,7 +65,7 @@ const SettingForm = () => {
                 />
               </div>
               <div>
-                <label for="fileInput" className={css.uploadLabel}>
+                <label htmlFor="fileInput" className={css.uploadLabel}>
                   <MdOutlineFileUpload />
                   <span>Upload photo</span>
                 </label>
@@ -81,7 +81,7 @@ const SettingForm = () => {
 
           <div className={css.genderSetting}>
             <h3>Your gender identity</h3>
-            <form className={css.checkGender}>
+            <div className={css.checkGender}>
               <label className={css.genderLabel}>
                 <input type="radio" name="option" value="option1" />
                 <span>Woman</span>
@@ -90,7 +90,7 @@ const SettingForm = () => {
                 <input type="radio" name="option" value="option2" />
                 <span>Man</span>
               </label>
-            </form>
+            </div>
           </div>
 
           <div className={css.userNameSetting}>
@@ -161,7 +161,7 @@ const SettingForm = () => {
               <div className={css.inputContainer}>
                 <Field
                   className={css.passwordInputField}
-                  type={showPassword ? "text" : "password"}
+                  type={showNewPassword ? "text" : "password"}
                   name="password"
                   id={`newPassword-${id}`}
                   placeholder="Password"
@@ -187,7 +187,7 @@ const SettingForm = () => {
               <div className={css.inputContainer}>
                 <Field
                   className={css.passwordInputField}
-                  type={showPassword ? "text" : "password"}
+                  type={showRepeatNewPassword ? "text" : "password"}
                   name="password"
                   id={`repeatNewPassword-${id}`}
                   placeholder="Password"
