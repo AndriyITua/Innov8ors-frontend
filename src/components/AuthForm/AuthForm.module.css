@@ -1,0 +1,210 @@
+
+
+
+.input {
+    width: 100%;
+    height: 44px;
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 10px;
+    background: var(--primary-color-white);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--secondary-color-light-blue);
+    border: hidden;
+    outline: none;
+
+    
+
+}
+.inputEmail {
+width: 100%;
+    height: 44px;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    padding: 12px 10px;
+    background: var(--primary-color-white);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--secondary-color-light-blue);
+    outline: none;
+}
+
+
+.inputContainer {
+    margin-bottom: 16px;
+    position: relative;
+    width: 100%;
+}
+.eyeContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    background-color: var(--primary-color-white);
+    outline: none;
+    padding-right: 12px;
+    
+}
+
+.eye {
+    color: var(--primary-color-blue);
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    padding-right: 12px;
+}
+
+.input::placeholder {
+    color: var(--secondary-color-light-blue);
+}
+.inputEmail::placeholder {
+    color: var(--secondary-color-light-blue);
+}
+
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+}
+
+.input {
+    width: 100%;
+    height: 44px;
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 10px;
+    background: var(--primary-color-white);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--secondary-color-light-blue);
+    outline: none;
+}
+
+
+
+.inputEmail {
+    width: 100%;
+    height: 44px;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    padding: 12px 10px;
+    background: var(--primary-color-white);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--secondary-color-light-blue);
+    outline: none;
+}
+
+.inputContainer {
+    margin-bottom: 16px;
+    position: relative;
+    width: 100%;
+}
+
+.eyeContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    background-color: var(--primary-color-white);
+    outline: none;
+    padding-right: 12px;
+}
+
+
+
+.eyeContainer.inputError .input {
+    color: var(--secondary-color-red);
+}
+
+.eye {
+    color: var(--primary-color-blue);
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    padding-right: 12px;
+}
+
+.input::placeholder,
+.inputEmail::placeholder {
+    color: var(--secondary-color-light-blue);
+}
+
+.input:focus,
+.input:active,
+.inputEmail:focus,
+.inputEmail:active {
+    color: var(--primary-color-blue);
+}
+
+
+.placeholderError::placeholder {
+    color: var(--secondary-color-red);
+}
+
+.inputError {
+    border-color: var(--secondary-color-red);
+    color: var(--secondary-color-red)
+}
+.error {
+    display: block;
+    font-size: 14px;
+    color: var(--secondary-color-red);
+    line-height: 18px;
+    margin-top: 4px;
+}
+
+.button {
+    width: 280px;
+    height: 36px;
+    border-radius: 10px;
+    padding: 8px 30px;
+    box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+    background-color: var(--primary-color-blue);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    text-align: center;
+    color: var(--primary-color-white);
+    border: none;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-color-black);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.33;
+}
+
+
+.navlink {
+    width: 280px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--primary-color-blue);
+}
+
+.navlink:hover {
+    color: var(--secondary-color-orange);
+}
+
+.inputFilled {
+    color: var(--primary-color-blue);
+}
