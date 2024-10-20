@@ -1,7 +1,7 @@
 @import "../../styles/variables.css";
 
 .section {
-  padding-top: 24px;
+  /* padding-top: 40px; */
   padding-bottom: 24px;
 }
 
@@ -31,4 +31,28 @@
   font-weight: 500;
   line-height: 1.23;
   margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .section {
+    padding-top: 26px;
+    padding-bottom: 16px;
+  }
+  .container {
+    padding: 0 32px;
+    padding-top: 14px;
+    max-width: 768px;
+
+    background-image: url("../../assets/signinPageImages/BottleBackground-tablet.png"),
+      url("../../assets/signinPageImages/BubblesBackground-tablet.png");
+    background-size: 736px, 768px;
+    background-position: 65px 0, 0 -90px;
+  }
+
+  @media (min-resolution: 192dpi) {
+    .container {
+      background-image: url("../../assets/signinPageImages/BottleBackground-tablet-2x.png"),
+        url("../../assets/signinPageImages/BubblesBackground-tablet-2x.png");
+    }
+  }
 }
