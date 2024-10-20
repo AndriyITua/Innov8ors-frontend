@@ -1,117 +1,110 @@
-.container{
-    max-width: 320px;
-    padding:0 20px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.title{
-    margin-top:0;
-    margin-bottom: 8px;
-font-family: var(--font-family);
-font-weight: 400;
-font-size: 18px;
-line-height: 1.3;
-/* text-align: center; */
-color: #407bff;
+.title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.3;
+  /* text-align: center; */
+  color: #407bff;
 }
 .input {
-    margin-left: 8px;
-    border-radius: 10px;
-    width: 256px;
-    height: 8px;
-    -webkit-appearance: none;
-    appearance: none;
-    /* background: linear-gradient(to right, #0d0d0e 70%, #1c1d1d 70%);  */
-    outline: none;
-    position: relative; /* Щоб можна було вирівняти thumb по центру */
-  }
-  
-  .input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: #fff; /* Колір повзунка */
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    position: relative;
-    top: -3px; /* Зміщення повзунка, щоб був по центру треку */
-    border: 1px solid #407bff;
-  }
-  
-  .input::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 8px;
-    border-radius: 10px;
-  }
+  margin-left: 8px;
+  border-radius: 10px;
+  width: 256px;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  /* background: linear-gradient(to right, #0d0d0e 70%, #1c1d1d 70%);  */
+  outline: none;
+  position: relative; /* Щоб можна було вирівняти thumb по центру */
+}
 
-.item{
-    min-width: 280px;
-    height: 32px;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Центруємо по вертикалі */
-    width: 100%;
-    gap: 10px;
-    list-style-type: none;
-    font-family: var(--font-family);
-font-weight: 500;
-font-size: 16px;
-line-height: 125%;
-text-align: center;
-color:  #407bff;
-margin-bottom: 16px;
-margin-top: 4px;
-    
+.input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff; /* Колір повзунка */
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  top: -3px; /* Зміщення повзунка, щоб був по центру треку */
+  border: 1px solid #407bff;
+}
+
+.input::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 10px;
+}
+
+.item {
+  min-width: 280px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Центруємо по вертикалі */
+  width: 100%;
+  gap: 10px;
+  list-style-type: none;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  text-align: center;
+  color: #407bff;
+  margin-bottom: 16px;
+  margin-top: 4px;
 }
 .lineContainer {
-    position: relative;
-    text-align: center; 
-  }
-  
-  .line {
-    /* border: px  ; */
-    position: absolute;
-    /* margin-bottom: 10px; */
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    color: #d7e3ff;
-    /* stroke-width: 5px */
-  }
-  .startEnd{
-    font-family: var(--font-family);
-font-weight: 400;
-font-size: 12px;
-line-height: 133%;
-text-align: center;
-color: #407bff;
-  }
-
-.button{
-border-radius: 10px;
-padding: 6px 76px;
-width: 280px;
-height: 36px;
-font-family: var(--font-family);
-font-weight: 500;
-font-size: 16px;
-line-height: 125%;
-text-align: center;
-background-color: #407bff;
-color: #fff;
-border: none;
-text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 13px;
+  position: relative;
+  text-align: center;
 }
-.icon{
-    width:20px;
-    height:20px;
-    stroke-width: 1px;
+
+.line {
+  /* border: px  ; */
+  position: absolute;
+  /* margin-bottom: 10px; */
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  color: #d7e3ff;
+  /* stroke-width: 5px */
+}
+.startEnd {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 133%;
+  text-align: center;
+  color: #407bff;
+}
+
+.button {
+  border-radius: 10px;
+  padding: 6px 76px;
+  width: 280px;
+  height: 36px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  text-align: center;
+  background-color: #407bff;
+  color: #fff;
+  border: none;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 13px;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1px;
 }
