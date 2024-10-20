@@ -16,20 +16,12 @@ export default function ModalAddWater({ isOpen, onClose }) {
 
   const onPlusClickedHandler = () => {
     const newWaterAmount = water + ADD_WATER;
-    if (newWaterAmount > WATER_MAX_LIMIT) {
-      setDisableButtonPluse(true);
-    } else {
-      setWater(newWaterAmount);
-    }
+    setWater(newWaterAmount);
   };
 
   const onMinusClickedHandler = () => {
     const newWaterAmount = water - ADD_WATER;
-    if (newWaterAmount < 0) {
-      setDisableButtonMinuse(true);
-    } else {
-      setWater(newWaterAmount);
-    }
+    setWater(newWaterAmount);
   };
 
   const time = new Date();
@@ -46,21 +38,25 @@ export default function ModalAddWater({ isOpen, onClose }) {
   const handleWaterChange = event => {
     const newWaterAmount = parseInt(event.target.value, 10);
     if (!isNaN(newWaterAmount)) {
-      if (newWaterAmount > WATER_MAX_LIMIT || newWaterAmount < 0) {
-        setDisableButtonPluse(true);
-        setDisableButtonMinuse(true);
-      } else {
-        setDisableButtonPluse(false);
-        setDisableButtonMinuse(false);
-        setDisableButtonSave(false);
-        setWater(newWaterAmount);
-      }
+      setWater(newWaterAmount);
     } else {
       setWater("");
     }
   };
 
   useEffect(() => {
+    if (water >= WATER_MAX_LIMIT) {
+      setDisableButtonPluse(true);
+    } else {
+      setDisableButtonPluse(false);
+    }
+
+    if (water <= 0) {
+      setDisableButtonMinuse(true);
+    } else {
+      setDisableButtonMinuse(false);
+    }
+
     if (water > WATER_MAX_LIMIT || water <= 0) {
       setDisableButtonSave(true);
     } else {
