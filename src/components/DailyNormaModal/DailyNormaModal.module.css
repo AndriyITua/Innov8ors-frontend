@@ -1,0 +1,107 @@
+.modalContent {
+  overflow-x: auto;
+  max-height: 80vh;
+}
+
+.title {
+  display: inline;
+  font-weight: 500;
+  font-size: 26px;
+  margin-right: 47px;
+}
+
+.clsButton {
+  background-color: transparent;
+  color: var(--primary-color-blue);
+}
+
+.gender {
+  margin-top: 24px;
+}
+
+.genderSpan {
+  font-size: 18px;
+  color: var(--primary-color-blue);
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.5;
+  border: 1px solid var(--secondary-color-light-gray);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 12px;
+}
+
+.rate {
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+label input[type="radio"] {
+  margin-right: 8px;
+}
+
+.radioBtn {
+  margin-right: 24px;
+}
+
+.wrap {
+  margin-top: 16px;
+}
+
+.label {
+  line-height: 1.5;
+}
+
+.input {
+  margin-top: 8px;
+  padding: 12px 10px;
+  width: 254px;
+  height: 44px;
+  border: 1px solid var(--secondary-color-light-gray);
+  border-radius: 6px;
+  color: var(--primary-color-blue);
+}
+
+.wrapLitres {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.amount {
+  line-height: 1.5;
+  display: block;
+  width: 190px;
+}
+
+.litres {
+  display: inline;
+}
+
+.litresSpan {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--primary-color-blue);
+}
+
+.resultWrap {
+  margin-top: 24px;
+}
+
+.result {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.saveBtn {
+  width: 254px;
+  height: 36px;
+  margin-top: 24px;
+  background-color: var(--primary-color-blue);
+  color: var(--primary-color-white);
+  border-radius: 10px;
+}
