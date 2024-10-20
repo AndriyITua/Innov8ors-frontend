@@ -21,7 +21,7 @@ export const login = createAsyncThunk(
       setAuthHeader(response.data.accessToken);
       return response.data;
     } catch (error) {
-      notifyOnlogginError(error.message);
+      notifyOnlogginError(error.response.data.message);
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -49,7 +49,7 @@ export const refreshUser = createAsyncThunk(
   {
     condition: (_, thunkAPI) => {
       const reduxState = thunkAPI.getState();
-      return reduxState.auth.token !== null;
+      return reduxState.auth.accessToken === null;
     },
   }
 );
