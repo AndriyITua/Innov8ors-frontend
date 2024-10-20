@@ -1,0 +1,104 @@
+.monthContainer {
+  margin-top: 24px;
+  min-width: 320px;
+  max-width: 100%;
+}
+
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  /* margin: 0 20px; */
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.monthNavigation {
+  display: flex;
+  margin-bottom: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrowButton {
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 255, 0);
+}
+
+.arrowButton:first-child {
+  margin-right: 6px;
+  margin-top: 4px;
+}
+
+.arrowButton:last-child {
+  margin-left: 6px;
+  margin-top: 4px;
+}
+
+.arrowButton .icon {
+  margin-top: 2px;
+}
+
+.monthControl {
+  color: var(--primery-color-blue, #407bff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spanInfo {
+  margin-top: 2px;
+}
+
+.daysContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  row-gap: 16px;
+  /* position: relative; */
+}
+
+.dayCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.dayItem {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: 1px solid #ff9d43;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.dayNumber {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.dayProgress {
+  color: var(--secondary-color-4, #9ebbff);
+  font-size: 10px;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+.incomplete {
+  outline: 1px solid #ff9d43;
+}
+
+.completed {
+  outline: none;
+  background-color: white;
+}
