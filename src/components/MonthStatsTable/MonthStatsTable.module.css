@@ -1,21 +1,43 @@
+.monthContainer {
+  margin-top: 24px;
+  min-width: 320px;
+  max-width: 100%;
+}
+
 .calendarContainer {
   display: flex;
   flex-direction: column;
-  margin: 0 20px;
+  /* margin: 0 20px; */
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 0 20px;
 }
 
 .monthNavigation {
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   justify-content: space-between;
   align-items: center;
 }
 
 .arrowButton {
   cursor: pointer;
-  margin: 10px;
   border: none;
   background-color: rgba(0, 0, 255, 0);
+}
+
+.arrowButton:first-child {
+  margin-right: 6px;
+  margin-top: 4px;
+}
+
+.arrowButton:last-child {
+  margin-left: 6px;
+  margin-top: 4px;
+}
+
+.arrowButton .icon {
+  margin-top: 2px;
 }
 
 .monthControl {
@@ -23,6 +45,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.spanInfo {
+  margin-top: 2px;
 }
 
 .daysContainer {
@@ -73,11 +99,4 @@
 .completed {
   outline: none;
   background-color: white;
-}
-
-@media screen and (min-width: 768px) {
-  .day-item {
-    width: 60px;
-    height: 60px;
-  }
 }
