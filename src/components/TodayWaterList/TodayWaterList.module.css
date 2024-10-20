@@ -8,7 +8,7 @@
     overflow-y: auto;
     overflow-x: hidden;  
     width: 264px;
-    height: 212px;
+    height: 220px;
     position: relative;
 
 }
@@ -161,6 +161,7 @@ color: #2f2f2f;
     background: #d7e3ff; 
     margin-top: 16px; 
     margin-bottom: 32px; 
+    border-radius: 8px; 
 }
 
 ::-webkit-scrollbar-thumb {
