@@ -1,19 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { login } from "./operationLogin.js";
 
-// Стан даних про користувача
 const authSlise = createSlice({
   name: "auth",
   initialState: {
     user: {
-      fullNume: null,
+      username: null,
       email: null,
+      dailynormwater: null,
       gender: null,
-      dailyWaterNorm: null,
     },
+    accessToken: null,
     isLoggedIn: false,
     isRefreshing: false,
     isLoading: false,
     isError: false,
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(login.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isLoggedIn = true;
+        state.accessToken = payload.accessToken;
+      });
   },
 });
 
