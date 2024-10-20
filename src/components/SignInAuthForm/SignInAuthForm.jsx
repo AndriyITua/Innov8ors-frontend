@@ -24,7 +24,7 @@ export default function SignInAuthForm() {
       .matches(emailPattern, "Format example@mail.com")
       .required("Required"),
     password: Yup.string()
-      .min(6, "Password should be at least 6 characters!")
+      .min(8, "Password should be at least 8 characters!")
       .required("Required"),
   });
 
