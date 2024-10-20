@@ -152,15 +152,23 @@ input:active {
     line-height: 20px;
     text-align: center;
     color: #ffffff;
+    cursor: pointer;
 }
-.buttonSave:hover {
+.buttonSave:hover:not([disabled]) {
     box-shadow: 0px 4px 14px 0px #407bff8a;
 }
-.buttonSave:active {
+
+.buttonSave:active:not([disabled]) {
     box-shadow: none;
     background: #407bff;
 }
 
+.buttonSave[disabled] {
+    background-color: #c5c4c4;
+    cursor: not-allowed;
+    box-shadow: none;
+    border: 1px solid #6070851a;
+}
 .infoWater {
     display: flex;
     font-size: 18px;
@@ -174,60 +182,4 @@ input:active {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
-}
-
-@media screen and (min-width: 780px) {
-    .modalWrap {
-        width: 704px;
-        height: 504px;
-        padding: 32px 24px;
-        gap: 24px;
-    }
-    .modalContent {
-        width: 656px;
-        height: 372px;
-    }
-    input {
-        width: 656px;
-    }
-    .boxButton {
-        width: 656px;
-        flex-direction: row;
-        justify-content: end;
-    }
-    .buttonSave {
-        width: 160px;
-        height: 44px;
-        padding: 10px 30px;
-    }
-    .infoWater {
-        width: 74px;
-    }
-    .forLoder {
-        width: 704px;
-        height: 504px;
-    }
-}
-
-@media screen and (min-width: 1140px) {
-    .modalWrap {
-        width: 592px;
-        height: 504px;
-    }
-    .modalContent {
-        width: 544px;
-        height: 316px;
-    }
-    input {
-        width: 544px;
-    }
-    .boxButton {
-        width: 544px;
-        flex-direction: row;
-        justify-content: end;
-    }
-    .forLoder {
-        width: 592px;
-        height: 504px;
-    }
 }

@@ -134,7 +134,9 @@ export default function ModalAddWater({ isOpen, onClose }) {
             <div className={css.boxButton}>
               <p className={css.infoWater}>{water}ml</p>
               <button
-                className={css.buttonSave}
+                className={`${css.buttonSave} ${
+                  disableButtonSave ? css.buttonDisabled : ""
+                }`}
                 onClick={handleSave}
                 disabled={disableButtonSave}
               >
