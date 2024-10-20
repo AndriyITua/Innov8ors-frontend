@@ -4,6 +4,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 
 import { useState } from "react";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
+import { TfiClose } from "react-icons/tfi";
 
 import * as Yup from "yup";
 import css from "./SettingForm.module.css";
@@ -32,7 +33,7 @@ const ValidationSchema = Yup.object().shape({
     .required("Заполните поле!"),
 });
 
-const SettingForm = () => {
+const SettingForm = ({ closeModal }) => {
   const id = useId();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -52,10 +53,17 @@ const SettingForm = () => {
       validationSchema={ValidationSchema}
     >
       <Form className={css.form}>
-        <h2>Setting</h2>
+        
+        <div className={css.settingWrapper}>
+          <h2 className={css.settingTitle}>Setting</h2>
+          <button className={css.closeButton} onClick={closeModal}>
+            <TfiClose className={css.closeIcon} />
+          </button>
+        </div>
+
         <div className={css.formSetting}>
           <div className={css.photoSetting}>
-            <h3>Your photo</h3>
+            <h3 className={css.photoText}>Your photo</h3>
             <div className={css.uploadPhoto}>
               <div className={css.photoCard}>
                 <img
@@ -67,7 +75,7 @@ const SettingForm = () => {
               <div>
                 <label htmlFor="fileInput" className={css.uploadLabel}>
                   <MdOutlineFileUpload />
-                  <span>Upload photo</span>
+                  <span className={css.uploadPhotoText}>Upload photo</span>
                 </label>
                 <input
                   className={css.uploadInput}
@@ -80,22 +88,24 @@ const SettingForm = () => {
           </div>
 
           <div className={css.genderSetting}>
-            <h3>Your gender identity</h3>
+            <h3 className={css.photoText}>Your gender identity</h3>
             <div className={css.checkGender}>
               <label className={css.genderLabel}>
                 <input type="radio" name="option" value="option1" />
-                <span>Woman</span>
+                <span className={css.checkboxText}>Woman</span>
               </label>
               <label className={css.genderLabel}>
                 <input type="radio" name="option" value="option2" />
-                <span>Man</span>
+                <span className={css.checkboxText}>Man</span>
               </label>
             </div>
           </div>
 
           <div className={css.userNameSetting}>
             <div className={css.userNameInput}>
-              <label htmlFor={`name-${id}`}>Your name</label>
+              <label htmlFor={`name-${id}`} className={css.userNameText}>
+                Your name
+              </label>
               <div className={css.inputText}>
                 <Field
                   type="text"
@@ -113,7 +123,9 @@ const SettingForm = () => {
             </div>
 
             <div className={css.userNameInput}>
-              <label htmlFor={`email-${id}`}>E-mail</label>
+              <label htmlFor={`email-${id}`} className={css.userNameText}>
+                E-mail
+              </label>
               <div className={css.inputText}>
                 <Field
                   type="text"
@@ -134,7 +146,7 @@ const SettingForm = () => {
           <div className={css.passwordSetting}>
             <h3 className={css.passwordSettingTitle}>Password</h3>
             <label className={css.passwordLabel} htmlFor={`password-${id}`}>
-              Password
+              Outdated password
               <div className={css.inputContainer}>
                 <Field
                   className={css.passwordInputField}

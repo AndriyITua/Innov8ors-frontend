@@ -4,23 +4,76 @@
   gap: 24px;
 }
 
-.button {
-  height: 36px;
-  color: #fff;
-  padding: 5px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.logoutTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoutTitleText {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.logoutText {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.closeButton {
+  font-size: 14px;
+  color: #407bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.closeIcon {
+  stroke-width: 1px;
+}
+
+.cancelButton {
   position: relative;
   display: inline-block;
-  outline: none;
+  height: 36px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
   border-radius: 10px;
-  border: 1px solid #2c0b8e;
-  background: #407bff;
+  border: 1px solid #ef5050;
+  outline: none;
+  background: #ef5050;
+  box-shadow: 0px 4px 8px 0px #407BFF57;
+
 }
-.button:hover {
-  background: #fff;
-  color: #2c0b8e;
+
+.logoutbutton {
+  position: relative;
+  display: inline-block;
+  height: 36px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #407bff;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  border-radius: 10px;
+  border: 1px solid #d7e3ff;
+  outline: none;
+  background: #d7e3ff;
 }
 
 .buttonList {

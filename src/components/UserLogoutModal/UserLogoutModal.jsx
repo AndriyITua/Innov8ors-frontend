@@ -14,7 +14,7 @@ const UserLogoutModal = ({ logoutModalIsOpen, closeLogoutModal }) => {
         overlayClassName={css.overlay}
       >
         <div className={css.card}>
-          <UserLogoutForm />
+          <UserLogoutForm closeLogoutModal={closeLogoutModal} />
         </div>
       </Modal>
     </div>

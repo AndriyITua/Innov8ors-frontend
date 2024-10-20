@@ -14,7 +14,7 @@ const SettingModal = ({ modalIsOpen, closeModal }) => {
         overlayClassName={css.overlay}
       >
         <div className={css.card}>
-          <SettingForm />
+          <SettingForm closeModal={closeModal}/>
         </div>
       </Modal>
     </div>
