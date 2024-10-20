@@ -1,12 +1,12 @@
 @import "../../styles/variables.css";
 
 .section {
-  /* padding-top: 40px; */
-  padding-bottom: 24px;
+  padding-top: 24px;
 }
 
 .container {
-  min-height: 93vh;
+  position: relative;
+  min-height: 90vh;
   margin: 0 auto;
   max-width: 320px;
   padding: 0 15px;
@@ -24,19 +24,10 @@
   }
 }
 
-.title {
-  text-align: left;
-  font-family: Roboto;
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 1.23;
-  margin-bottom: 16px;
-}
-
 @media screen and (min-width: 768px) {
   .section {
     padding-top: 26px;
-    padding-bottom: 16px;
+    /* padding-bottom: 16px; */
   }
   .container {
     padding: 0 32px;
@@ -53,6 +44,29 @@
     .container {
       background-image: url("../../assets/signinPageImages/BottleBackground-tablet-2x.png"),
         url("../../assets/signinPageImages/BubblesBackground-tablet-2x.png");
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .section {
+    padding-top: 21px;
+  }
+  .container {
+    padding: 0 18px;
+    padding-top: 141px;
+    max-width: 1440px;
+
+    background-image: url("../../assets/signinPageImages/BottleDeskTop.png"),
+      url("../../assets/signinPageImages/BubblesBackground-Desktop.png");
+    background-size: 916px, 1404px;
+    background-position: 65px 0, 17px 0;
+  }
+
+  @media (min-resolution: 192dpi) {
+    .container {
+      background-image: url("../../assets/signinPageImages/BottleDeskTop-2x.png"),
+        url("../../assets/signinPageImages/BubblesBackground-Desktop-2x.png");
     }
   }
 }
