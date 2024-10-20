@@ -1,4 +1,3 @@
-import Container from "../Container/Container"
 import { HiOutlinePlus } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import css from "./TodayWaterList.module.css"
@@ -6,7 +5,6 @@ import  glassWater from "../../assets/homePageImages/glassWater.svg"
 import  deleteW from "../../assets/homePageImages/delete.svg"
 export default function TodayWaterList() {
     return (
-        <Container>
         <div className={css.container}>
             <p className={css.title}>Today</p>
             <div className={css.contItem}>
@@ -126,6 +124,5 @@ export default function TodayWaterList() {
                 </div>
             </div>
         </div>
-        </Container>
     )
 }

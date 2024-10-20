@@ -2,8 +2,6 @@
     background-color: #ecf2ff;
     width: 264px;
     height: 258px;
-    margin: 10px 10px 0 10px;
-    /* overflow: hidden;  */
 }
 .contItem{
     position: relative;
@@ -118,7 +116,7 @@ text-decoration: none;
     bottom: 0; 
     background-color: #ecf2ff; 
     z-index: 10;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); */
 }
 .button:hover{
     color:#ff9d43;
