@@ -57,6 +57,7 @@
   flex-wrap: wrap;
   gap: 26px;
   row-gap: 16px;
+  /* position: relative; */
 }
 
 .dayCell {
@@ -67,6 +68,7 @@
 }
 
 .dayItem {
+  position: relative;
   width: 32px;
   height: 32px;
   border-radius: 50%;

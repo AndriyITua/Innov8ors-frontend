@@ -31,8 +31,8 @@ const MonthStatsTable = () => {
     setSelectedDay(day);
     const rect = event.target.getBoundingClientRect();
     setModalPosition({
-      top: rect.top,
-      left: rect.left,
+      top: rect.top + window.scrollY,
+      left: rect.left + window.scrollX,
       width: rect.width,
     });
   };
