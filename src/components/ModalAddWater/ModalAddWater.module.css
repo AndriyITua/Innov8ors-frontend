@@ -117,7 +117,17 @@ input {
     border-radius: 6px;
     opacity: 0px;
     border: 1px solid #d7e3ff;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    color: #407bff;
 }
+
+input:active {
+    border: 2px solid #407bff;
+}
+
 .boxButton {
     display: flex;
     flex-direction: column;
@@ -152,11 +162,13 @@ input {
 }
 
 .infoWater {
+    display: flex;
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
     margin: 0;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
     color: #407bff;
     font-family: Roboto;
     font-size: 18px;
@@ -164,10 +176,58 @@ input {
     line-height: 24px;
 }
 
-input {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: left;
-    color: #407bff;
+@media screen and (min-width: 780px) {
+    .modalWrap {
+        width: 704px;
+        height: 504px;
+        padding: 32px 24px;
+        gap: 24px;
+    }
+    .modalContent {
+        width: 656px;
+        height: 372px;
+    }
+    input {
+        width: 656px;
+    }
+    .boxButton {
+        width: 656px;
+        flex-direction: row;
+        justify-content: end;
+    }
+    .buttonSave {
+        width: 160px;
+        height: 44px;
+        padding: 10px 30px;
+    }
+    .infoWater {
+        width: 74px;
+    }
+    .forLoder {
+        width: 704px;
+        height: 504px;
+    }
+}
+
+@media screen and (min-width: 1140px) {
+    .modalWrap {
+        width: 592px;
+        height: 504px;
+    }
+    .modalContent {
+        width: 544px;
+        height: 316px;
+    }
+    input {
+        width: 544px;
+    }
+    .boxButton {
+        width: 544px;
+        flex-direction: row;
+        justify-content: end;
+    }
+    .forLoder {
+        width: 592px;
+        height: 504px;
+    }
 }

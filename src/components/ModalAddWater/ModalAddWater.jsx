@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import css from "./ModalAddWater.module.css";
 import { IoCloseOutline, IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
@@ -60,14 +60,18 @@ export default function ModalAddWater({ isOpen, onClose }) {
     }
   };
 
-  const handleSave = () => {
-    console.log("На сервер:", { water, localTime });
-    setLoading(true);
+  useEffect(() => {
     if (water > WATER_MAX_LIMIT || water <= 0) {
       setDisableButtonSave(true);
     } else {
       setDisableButtonSave(false);
     }
+  }, [water]);
+
+  const handleSave = () => {
+    console.log("На сервер:", { water, localTime });
+    setLoading(true);
+
     setTimeout(() => {
       setLoading(false);
       onClose();
