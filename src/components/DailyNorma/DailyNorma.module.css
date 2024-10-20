@@ -1,0 +1,32 @@
+.div {
+  width: 167px;
+  height: 74px;
+  padding: 8px 20px;
+  border: 1px solid var(--secondary-color-smoke-white);
+  border-radius: 10px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  /* line-height: 24px; */
+  margin-bottom: 12px;
+}
+
+.litres {
+  display: inline;
+  font-weight: 700;
+  font-size: 22px;
+  /* line-height: 22px; */
+  color: var(--primary-color-blue);
+  margin-right: 12px;
+}
+
+.button {
+  width: 27px;
+  height: 16px;
+  padding: 0px;
+  display: inline;
+  background-color: transparent;
+  color: #8baeff;
+}
