@@ -1,16 +1,13 @@
 .monthContainer {
   margin-top: 24px;
-  min-width: 320px;
   max-width: 100%;
 }
 
 .calendarContainer {
   display: flex;
   flex-direction: column;
-  /* margin: 0 20px; */
   margin: 0 auto;
   max-width: 600px;
-  padding: 0 20px;
 }
 
 .monthNavigation {

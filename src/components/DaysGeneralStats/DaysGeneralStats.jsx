@@ -62,8 +62,8 @@ export const DaysGeneralStats = ({
     let rightDirection = 0;
 
     if (isMobileScreen) {
-      modal.style.width = `80%`;
-      modal.style.left = "10%";
+      // modal.style.width = `80%`;
+      // modal.style.left = "10%";
       const adjustedTop = Math.max(0, top - modalHeight - 10);
       modal.style.top = `${adjustedTop}px`;
       modal.style.transform = `translateX(0)`;
