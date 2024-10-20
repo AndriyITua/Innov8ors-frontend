@@ -11,6 +11,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
   const [water, setWater] = useState(50);
   const [disableButtonPluse, setDisableButtonPluse] = useState(false);
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
+  const [disableButtonSave, setDisableButtonSave] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onPlusClickedHandler = () => {
@@ -51,6 +52,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
       } else {
         setDisableButtonPluse(false);
         setDisableButtonMinuse(false);
+        setDisableButtonSave(false);
         setWater(newWaterAmount);
       }
     } else {
@@ -61,7 +63,11 @@ export default function ModalAddWater({ isOpen, onClose }) {
   const handleSave = () => {
     console.log("На сервер:", { water, localTime });
     setLoading(true);
-
+    if (water > WATER_MAX_LIMIT || water <= 0) {
+      setDisableButtonSave(true);
+    } else {
+      setDisableButtonSave(false);
+    }
     setTimeout(() => {
       setLoading(false);
       onClose();
@@ -96,7 +102,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
                 >
                   <FiMinus className={css.circleButton} />
                 </button>
-                <div className={css.waterMl}>{water}ml</div>
+                <div className={css.waterMl}>50ml</div>
                 <button
                   className={css.circle}
                   onClick={onPlusClickedHandler}
@@ -123,7 +129,11 @@ export default function ModalAddWater({ isOpen, onClose }) {
 
             <div className={css.boxButton}>
               <p className={css.infoWater}>{water}ml</p>
-              <button className={css.buttonSave} onClick={handleSave}>
+              <button
+                className={css.buttonSave}
+                onClick={handleSave}
+                disabled={disableButtonSave}
+              >
                 Save
               </button>
             </div>
