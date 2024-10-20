@@ -1,11 +1,10 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import TemporaryHeader from "../HeaderBar/TemporaryHeader/TemporaryHeader";
-
+import Header from "../Header/Header";
 export default function SharedLayout() {
   return (
     <>
-      <TemporaryHeader />
+      <Header />
       <Suspense fallback={<p>Loading ...</p>}>
         <Outlet />
       </Suspense>

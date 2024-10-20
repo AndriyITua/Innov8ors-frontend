@@ -1,0 +1,29 @@
+.button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 28px;
+  background: transparent;
+  border: none;
+}
+
+.span {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  color: #407bff;
+  margin-right: 8px;
+  padding: 4px 0;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 30px;
+  color: rgba(47, 47, 47, 1);
+  border: 1px solid rgba(47, 47, 47, 1);
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
