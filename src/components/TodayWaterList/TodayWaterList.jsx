@@ -121,7 +121,7 @@ export default function TodayWaterList() {
                 
                 <div className={css.buttonAddWaterCont}>
                     <button type="submit" className={css.button}>
-                        <HiOutlinePlus className={css.icon}/>
+                       <div className={css.plus}> <HiOutlinePlus className={css.icon}/></div>
                         Add water</button>
                 </div>
             </div>
