@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login } from "./operationLogin.js";
+import { login, refreshUser } from "./operationLogin.js";
 
-const authSlise = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: {
@@ -14,7 +14,7 @@ const authSlise = createSlice({
     isLoggedIn: false,
     isRefreshing: false,
     isLoading: false,
-    isError: false,
+    isError: null,
   },
   extraReducers: builder => {
     builder
@@ -22,12 +22,31 @@ const authSlise = createSlice({
         state.isLoading = true;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
-        state.isError = false;
+        state.isError = null;
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.accessToken = payload.accessToken;
+        state.accessToken = payload.data.accessToken;
+      })
+      .addCase(login.rejected, (state, { payload }) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.accessToken = null;
+        state.isError = payload;
+      })
+      .addCase(refreshUser.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUser.fulfilled, state => {
+        state.isRefreshing = false;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(refreshUser.rejected, (state, { payload }) => {
+        state.isError = payload;
+        state.isRefreshing = false;
       });
   },
 });
 
-export const authReduser = authSlise.reducer;
+export const authReducer = authSlice.reducer;
