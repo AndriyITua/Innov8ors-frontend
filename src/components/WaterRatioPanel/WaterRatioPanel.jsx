@@ -11,13 +11,12 @@ export default function WaterRatioPanel() {
   const handleOpenModal = () => {
     setModalOpen(true);
   };
-
   const handleCloseModal = () => {
     setModalOpen(false);
+    
   };
   return (
     <div className={css.container}>
-      <div>
         <p className={css.title}>Today</p>
         <input
           className={css.input}
