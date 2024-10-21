@@ -27,6 +27,7 @@
     border-radius: 10px;
     margin-top: 40px;
     overflow-y: auto;
+    margin-top: 40px;
 }
 
 .forLoder {
@@ -38,6 +39,7 @@
     height: 540px;
     padding: 24px 12px;
     border-radius: 10px;
+    margin-top: 40px;
 }
 .title {
     display: flex;
