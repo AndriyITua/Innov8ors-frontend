@@ -10,7 +10,7 @@ const authSlise = createSlice({
       gender: null,
       dailyWaterNorm: null,
     },
-    isLoggedIn: false,
+    isLoggedIn: true,
     isRefreshing: false,
     isLoading: false,
     isError: false,

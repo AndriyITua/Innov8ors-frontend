@@ -5,3 +5,10 @@
   padding-top: 8px;
   margin-bottom: 24px;
 }
+
+.logo {
+  width: 102px;
+  height: 48px;
+  gap: 4px;
+  margin-bottom: 24px;
+}

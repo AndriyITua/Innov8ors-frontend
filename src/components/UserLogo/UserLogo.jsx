@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
+import Avatar from "../../assets/icons/Avatar"; /* тимчасово */
 import UserLogoModal from "../UserLogoModal/UserLogoModal";
 import Modal from "react-modal";
 import { GoChevronDown } from "react-icons/go";
 import css from "./UserLogo.module.css";
-import Avatar from "../../assets/icons/Avatar";
 
 Modal.setAppElement("#root");
 
@@ -54,6 +54,7 @@ const UserLogo = () => {
           <span>{user?.fullName?.[0]?.toUpperCase() || user?.email?.[0]}</span>
         )}
         {user?.fullName || user?.email}
+
         <Avatar />
         <GoChevronDown className={css.icon} />
       </button>
@@ -71,9 +72,10 @@ const UserLogo = () => {
             position: "absolute",
             top: modalPosition.top,
             left: modalPosition.left,
-            padding: "16px",
-            overflow: "none",
-            boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
+            padding: "12px",
+            margin: "0",
+            boxShadow: " rgba(0, 0, 0, 0.1)",
+            transform: "translateY(5px)",
           },
         }}
       >
