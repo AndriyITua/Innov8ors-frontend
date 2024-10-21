@@ -13,10 +13,10 @@ export default function WaterRatioPanel() {
   };
   const handleCloseModal = () => {
     setModalOpen(false);
-    
   };
   return (
-    <div className={css.container}>
+    <>
+      <div>
         <p className={css.title}>Today</p>
         <input
           className={css.input}
@@ -50,6 +50,6 @@ export default function WaterRatioPanel() {
         Add Water
       </button>
       <ModalAddWater isOpen={isModalOpen} onClose={handleCloseModal} />
-    </div>
+    </>
   );
 }
