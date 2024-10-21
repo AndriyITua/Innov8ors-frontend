@@ -1,0 +1,20 @@
+.div {
+  display: flex;
+  align-items: center; /* Вертикальне центрування логотипа і тексту */
+  gap: 4px; /* Відстань між логотипом і текстом */
+}
+
+.img {
+  width: 40px;
+  height: 48px;
+}
+.text {
+  width: 58px;
+  height: 28px;
+  color: var(--primery-color-blue, #407bff);
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14.06px;
+  text-align: left;
+}

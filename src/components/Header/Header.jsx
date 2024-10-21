@@ -12,7 +12,7 @@ const Header = () => {
     <header>
       <Container>
         <div className={css.header}>
-          <Logo className={css.logo} />
+          <Logo />
           {isLoggedIn ? <UserLogo /> : <UserAuth />}
         </div>
       </Container>

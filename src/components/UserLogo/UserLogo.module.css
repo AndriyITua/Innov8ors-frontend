@@ -1,0 +1,7 @@
+.button {
+  background-color: var(--primary-color-white, #ffffff);
+}
+
+.icon {
+  color: var(--primery-color-blue, #407bff);
+}

@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 
 export default function PrivateRoute({ component, redirectTo }) {
   // Поки немає логіки логіну, вручну змінюйте на true/false
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   return isLoggedIn ? component : <Navigate to={redirectTo} />;
 }
