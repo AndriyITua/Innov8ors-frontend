@@ -7,7 +7,6 @@ export default function SigninPage() {
     <main>
       <section className={css.section}>
         <div className={css.container}>
-          <h2 className={css.title}>Sign In</h2>
           <SignInAuthForm />
         </div>
       </section>

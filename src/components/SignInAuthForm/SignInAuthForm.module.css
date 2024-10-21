@@ -4,6 +4,14 @@
   gap: 16px;
 }
 
+.title {
+  text-align: left;
+  font-family: Roboto;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.23;
+}
+
 .inputWrapper {
   position: relative;
 }
@@ -107,5 +115,12 @@
 
     font-style: 18px;
     line-height: 1.33;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .form {
+    position: absolute;
+    right: 198px;
   }
 }
