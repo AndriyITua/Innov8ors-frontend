@@ -18,6 +18,6 @@
   width: 280px;
   height: 260px;
   padding: 32px 24px;
-  background-color: whitesmoke;
+  background-color: var(--primary-color-white);
   border-radius: 8px;
 }

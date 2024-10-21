@@ -25,7 +25,7 @@
 
 .closeButton {
   font-size: 14px;
-  color: #407bff;
+  color: var(--primary-color-blue);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,15 +44,15 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  color: #ffffff;
+  color: var(--primary-color-white);
 
   cursor: pointer;
   transition: all 0.3s ease;
 
   border-radius: 10px;
-  border: 1px solid #ef5050;
+  border: 1px solid var(--secondary-color-red);
   outline: none;
-  background: #ef5050;
+  background: var(--secondary-color-red);
   box-shadow: 0px 4px 8px 0px #407BFF57;
 
 }
@@ -65,15 +65,15 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  color: #407bff;
+  color: var(--primary-color-blue);
 
   cursor: pointer;
   transition: all 0.3s ease;
 
   border-radius: 10px;
-  border: 1px solid #d7e3ff;
+  border: 1px solid var(--secondary-color-light-gray);
   outline: none;
-  background: #d7e3ff;
+  background: var(--secondary-color-light-gray);
 }
 
 .buttonList {

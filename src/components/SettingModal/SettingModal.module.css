@@ -1,25 +1,28 @@
 .modal {
   position: absolute;
-  z-index: 1;
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);  
+  
 }
 
 .overlay {
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  overflow-y: auto
+  overflow-y: auto;
 }
 
 .card {
+  position: relative;
   width: 280px;
   height: 860px;
   padding: 32px 12px;
-  background-color: whitesmoke;
+  background-color:var(--primary-color-white);
   border-radius: 8px;
+  margin-bottom: 50px;
 }
