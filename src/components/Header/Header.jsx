@@ -3,7 +3,7 @@ import { Logo } from "../Logo/Logo";
 import UserAuth from "../UserAuth/UserAuth";
 import UserLogo from "../UserLogo/UserLogo";
 import Container from "../Container/Container";
-import css from "./Headeer.module.css";
+import css from "./Header.module.css";
 
 const Header = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);

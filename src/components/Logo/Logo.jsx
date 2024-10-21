@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/header/Logo.png";
+import logo from "../../assets/header/Logo.svg";
 import css from "./Logo.module.css";
 
 export const Logo = () => {
@@ -17,9 +17,9 @@ export const Logo = () => {
     >
       <img className={css.img} src={logo} alt="Logo" />
       <span className={css.text}>
-        Tracker
+        TRACKER
         <br />
-        of water
+        OF WATER
       </span>
     </div>
   );
