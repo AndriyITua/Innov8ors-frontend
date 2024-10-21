@@ -1,6 +1,6 @@
 // Как использовать, если нужно изменить цвет и размер <Avatar size={50} color="red" />
 
-export default function Avatar({ size = 24, color = "#2F2F2F" }) {
+export default function Avatar({ size = 28, color = "#2F2F2F" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
