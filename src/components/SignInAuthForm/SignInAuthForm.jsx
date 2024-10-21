@@ -9,13 +9,16 @@ import { HiOutlineEyeSlash } from "react-icons/hi2";
 import { HiOutlineEye } from "react-icons/hi2";
 
 import css from "./SignInAuthForm.module.css";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/auth/operationLogin.js";
 
 export default function SignInAuthForm() {
   const [shouldPasswordBeShown, setShouldPasswordBeShown] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (values, actions) => {
-    console.log("actions:", actions);
-    console.log("values:", values);
+    dispatch(login(values));
     actions.resetForm();
   };
 
