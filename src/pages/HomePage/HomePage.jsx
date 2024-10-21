@@ -1,4 +1,5 @@
 import Container from "../../components/Container/Container";
+import DailyNorma from "../../components/DailyNorma/DailyNorma";
 import WaterRatioPanel from "../../components/WaterRatioPanel/WaterRatioPanel";
 import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable";
 import TodayWaterList from "../../components/TodayWaterList/TodayWaterList";
@@ -9,6 +10,9 @@ export default function HomePage() {
     <main>
       <section className={css.homePage}>
         <Container>
+          <section className={css.norma}>
+            <DailyNorma />
+          </section>
           <section className={css.WaterRatio}>
             <WaterRatioPanel />
           </section>
