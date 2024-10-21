@@ -18,7 +18,6 @@ export default function App() {
   const dispatch = useDispatch();
 
   const isRefreshing = useSelector(selectIsRefreshing);
-  // const isRefreshing = false;
 
   useEffect(() => {
     dispatch(refreshUser());
