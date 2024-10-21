@@ -86,14 +86,14 @@ export default function ModalAddWater({ isOpen, onClose }) {
         <div className={css.modalWrap}>
           <div className={css.title}>
             <h2>Add water</h2>
-            <button onClick={onClose}>
+            <button className={css.button} onClick={onClose}>
               <IoCloseOutline className={css.buttonClose} />
             </button>
           </div>
           <div className={css.modalContent}>
             <div>
-              <h3>Choose a value:</h3>
-              <p>Amount of water:</p>
+              <h3 className={css.h3}>Choose a value:</h3>
+              <p className={css.p}>Amount of water:</p>
               <div className={css.addWater}>
                 <button
                   className={css.circle}
@@ -114,17 +114,23 @@ export default function ModalAddWater({ isOpen, onClose }) {
             </div>
 
             <div>
-              <p>Recording time:</p>
+              <p className={css.p}>Recording time:</p>
               <input
                 type="text"
                 value={localTime}
                 onChange={handleTimeChange}
+                className={css.input}
               />
             </div>
 
             <div>
-              <h3>Enter the value of the water used:</h3>
-              <input type="text" value={water} onChange={handleWaterChange} />
+              <h3 className={css.h3}>Enter the value of the water used:</h3>
+              <input
+                type="text"
+                value={water}
+                onChange={handleWaterChange}
+                className={css.input}
+              />
             </div>
 
             <div className={css.boxButton}>
