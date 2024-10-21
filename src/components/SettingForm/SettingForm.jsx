@@ -54,7 +54,7 @@ const SettingForm = ({ closeModal }) => {
       // onSubmit={submit}
       validationSchema={ValidationSchema}
     >
-      <Form className={css.form}>
+      <Form className={css.form} >
         <div className={css.settingWrapper}>
           <h2 className={css.settingTitle}>Setting</h2>
           <button className={css.closeButton} onClick={closeModal}>
@@ -155,6 +155,7 @@ const SettingForm = ({ closeModal }) => {
                   name="outdatedPassword"
                   id={`password-${id}`}
                   placeholder="Password"
+                  autocomplete="new-password"
                 />
                 {showPassword ? (
                   <HiOutlineEye
