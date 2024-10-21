@@ -124,10 +124,6 @@ input {
     color: #407bff;
 }
 
-input:active {
-    border: 2px solid #407bff;
-}
-
 .boxButton {
     display: flex;
     flex-direction: column;
