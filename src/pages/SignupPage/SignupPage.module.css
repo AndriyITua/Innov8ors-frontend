@@ -3,6 +3,8 @@
 .formText {
  font-size: 26px;
  margin-bottom: 16px;
+ font-weight: 500;
+ line-height: 1.23;
  color: var(--primary-color-black);
  text-align: left;
 }
@@ -19,6 +21,7 @@ background-size: 280px, 320px;
 background-repeat: no-repeat;
 background-position: 20px 375px, 0px 28px;
 }
+
 
 .signupSection {
     padding-top: 24px;

@@ -54,7 +54,7 @@ export default function AuthForm() {
         validateOnBlur={false}
       >
         {({ errors, touched, values }) => (
-          <Form className={css.form}>
+          <Form className={css.formSignup}>
             <div className={css.inputContainer}>
               <label className={css.label} htmlFor={emailFieldId}>
                 Enter your email
