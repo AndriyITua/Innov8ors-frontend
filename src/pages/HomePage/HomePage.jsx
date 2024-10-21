@@ -4,7 +4,6 @@ import MonthStatsTable from "../../components/MonthStatsTable/MonthStatsTable";
 import TodayWaterList from "../../components/TodayWaterList/TodayWaterList";
 import css from "./HomePage.module.css";
 
-
 export default function HomePage() {
   return (
     <main>
@@ -14,7 +13,7 @@ export default function HomePage() {
             <WaterRatioPanel />
           </section>
           <section className={css.TodayMonthWrap}>
-            <TodayWaterList/>
+            <TodayWaterList />
             <MonthStatsTable />
           </section>
         </Container>
