@@ -1,6 +1,5 @@
 .div {
   display: flex;
-<<<<<<< Updated upstream
   flex-direction: column;
   gap: 8px;
   align-items: center;
@@ -16,22 +15,6 @@
   background-color: var(--primary-color-white, #ffffff);
   border: none;
   cursor: pointer;
-=======
-  flex-wrap: wrap;
-  row-gap: 16px;
-  background: rgba(255, 255, 255, 1);
-}
-
-.button {
-  background: rgba(255, 255, 255, 1);
-}
-
-.icon {
-  width: 16px;
-  height: 16px;
-  color: rgba(64, 123, 255, 1);
-  margin-right: 8px;
->>>>>>> Stashed changes
 }
 
 .span {
@@ -39,7 +22,6 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
-<<<<<<< Updated upstream
   background-color: var(--primary-color-white, #ffffff);
   color: var(--primery-color-blue, #407bff);
 }
@@ -49,8 +31,4 @@
   height: 16px;
   background-color: var(--primary-color-white, #ffffff);
   color: var(--primery-color-blue, #407bff);
-=======
-  text-align: left;
-  color: rgba(64, 123, 255, 1);
->>>>>>> Stashed changes
 }

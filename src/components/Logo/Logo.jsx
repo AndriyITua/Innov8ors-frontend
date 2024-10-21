@@ -10,8 +10,6 @@ export const Logo = () => {
   };
 
   return (
-    <div onClick={handleClick} style={{ cursor: "pointer" }}>
-      <img className={css.img} src={logo} alt="Logo" />
     <div
       className={css.div}
       onClick={handleClick}

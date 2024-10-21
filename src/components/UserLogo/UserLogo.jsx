@@ -72,10 +72,9 @@ const UserLogo = () => {
             position: "absolute",
             top: modalPosition.top,
             left: modalPosition.left,
-            padding: "12px",
-            margin: "0",
-            boxShadow: " rgba(0, 0, 0, 0.1)",
-            transform: "translateY(5px)",
+            padding: "16px",
+            overflow: "none",
+            boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
           },
         }}
       >
