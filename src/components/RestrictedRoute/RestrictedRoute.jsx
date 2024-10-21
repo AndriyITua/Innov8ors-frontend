@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 
 export default function RestrictedRoute({ component, redirectTo }) {
   // Поки немає логіки логіну, вручну змінюйте на true/false
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   return isLoggedIn ? <Navigate to={redirectTo} /> : component;
 }

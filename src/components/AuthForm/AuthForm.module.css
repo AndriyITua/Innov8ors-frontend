@@ -34,7 +34,6 @@ width: 100%;
 
 
 .inputContainer {
-    margin-bottom: 16px;
     position: relative;
     width: 100%;
 }
@@ -68,10 +67,11 @@ width: 100%;
 
 
 
-.form {
+.formSignup {
     display: flex;
     flex-direction: column;
     width: 280px;
+    gap: 0px;
 }
 
 .input {
