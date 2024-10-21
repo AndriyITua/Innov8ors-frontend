@@ -27,12 +27,12 @@ const ValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")
-    .matches(nameRegExp, "Неверный ввод")
-    .required("Заполните поле!"),
+    .matches(nameRegExp, "Invalid input!")
+    .required("Fill in the input field!"),
   email: Yup.string()
     .min(5, "Too Short!")
-    .matches(emailRegexp, "Неверный ввод")
-    .required("Заполните поле!"),
+    .matches(emailRegexp, "Invalid input!")
+    .required("Fill in the input field!"),
 });
 
 const SettingForm = ({ closeModal }) => {

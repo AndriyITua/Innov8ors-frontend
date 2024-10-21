@@ -12,7 +12,7 @@ const UserLogoutForm = ({ closeLogoutModal }) => {
       </div>
       <p className={css.logoutText}>Do you really want to leave</p>
       <div className={css.buttonList}>
-        <button type="submit" className={css.cancelButton}>
+        <button className={css.cancelButton} onClick={closeLogoutModal}>
           Cancel
         </button>
         <button type="submit" className={css.logoutbutton}>
