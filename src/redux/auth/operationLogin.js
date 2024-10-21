@@ -8,7 +8,7 @@ import {
   notifySuccessToast,
 } from "../../helpers/hot-toasts.js";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://innov8ors-backend.onrender.com";
 
 axios.defaults.withCredentials = true;
 
