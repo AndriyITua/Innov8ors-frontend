@@ -133,12 +133,16 @@ form {
 }
 
 .inputText {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
 .error {
+  position: absolute;
+  top: 45px;            
+  left: 0;
   color: red;
 }
 

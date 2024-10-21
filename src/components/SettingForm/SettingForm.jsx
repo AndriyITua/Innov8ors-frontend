@@ -92,7 +92,7 @@ const SettingForm = ({ closeModal }) => {
             <h3 className={css.photoText}>Your gender identity</h3>
             <div className={css.checkGender}>
               <label className={css.genderLabel}>
-                <input type="radio" name="option" value="option1" />
+                <input type="radio" name="option" value="option1" checked/>
                 <span className={css.checkboxText}>Woman</span>
               </label>
               <label className={css.genderLabel}>
