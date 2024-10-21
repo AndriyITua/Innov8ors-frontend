@@ -1,8 +1,8 @@
 .modal {
   position: absolute;
-  top: 60%;
+  top: 20px;
   left: 50%;
-  transform: translate(-50%, -50%);  
+  transform: translate(-50%);  
   
 }
 
@@ -18,11 +18,13 @@
 }
 
 .card {
+  margin-bottom: 20px;
+  
   position: relative;
   width: 280px;
   height: 860px;
   padding: 32px 12px;
   background-color:var(--primary-color-white);
   border-radius: 8px;
-  margin-bottom: 50px;
+  
 }
