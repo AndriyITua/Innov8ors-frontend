@@ -8,7 +8,7 @@ import {
   notifySuccessToast,
 } from "../../helpers/hot-toasts.js";
 
-axios.defaults.baseURL = "https://innov8ors-backend.onrender.com";
+axios.defaults.baseURL = "http://localhost:3000";
 
 axios.defaults.withCredentials = true;
 
@@ -49,7 +49,7 @@ export const refreshUser = createAsyncThunk(
   {
     condition: (_, thunkAPI) => {
       const reduxState = thunkAPI.getState();
-      return reduxState.auth.accessToken === null;
+      return reduxState.auth.accessToken !== null;
     },
   }
 );
