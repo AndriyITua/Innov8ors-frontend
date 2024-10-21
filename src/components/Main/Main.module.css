@@ -1,4 +1,6 @@
 .welcomeSection {
+  max-width: 320px;
+  margin: 0 auto;
   background-image: url("../../assets/welcomePageImages/bg_mobile.png");
   background-repeat: no-repeat;
   background-position: bottom;
