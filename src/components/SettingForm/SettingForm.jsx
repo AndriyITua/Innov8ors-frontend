@@ -12,6 +12,8 @@ import css from "./SettingForm.module.css";
 const initialValues = {
   name: "",
   email: "",
+  password: "",
+  newPassword: "",
 };
 
 // паттерн для валидации имени
@@ -52,8 +54,7 @@ const SettingForm = ({ closeModal }) => {
       // onSubmit={submit}
       validationSchema={ValidationSchema}
     >
-      <Form className={css.form}>
-        
+      <Form className={css.form} >
         <div className={css.settingWrapper}>
           <h2 className={css.settingTitle}>Setting</h2>
           <button className={css.closeButton} onClick={closeModal}>
@@ -91,7 +92,7 @@ const SettingForm = ({ closeModal }) => {
             <h3 className={css.photoText}>Your gender identity</h3>
             <div className={css.checkGender}>
               <label className={css.genderLabel}>
-                <input type="radio" name="option" value="option1" />
+                <input type="radio" name="option" value="option1" checked/>
                 <span className={css.checkboxText}>Woman</span>
               </label>
               <label className={css.genderLabel}>
@@ -151,9 +152,10 @@ const SettingForm = ({ closeModal }) => {
                 <Field
                   className={css.passwordInputField}
                   type={showPassword ? "text" : "password"}
-                  name="password"
+                  name="outdatedPassword"
                   id={`password-${id}`}
                   placeholder="Password"
+                  autocomplete="new-password"
                 />
                 {showPassword ? (
                   <HiOutlineEye
@@ -174,7 +176,7 @@ const SettingForm = ({ closeModal }) => {
                 <Field
                   className={css.passwordInputField}
                   type={showNewPassword ? "text" : "password"}
-                  name="password"
+                  name="newPassword"
                   id={`newPassword-${id}`}
                   placeholder="Password"
                 />
@@ -200,7 +202,7 @@ const SettingForm = ({ closeModal }) => {
                 <Field
                   className={css.passwordInputField}
                   type={showRepeatNewPassword ? "text" : "password"}
-                  name="password"
+                  name="repeatNewPassword"
                   id={`repeatNewPassword-${id}`}
                   placeholder="Password"
                 />
