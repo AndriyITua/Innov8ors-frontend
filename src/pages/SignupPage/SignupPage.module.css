@@ -52,10 +52,5 @@ background-position: 20px 375px, 0px 28px;
     .signupSection {
         padding-bottom: 0px;
     }
-        @media (min-resolution: 192dpi) {
-            .container {
-                background-image: url("../../assets/signinPageImages/BottleBackground-tablet-2x.png"),
-                    url("../../assets/signinPageImages/BubblesBackground-tablet-2x.png");
-            }
-        }
+    
 }
