@@ -230,7 +230,7 @@ background-color: #ecf2ff;
     height: 36px;
     padding:3px 6px;
 }
-@media screen and (min-width: 780px) {
+@media screen and (min-width: 768px) {
     .modalWrap {
         border-radius: 10px;
         padding: 32px 24px;
@@ -264,7 +264,7 @@ background-color: #ecf2ff;
     }
 }
 
-@media screen and (min-width: 1140px) {
+@media screen and (min-width: 1440px) {
     .modalWrap {
         width: 592px;
         height: 580px;
