@@ -142,7 +142,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
             </div>
 
             <div className={css.boxButton}>
-              <p className={css.infoWater}>{water}ml</p>
+              <p className={css.infoWater}>200ml</p>
               <button
                 className={`${css.buttonSave} ${
                   disableButtonSave ? css.buttonDisabled : ""

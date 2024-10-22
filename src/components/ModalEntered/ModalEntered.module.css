@@ -14,8 +14,8 @@
     background: #000000cc;
     display: flex;
     justify-content: center;
-    align-items: center;
     z-index: 1000;
+    overflow-y: auto;
 }
 
 .modalWrap {
@@ -26,9 +26,19 @@
     padding: 24px 12px;
     border-radius: 10px;
     margin-top: 40px;
-    overflow-y: auto;
     margin-top: 40px;
-    /* margin-bottom: 24px; */
+}
+.modalWrap::-webkit-scrollbar {
+    display: none; 
+}
+/* body {
+    overflow: hidden; 
+} */
+.container::-webkit-scrollbar {
+    display: none; 
+}
+.modalWrap::-webkit-scrollbar {
+    display: none;
 }
 
 .forLoder {
@@ -219,4 +229,53 @@ background-color: #ecf2ff;
     width: 36px;
     height: 36px;
     padding:3px 6px;
+}
+@media screen and (min-width: 780px) {
+    .modalWrap {
+        border-radius: 10px;
+        padding: 32px 24px;
+        width: 704px;
+        height: 580px;
+        gap: 24px;
+    }
+    .modalContent {
+        width: 544px;
+        height: 392px;
+    }
+    .input {
+        width: 544px;
+    }
+    .boxButton {
+        width: 656px;
+        flex-direction: row;
+        justify-content: end;
+    }
+    .buttonSave {
+        width: 160px;
+        height: 44px;
+        padding: 10px 30px;
+    }
+    .infoWater {
+        width: 74px;
+    }
+    .forLoder {
+        width: 704px;
+        height: 504px;
+    }
+}
+
+@media screen and (min-width: 1140px) {
+    .modalWrap {
+        width: 592px;
+        height: 580px;
+    }
+    .boxButton {
+        width: 544px;
+        flex-direction: row;
+        justify-content: end;
+    }
+    .forLoder {
+        width: 592px;
+        height: 504px;
+    }
 }
