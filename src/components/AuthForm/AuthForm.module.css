@@ -34,7 +34,6 @@ width: 100%;
 
 
 .inputContainer {
-    margin-bottom: 16px;
     position: relative;
     width: 100%;
 }
@@ -68,10 +67,11 @@ width: 100%;
 
 
 
-.form {
+.formSignup {
     display: flex;
     flex-direction: column;
     width: 280px;
+    gap: 0px;
 }
 
 .input {
@@ -188,7 +188,7 @@ width: 100%;
     color: var(--primary-color-black);
     font-weight: 400;
     font-size: 18px;
-    line-height: 1.33;
+    line-height: 133%;
 }
 
 

@@ -3,7 +3,25 @@ import { HiOutlinePencilSquare } from "react-icons/hi2";
 import css from "./TodayWaterList.module.css"
 import  glassWater from "../../assets/homePageImages/glassWater.svg"
 import  deleteW from "../../assets/homePageImages/delete.svg"
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { useState } from "react";
 export default function TodayWaterList() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedEntry, setselectedEntry] =useState(null);
+
+    const openModal =(entry)=>{
+        setselectedEntry(entry);
+        setIsModalOpen(true);
+    }
+    const closeModal =()=>{
+        setIsModalOpen(false);
+        setselectedEntry(null);
+    }
+    const handleDelete=()=>{
+        console.log('Deleting entry:', selectedEntry);
+        closeModal();
+    };
+
     return (
         <div className={css.container}>
             <p className={css.title}>Today</p>
@@ -21,7 +39,9 @@ export default function TodayWaterList() {
                             <button className={css.buttonIcon}><HiOutlinePencilSquare/></button>
                         </li>
                         <li>
-                           <button className={css.buttonDel}> <img src={deleteW} alt="Delete"/></button>
+                           <button onClick={()=>openModal()} className={css.buttonDel}> 
+                            <img src={deleteW} alt="Delete"/>
+                            </button>
                         </li>
                     </div>
                 </ul>
@@ -123,6 +143,7 @@ export default function TodayWaterList() {
                         Add water</button>
                 </div>
             </div>
+            <DeleteModal isOpen={isModalOpen} onClose={closeModal} onDelete={handleDelete}/>
         </div>
     )
 }
