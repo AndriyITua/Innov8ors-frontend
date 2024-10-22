@@ -5,7 +5,7 @@ import { useState } from "react";
 import ModalAddWater from "../../components/ModalAddWater/ModalAddWater";
 
 export default function WaterRatioPanel() {
-  const [value, setValue] = useState(50);
+  const [value, setValue] = useState(0);
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -14,8 +14,11 @@ export default function WaterRatioPanel() {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
-  const getFontSize = (currentValue, targetValue) => {
-    return currentValue === targetValue ? '16px' : '12px';
+  const getFontStyle = (currentValue, targetValue) => {
+    return {
+      fontSize: currentValue === targetValue ? '16px' : '12px',
+      fontWeight: currentValue === targetValue ? '500' : '400',
+    };
   };
   return (
     <div className={css.container}>
@@ -37,15 +40,15 @@ export default function WaterRatioPanel() {
         <ul className={css.item}>
           <li className={css.lineContainer}>
             <div><PiLineVertical className={css.line} /></div>
-            <span className={css.startEnd} style={{ fontSize: getFontSize(value, 0) }}>0%</span>
+            <span className={css.startEnd} style={ getFontStyle(value, 0)}>0%</span>
           </li>
           <li className={css.lineContainer}>
             <PiLineVertical className={css.line} />
-            <span className={css.startEnd} style={{ fontSize: getFontSize(value, 50) }}>50%</span>
+            <span className={css.startEnd} style={ getFontStyle(value, 50) }>50%</span>
           </li>
           <li className={css.lineContainer}>
             <PiLineVertical className={css.line} />
-            <span className={css.startEnd}  style={{ fontSize: getFontSize(value, 100) }}>100%</span>
+            <span className={css.startEnd}  style={ getFontStyle(value, 100)}>100%</span>
           </li>
         </ul>
       </div>
