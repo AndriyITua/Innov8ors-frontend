@@ -2,6 +2,9 @@
 // import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import { CgClose } from "react-icons/cg";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import toast from "react-hot-toast";
 import css from "../DailyNormaModal/DailyNormaModal.module.css";
 
 const customStyles = {
@@ -65,7 +68,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
             <input
               type="number"
               id="weight"
-              value="0"
+              placeholder="0"
               className={css.inputNumber}
             ></input>
           </div>
@@ -77,7 +80,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
             <input
               type="number"
               id="hours"
-              value="0"
+              placeholder="0"
               className={css.inputNumber}
             ></input>
           </div>
@@ -96,7 +99,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
             <input
               type="number"
               id="water"
-              value="0"
+              placeholder="0"
               className={css.inputNumber}
             ></input>
           </div>
