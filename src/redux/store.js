@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import { authReducer } from "./auth/slice";
+import { setupAxiosInterceptors } from "../api/api.js";
 
 const authPersistConfig = {
   key: "auth-token",
@@ -34,3 +35,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+setupAxiosInterceptors(store);
