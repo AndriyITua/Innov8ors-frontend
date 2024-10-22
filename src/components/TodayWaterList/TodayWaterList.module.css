@@ -211,7 +211,7 @@ color: #2f2f2f;
     height: 24px;
     } 
 }
-@media screen and (min-width: 1140px){
+@media screen and (min-width: 1440px){
     .container{
         width: 544px;
     }
