@@ -18,7 +18,6 @@ export default function TodayWaterList() {
         setIsModalOpen(true);
     }
     const closeModal =()=>{
-        setModalOpen(false)
         setIsModalOpen(false);
     }
     const handleDelete=()=>{
