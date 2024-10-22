@@ -33,11 +33,11 @@
 
 @media screen and (min-width: 768px) {
   .homePage {
-    background-image: url(../../assets/homePageImages/bgHomeTablet.png),
-      url(../../assets/homePageImages/bottleHomeTablet-new.png);
-    background-size: 768px, 521px;
-    /* background-position: center 29px, center 45px; */
+    background-image: url(../../assets/homePageImages/bottleHomeTablet-new.png),
+      url(../../assets/homePageImages/bgHomeTablet.png);
+    background-size: 521px, 768px;
     background-position: center 11px, center 27px;
+    background-position: center 27px, center 11px;
     padding-bottom: 44px;
   }
 
@@ -61,7 +61,7 @@
     background-image: url(../../assets/homePageImages/bgHomeDesc.png),
       url(../../assets/homePageImages/bottleHomeDesc.png);
     background-size: 1415px, 682px;
-    background-position: left 35px, 50px 27px;
+    background-position: center 35px, 50px 27px;
   }
 
   .container {
