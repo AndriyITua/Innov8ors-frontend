@@ -24,3 +24,22 @@
 .welcomeTryBtn:active {
   box-shadow: none;
 }
+@media screen and (min-width: 768px) {
+  .welcomeTryBtn {
+    width: 336px;
+    font-size: 18px;
+    line-height: 1.33333;
+    padding: 10px 30px;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .welcomeTryBtn {
+    width: 384px;
+    font-size: 18px;
+    line-height: 1.33333;
+    padding: 10px 30px;
+    height: auto;
+  }
+}

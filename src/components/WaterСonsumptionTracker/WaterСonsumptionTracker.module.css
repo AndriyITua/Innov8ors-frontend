@@ -37,7 +37,6 @@
   padding-top: 3px;
   padding-left: 0;
   margin-top: 0;
-  margin-bottom: 0;
   margin-bottom: 25px;
 }
 .welcomeListItem {
@@ -58,4 +57,59 @@
 
 .waterСonsumption {
   padding-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .welcomeTitle {
+    font-size: 36px;
+    line-height: 1.16667;
+  }
+  .welcomeText {
+    font-size: 26px;
+    line-height: 1.23007;
+    color: var(--primary-color-black);
+    max-width: 100%;
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+  .welcomeList {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-bottom: 25px;
+  }
+  .welcomeListItem {
+    width: 224px;
+  }
+  .welcomeSvg {
+    width: 40px;
+    height: 40px;
+  }
+  .welcomeListItem:not(:last-child) {
+    margin-bottom: 0px;
+  }
+  .waterСonsumption {
+    padding-top: 16px;
+    padding-bottom: 60px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .waterСonsumption {
+    padding-top: 56px;
+    padding-left: 104px;
+    width: 545px;
+  }
+  .welcomeTitle {
+    line-height: 1.16667;
+  }
+  .welcomeList {
+    flex-direction: column;
+  }
+  .welcomeListItem {
+    margin-bottom: 0;
+  }
+  .welcomeListItem:not(:last-child) {
+    margin-bottom: 0px;
+  }
 }
