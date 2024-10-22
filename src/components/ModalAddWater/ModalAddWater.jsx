@@ -31,6 +31,8 @@ export default function ModalAddWater({ isOpen, onClose }) {
 
   const [localTime, setLocalTime] = useState(formattedTime);
 
+  useEffect(() => {}, [localTime]);
+
   const handleTimeChange = event => {
     setLocalTime(event.target.value);
   };
@@ -73,6 +75,13 @@ export default function ModalAddWater({ isOpen, onClose }) {
       onClose();
     }, 800);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      setLocalTime(formattedTime);
+      setWater(50);
+    }
+  }, [isOpen, formattedTime]);
 
   if (!isOpen) return null;
 
