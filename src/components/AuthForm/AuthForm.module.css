@@ -208,3 +208,18 @@ width: 100%;
 .inputFilled {
     color: var(--primary-color-blue);
 }
+
+@media screen and (min-width: 768px) {
+    .formSignup {
+        width: 336px;
+    }
+
+    .button {
+        width: 336px;
+        height: 44px;
+        padding: 10px 30px;
+        font-size: 18px;
+        line-height: 133%;
+    }
+
+}
