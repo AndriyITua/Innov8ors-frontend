@@ -49,7 +49,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
           commensurate in terms of loads (in the absence of these, you must set
           0)
         </p>
-        <form>
+        <form className={css.form}>
           <div>
             <legend className={css.rate}>Calculate your rate:</legend>
             <label className={css.radioBtn}>
@@ -66,7 +66,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
               type="number"
               id="weight"
               value="0"
-              className={css.input}
+              className={css.inputNumber}
             ></input>
           </div>
           <div className={css.wrap}>
@@ -78,7 +78,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
               type="number"
               id="hours"
               value="0"
-              className={css.input}
+              className={css.inputNumber}
             ></input>
           </div>
           <div className={css.wrapLitres}>
@@ -97,7 +97,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
               type="number"
               id="water"
               value="0"
-              className={css.input}
+              className={css.inputNumber}
             ></input>
           </div>
           <button type="submit" className={css.saveBtn}>

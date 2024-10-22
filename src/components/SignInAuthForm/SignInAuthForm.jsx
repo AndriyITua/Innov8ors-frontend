@@ -44,6 +44,7 @@ export default function SignInAuthForm() {
     >
       {({ errors }) => (
         <Form className={css.form}>
+          <h2 className={css.title}>Sign In</h2>
           <div className={css.inputWrapper}>
             <label className={css.label} htmlFor="email">
               Enter your email
