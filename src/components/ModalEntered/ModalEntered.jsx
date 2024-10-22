@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import css from "./ModalAddWater.module.css";
+import css from "./ModalEntered.module.css";
 import { IoCloseOutline, IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
 import Loader from "../Loader/Loader.jsx";
+import Glasses from "../../assets/icons/Glasses.jsx"
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
@@ -30,8 +31,6 @@ export default function ModalAddWater({ isOpen, onClose }) {
   const formattedTime = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
 
   const [localTime, setLocalTime] = useState(formattedTime);
-
-  useEffect(() => {}, [localTime]);
 
   const handleTimeChange = event => {
     setLocalTime(event.target.value);
@@ -76,13 +75,6 @@ export default function ModalAddWater({ isOpen, onClose }) {
     }, 800);
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      setLocalTime(formattedTime);
-      setWater(50);
-    }
-  }, [isOpen, formattedTime]);
-
   if (!isOpen) return null;
 
   return (
@@ -94,13 +86,20 @@ export default function ModalAddWater({ isOpen, onClose }) {
       ) : (
         <div className={css.modalWrap}>
           <div className={css.title}>
-            <h2>Add water</h2>
+            <h2>Edit the entered amount of water</h2>
             <button className={css.button} onClick={onClose}>
               <IoCloseOutline className={css.buttonClose} />
             </button>
           </div>
           <div className={css.modalContent}>
             <div>
+                <ul className={css.item}>
+                   <div className={css.classesContainer}><Glasses/></div>
+                    <div className={css.time}>
+                        <li className={css.water}>200 ml</li>
+                        <li className={css.am}>14:00 PM</li>
+                    </div>
+                </ul>
               <h3 className={css.h3}>Choose a value:</h3>
               <p className={css.p}>Amount of water:</p>
               <div className={css.addWater}>
@@ -111,7 +110,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
                 >
                   <FiMinus className={css.circleButton} />
                 </button>
-                <div className={css.waterMl}>50ml</div>
+                <div className={css.waterMl}>200ml</div>
                 <button
                   className={css.circle}
                   onClick={onPlusClickedHandler}
