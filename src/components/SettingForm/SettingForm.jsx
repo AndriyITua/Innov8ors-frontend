@@ -54,7 +54,7 @@ const SettingForm = ({ closeModal }) => {
       // onSubmit={submit}
       validationSchema={ValidationSchema}
     >
-      <Form className={css.form} >
+      <Form className={css.form}>
         <div className={css.settingWrapper}>
           <h2 className={css.settingTitle}>Setting</h2>
           <button className={css.closeButton} onClick={closeModal}>
@@ -87,142 +87,152 @@ const SettingForm = ({ closeModal }) => {
               </div>
             </div>
           </div>
+          <div className={css.genderPasswordWrapper}>
+            <div className={css.genderEmailWrapper}>
+              <div className={css.genderSetting}>
+                <h3 className={css.photoText}>Your gender identity</h3>
+                <div className={css.checkGender}>
+                  <label className={css.genderLabel}>
+                    <input type="radio" name="option" value="option1" checked />
+                    <span className={css.checkboxText}>Woman</span>
+                  </label>
+                  <label className={css.genderLabel}>
+                    <input type="radio" name="option" value="option2" />
+                    <span className={css.checkboxText}>Man</span>
+                  </label>
+                </div>
+              </div>
 
-          <div className={css.genderSetting}>
-            <h3 className={css.photoText}>Your gender identity</h3>
-            <div className={css.checkGender}>
-              <label className={css.genderLabel}>
-                <input type="radio" name="option" value="option1" checked/>
-                <span className={css.checkboxText}>Woman</span>
+              <div className={css.userNameSetting}>
+                <div className={css.userNameInput}>
+                  <label htmlFor={`name-${id}`} className={css.userNameText}>
+                    Your name
+                  </label>
+                  <div className={css.inputText}>
+                    <Field
+                      type="text"
+                      name="name"
+                      id={`name-${id}`}
+                      className={css.inputField}
+                      placeholder="Name"
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="span"
+                      className={css.error}
+                    />
+                  </div>
+                </div>
+
+                <div className={css.userNameInput}>
+                  <label htmlFor={`email-${id}`} className={css.userNameText}>
+                    E-mail
+                  </label>
+                  <div className={css.inputText}>
+                    <Field
+                      type="text"
+                      name="email"
+                      id={`email-${id}`}
+                      className={css.inputField}
+                      placeholder="Email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="span"
+                      className={css.error}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={css.passwordSetting}>
+              <h3 className={css.passwordSettingTitle}>Password</h3>
+              <label className={css.passwordLabel} htmlFor={`password-${id}`}>
+                Outdated password
+                <div className={css.inputContainer}>
+                  <Field
+                    className={css.passwordInputField}
+                    type={showPassword ? "text" : "password"}
+                    name="outdatedPassword"
+                    id={`password-${id}`}
+                    placeholder="Password"
+                    autocomplete="new-password"
+                  />
+                  {showPassword ? (
+                    <HiOutlineEye
+                      className={css.eyeIcon}
+                      onClick={() => setShowPassword(prevState => !prevState)}
+                    />
+                  ) : (
+                    <HiOutlineEyeSlash
+                      className={css.eyeIcon}
+                      onClick={() => setShowPassword(prevState => !prevState)}
+                    />
+                  )}
+                </div>
               </label>
-              <label className={css.genderLabel}>
-                <input type="radio" name="option" value="option2" />
-                <span className={css.checkboxText}>Man</span>
+              <label
+                className={css.passwordLabel}
+                htmlFor={`newPassword-${id}`}
+              >
+                New password
+                <div className={css.inputContainer}>
+                  <Field
+                    className={css.passwordInputField}
+                    type={showNewPassword ? "text" : "password"}
+                    name="newPassword"
+                    id={`newPassword-${id}`}
+                    placeholder="Password"
+                  />
+                  {showNewPassword ? (
+                    <HiOutlineEye
+                      className={css.eyeIcon}
+                      onClick={() =>
+                        setShowNewPassword(prevState => !prevState)
+                      }
+                    />
+                  ) : (
+                    <HiOutlineEyeSlash
+                      className={css.eyeIcon}
+                      onClick={() =>
+                        setShowNewPassword(prevState => !prevState)
+                      }
+                    />
+                  )}
+                </div>
+              </label>
+              <label
+                className={css.passwordLabel}
+                htmlFor={`repeatNewPassword-${id}`}
+              >
+                Repeat new password
+                <div className={css.inputContainer}>
+                  <Field
+                    className={css.passwordInputField}
+                    type={showRepeatNewPassword ? "text" : "password"}
+                    name="repeatNewPassword"
+                    id={`repeatNewPassword-${id}`}
+                    placeholder="Password"
+                  />
+                  {showRepeatNewPassword ? (
+                    <HiOutlineEye
+                      className={css.eyeIcon}
+                      onClick={() =>
+                        setRepeatNewPassword(prevState => !prevState)
+                      }
+                    />
+                  ) : (
+                    <HiOutlineEyeSlash
+                      className={css.eyeIcon}
+                      onClick={() =>
+                        setRepeatNewPassword(prevState => !prevState)
+                      }
+                    />
+                  )}
+                </div>
               </label>
             </div>
-          </div>
-
-          <div className={css.userNameSetting}>
-            <div className={css.userNameInput}>
-              <label htmlFor={`name-${id}`} className={css.userNameText}>
-                Your name
-              </label>
-              <div className={css.inputText}>
-                <Field
-                  type="text"
-                  name="name"
-                  id={`name-${id}`}
-                  className={css.inputField}
-                  placeholder="Name"
-                />
-                <ErrorMessage
-                  name="name"
-                  component="span"
-                  className={css.error}
-                />
-              </div>
-            </div>
-
-            <div className={css.userNameInput}>
-              <label htmlFor={`email-${id}`} className={css.userNameText}>
-                E-mail
-              </label>
-              <div className={css.inputText}>
-                <Field
-                  type="text"
-                  name="email"
-                  id={`email-${id}`}
-                  className={css.inputField}
-                  placeholder="Email"
-                />
-                <ErrorMessage
-                  name="email"
-                  component="span"
-                  className={css.error}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className={css.passwordSetting}>
-            <h3 className={css.passwordSettingTitle}>Password</h3>
-            <label className={css.passwordLabel} htmlFor={`password-${id}`}>
-              Outdated password
-              <div className={css.inputContainer}>
-                <Field
-                  className={css.passwordInputField}
-                  type={showPassword ? "text" : "password"}
-                  name="outdatedPassword"
-                  id={`password-${id}`}
-                  placeholder="Password"
-                  autocomplete="new-password"
-                />
-                {showPassword ? (
-                  <HiOutlineEye
-                    className={css.eyeIcon}
-                    onClick={() => setShowPassword(prevState => !prevState)}
-                  />
-                ) : (
-                  <HiOutlineEyeSlash
-                    className={css.eyeIcon}
-                    onClick={() => setShowPassword(prevState => !prevState)}
-                  />
-                )}
-              </div>
-            </label>
-            <label className={css.passwordLabel} htmlFor={`newPassword-${id}`}>
-              New password
-              <div className={css.inputContainer}>
-                <Field
-                  className={css.passwordInputField}
-                  type={showNewPassword ? "text" : "password"}
-                  name="newPassword"
-                  id={`newPassword-${id}`}
-                  placeholder="Password"
-                />
-                {showNewPassword ? (
-                  <HiOutlineEye
-                    className={css.eyeIcon}
-                    onClick={() => setShowNewPassword(prevState => !prevState)}
-                  />
-                ) : (
-                  <HiOutlineEyeSlash
-                    className={css.eyeIcon}
-                    onClick={() => setShowNewPassword(prevState => !prevState)}
-                  />
-                )}
-              </div>
-            </label>
-            <label
-              className={css.passwordLabel}
-              htmlFor={`repeatNewPassword-${id}`}
-            >
-              Repeat new password
-              <div className={css.inputContainer}>
-                <Field
-                  className={css.passwordInputField}
-                  type={showRepeatNewPassword ? "text" : "password"}
-                  name="repeatNewPassword"
-                  id={`repeatNewPassword-${id}`}
-                  placeholder="Password"
-                />
-                {showRepeatNewPassword ? (
-                  <HiOutlineEye
-                    className={css.eyeIcon}
-                    onClick={() =>
-                      setRepeatNewPassword(prevState => !prevState)
-                    }
-                  />
-                ) : (
-                  <HiOutlineEyeSlash
-                    className={css.eyeIcon}
-                    onClick={() =>
-                      setRepeatNewPassword(prevState => !prevState)
-                    }
-                  />
-                )}
-              </div>
-            </label>
           </div>
         </div>
 

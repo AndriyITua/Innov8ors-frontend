@@ -2,8 +2,7 @@
   position: absolute;
   top: 20px;
   left: 50%;
-  transform: translate(-50%);  
-  
+  transform: translate(-50%);
 }
 
 .overlay {
@@ -19,12 +18,38 @@
 
 .card {
   margin-bottom: 20px;
-  
+
   position: relative;
   width: 280px;
   height: 860px;
   padding: 32px 12px;
-  background-color:var(--primary-color-white);
+  background-color: var(--primary-color-white);
   border-radius: 8px;
-  
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    padding: 32px 24px;
+    width: 704px;
+  }
+
+  .modal {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .card {
+    width: 1008px;
+    height: 592px;
+  }
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
