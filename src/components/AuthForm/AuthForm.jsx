@@ -40,9 +40,7 @@ export default function AuthForm() {
   const navigate = useNavigate();
 
   const handleSubmit = async (values, actions) => {
-    console.log(values);
     const { email, password } = values;
-    console.log(values);
     const result = await dispatch(register({ email, password }));
     if (register.fulfilled.match(result)) {
       navigate("/signin");

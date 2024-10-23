@@ -33,6 +33,7 @@ background-position: 20px 375px, 0px 28px;
     }
 
     .container {
+        /* padding-top: 14px; */
         max-width: 768px;
         height: 680px;
         margin: 0 auto;
