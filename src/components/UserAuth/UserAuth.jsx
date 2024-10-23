@@ -6,7 +6,7 @@ const UserAuth = () => {
   const navigate = useNavigate();
   return (
     <button className={css.button} onClick={() => navigate("/signin")}>
-      <span className={css.span}>Sign In</span>
+      <span className={css.span}>Sign in</span>
       <Avatar />
     </button>
   );
