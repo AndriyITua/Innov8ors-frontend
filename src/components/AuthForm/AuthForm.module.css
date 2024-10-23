@@ -38,7 +38,7 @@
 }
 
 .inputContainer {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     position: relative;
     width: 100%;
 }
@@ -95,7 +95,8 @@
     font-size: 14px;
     color: var(--secondary-color-red);
     line-height: 18px;
-    margin-top: 4px;
+    /* margin-top: 4px; */
+    position: absolute;
 }
 
 .button {
@@ -141,6 +142,7 @@ box-shadow: none;
     font-weight: 400;
     line-height: 20px;
     color: var(--primary-color-blue);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navlink:hover {
