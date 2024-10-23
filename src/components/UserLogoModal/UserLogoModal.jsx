@@ -14,19 +14,23 @@ export const UserLogoModal = () => {
 
   // фyнкции для Setting модалки
   function openSettingModal() {
+    document.body.classList.add('modal-open');
     setSettingModalIsOpen(true);
   }
 
   function closeSettingModal() {
+    document.body.classList.remove('modal-open')
     setSettingModalIsOpen(false);
   }
 
   // фyнкции для Logout модалки
   function openLogoutModal() {
+    document.body.classList.add('modal-open');
     setLogoutModalIsOpen(true);
   }
 
   function closeLogoutModal() {
+    document.body.classList.remove('modal-open')
     setLogoutModalIsOpen(false);
   }
 

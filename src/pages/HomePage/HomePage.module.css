@@ -5,16 +5,16 @@
   /* height: 1356px; */
   background-image: url(../../assets/homePageImages/bgHomeMob.png),
     url(../../assets/homePageImages/bottleHomeMob.png);
-  background-size: 318px, 280px;
+  background-size: 320px, 280px;
   background-repeat: no-repeat, no-repeat;
   background-position: center 52px, center 106px;
   padding-bottom: 40px;
   overflow: hidden;
 }
 
-.norma {
+/* .norma {
   margin-top: 24px;
-}
+} */
 
 .WaterRatio {
   margin-top: 225px;
@@ -29,4 +29,65 @@
   background-color: var(--secondary-color-smoke-white);
   border-radius: 10px;
   padding: 24px 8px;
+}
+
+@media screen and (min-width: 768px) {
+  .homePage {
+    background-image: url(../../assets/homePageImages/bottleHomeTablet-new.png),
+      url(../../assets/homePageImages/bgHomeTablet.png);
+    background-size: 521px, 768px;
+    background-position: center 11px, center 27px;
+    background-position: center 27px, center 11px;
+    padding-bottom: 44px;
+  }
+
+  .norma {
+    margin-top: 20px;
+  }
+
+  .WaterRatio {
+    margin-top: 326px;
+    max-width: 704px;
+  }
+
+  .TodayMonthWrap {
+    width: 704px;
+    padding: 32px 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .homePage {
+    background-image: url(../../assets/homePageImages/bgHomeDesc.png),
+      url(../../assets/homePageImages/bottleHomeDesc.png);
+    background-size: 1415px, 682px;
+    background-position: center 35px, 50px 27px;
+  }
+
+  .container {
+    /* display: flex;
+    justify-content: space-between; */
+    position: relative;
+  }
+
+  /* .homeWrap {
+  } */
+
+  .norma {
+    margin-top: 28px;
+  }
+
+  .WaterRatio {
+    margin-top: 466px;
+  }
+
+  .TodayMonthWrap {
+    width: 592px;
+    height: 680px;
+    position: absolute;
+    width: 592px;
+    height: 680px;
+    top: -66px;
+    left: 624px;
+  }
 }

@@ -4,7 +4,7 @@
  font-size: 26px;
  margin-bottom: 16px;
  font-weight: 500;
- line-height: 1.23;
+ line-height: 123%;
  color: var(--primary-color-black);
  text-align: left;
 }
@@ -23,6 +23,31 @@ background-position: 20px 375px, 0px 28px;
 }
 
 
-.signupSection {
-    padding-bottom: 20px;
+
+@media screen and (min-width: 768px) {
+    .formText {
+        font-size: 26px;
+        margin-bottom: 16px;
+        color: var(--primary-color-black);
+        text-align: left;
+    }
+
+    .container {
+        padding-top: 14px;
+        max-width: 768px;
+        height: 680px;
+        margin: 0 auto;
+        padding-left: 32px;
+        padding-right: 0px;
+        background-color: var(--primary-color-white);
+        background: url(../../assets/signupPageImages/background-tablet-bottle-image.svg), url(../../assets/signupPageImages/background-tablet-svg.svg);
+        background-size: 656px, 768px;
+        background-position: 112px 30px, 0px -90px;
+        background-repeat: no-repeat;
+    }
+
+    .signupSection {
+        padding-bottom: 0px;
+    }
+    
 }
