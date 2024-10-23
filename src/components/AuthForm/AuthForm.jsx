@@ -2,6 +2,9 @@ import { Field, Form, Formik, ErrorMessage } from "formik";
 import { HiOutlineEye } from "react-icons/hi2";
 import { HiOutlineEyeSlash } from "react-icons/hi2";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operationRegister";
+import { useNavigate } from "react-router-dom";
 
 import { useId, useState } from "react";
 
@@ -33,9 +36,17 @@ export default function AuthForm() {
     password: "",
     repeat: "",
   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     console.log(values);
+    const { email, password } = values;
+    console.log(values);
+    const result = await dispatch(register({ email, password }));
+    if (register.fulfilled.match(result)) {
+      navigate("/signin");
+    }
     actions.resetForm();
   };
 
