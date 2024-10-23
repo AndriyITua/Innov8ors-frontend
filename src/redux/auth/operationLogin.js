@@ -15,6 +15,12 @@ axios.defaults.baseURL = "https://innov8ors-backend.onrender.com";
 
 axios.defaults.withCredentials = true;
 
+// функція скидання токена авторизації при логауті 
+const clearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = "";
+};
+
+
 export const login = createAsyncThunk(
   "auth/login",
   async (credentials, thunkApi) => {
@@ -55,3 +61,13 @@ export const refreshAccessToken = createAsyncThunk(
     }
   }
 );
+
+//logout юзера
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+     await axios.post("/auth/logout");
+     clearAuthHeader();
+  } catch (error) {
+     return thunkAPI.rejectWithValue(error.message);
+  }
+});

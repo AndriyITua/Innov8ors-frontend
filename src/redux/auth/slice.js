@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, refreshAccessToken, refreshUser } from "./operationLogin.js";
+import {
+  login,
+  refreshAccessToken,
+  refreshUser,
+  logout,
+} from "./operationLogin.js";
 
 const authSlice = createSlice({
   name: "auth",
@@ -11,7 +16,7 @@ const authSlice = createSlice({
       gender: null,
     },
     accessToken: null,
-    isLoggedIn: false,
+    isLoggedIn: true,
     isRefreshing: false,
     isLoading: false,
     isError: null,
@@ -64,6 +69,20 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.accessToken = null;
         state.isLoading = false;
+      })
+
+      // блок для log out
+      .addCase(logout.fulfilled, state => {
+        state.user = {
+          username: null,
+          email: null,
+          dailynormwater: null,
+          gender: null,
+        };
+        state.accessToken = null;
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.isError = null;
       });
   },
 });

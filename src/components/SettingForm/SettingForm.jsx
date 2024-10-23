@@ -1,15 +1,16 @@
-import { useId } from "react";
+import { useState, useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { MdOutlineFileUpload } from "react-icons/md";
+import { useDispatch } from "react-redux";
 
-import { useState } from "react";
+import { MdOutlineFileUpload } from "react-icons/md";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import { TfiClose } from "react-icons/tfi";
-
 import * as Yup from "yup";
+
 import css from "./SettingForm.module.css";
 
 const initialValues = {
+  selectedOptions: [],
   name: "",
   email: "",
   password: "",
@@ -25,33 +26,37 @@ const emailRegexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
 const ValidationSchema = Yup.object().shape({
   name: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
+    .min(3, "Too short, min 3!")
+    .max(30, "Too long, max 30!")
     .matches(nameRegExp, "Invalid input!")
-    .required("Fill in the input field!"),
+    .required("Fill input field!"),
   email: Yup.string()
-    .min(5, "Too Short!")
+    .min(8, "Too short, min 8!")
     .matches(emailRegexp, "Invalid input!")
-    .required("Fill in the input field!"),
+    .required("Fill input field!"),
 });
 
 const SettingForm = ({ closeModal }) => {
   const id = useId();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatNewPassword, setRepeatNewPassword] = useState(false);
 
-  //   const submit = (values, actions) => {
-  //     //добавляем контакт
-  //     dispatch(addContact(values));
-  //     actions.resetForm();
-  //   };
+  const submit = (values, actions) => {
+    //добавляем контакт
+    // dispatch(addContact(values));
+
+    console.log(values);
+
+    actions.resetForm();
+  };
 
   return (
     <Formik
       initialValues={initialValues}
-      // onSubmit={submit}
+      onSubmit={submit}
       validationSchema={ValidationSchema}
     >
       <Form className={css.form}>
@@ -93,11 +98,11 @@ const SettingForm = ({ closeModal }) => {
                 <h3 className={css.photoText}>Your gender identity</h3>
                 <div className={css.checkGender}>
                   <label className={css.genderLabel}>
-                    <input type="radio" name="option" value="option1" checked />
+                    <Field type="radio" name="selectedOptions" value="woman" checked />
                     <span className={css.checkboxText}>Woman</span>
                   </label>
                   <label className={css.genderLabel}>
-                    <input type="radio" name="option" value="option2" />
+                    <Field type="radio" name="selectedOptions" value="man" />
                     <span className={css.checkboxText}>Man</span>
                   </label>
                 </div>
@@ -157,7 +162,7 @@ const SettingForm = ({ closeModal }) => {
                     name="outdatedPassword"
                     id={`password-${id}`}
                     placeholder="Password"
-                    autocomplete="new-password"
+                    autoComplete="new-password"
                   />
                   {showPassword ? (
                     <HiOutlineEye
