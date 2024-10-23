@@ -1,72 +1,4 @@
 
-
-
-.input {
-    width: 100%;
-    height: 44px;
-    border: 0;
-    border-radius: 6px;
-    padding: 12px 10px;
-    background: var(--primary-color-white);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: var(--secondary-color-light-blue);
-    border: hidden;
-    outline: none;
-
-    
-
-}
-.inputEmail {
-width: 100%;
-    height: 44px;
-    border: 1px solid var(--secondary-color-light-gray);
-    border-radius: 6px;
-    padding: 12px 10px;
-    background: var(--primary-color-white);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: var(--secondary-color-light-blue);
-    outline: none;
-}
-
-
-.inputContainer {
-    position: relative;
-    width: 100%;
-}
-.eyeContainer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid var(--secondary-color-light-gray);
-    border-radius: 6px;
-    background-color: var(--primary-color-white);
-    outline: none;
-    padding-right: 12px;
-    
-}
-
-.eye {
-    color: var(--primary-color-blue);
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    padding-right: 12px;
-}
-
-.input::placeholder {
-    color: var(--secondary-color-light-blue);
-}
-.inputEmail::placeholder {
-    color: var(--secondary-color-light-blue);
-}
-
-
-
 .formSignup {
     display: flex;
     flex-direction: column;
@@ -85,6 +17,7 @@ width: 100%;
     font-size: 16px;
     line-height: 20px;
     color: var(--secondary-color-light-blue);
+    border: hidden;
     outline: none;
 }
 
