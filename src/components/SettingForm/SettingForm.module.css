@@ -285,3 +285,13 @@ form {
     right: 3%;
   }
 }
+
+
+.placeholderError::placeholder {
+  color: var(--secondary-color-red);
+}
+
+.inputError {
+  border-color: var(--secondary-color-red);
+  color: var(--secondary-color-red)
+}
