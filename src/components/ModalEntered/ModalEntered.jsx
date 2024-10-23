@@ -3,7 +3,7 @@ import css from "./ModalEntered.module.css";
 import { IoCloseOutline, IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
 import Loader from "../Loader/Loader.jsx";
-import Glasses from "../../assets/icons/Glasses.jsx"
+import Glasses from "../../assets/icons/Glasses.jsx";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
@@ -44,6 +44,15 @@ export default function ModalAddWater({ isOpen, onClose }) {
       setWater("");
     }
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (water >= WATER_MAX_LIMIT) {
@@ -93,13 +102,15 @@ export default function ModalAddWater({ isOpen, onClose }) {
           </div>
           <div className={css.modalContent}>
             <div>
-                <ul className={css.item}>
-                   <div className={css.classesContainer}><Glasses/></div>
-                    <div className={css.time}>
-                        <li className={css.water}>200 ml</li>
-                        <li className={css.am}>14:00 PM</li>
-                    </div>
-                </ul>
+              <ul className={css.item}>
+                <div className={css.classesContainer}>
+                  <Glasses />
+                </div>
+                <div className={css.time}>
+                  <li className={css.water}>200 ml</li>
+                  <li className={css.am}>14:00 PM</li>
+                </div>
+              </ul>
               <h3 className={css.h3}>Choose a value:</h3>
               <p className={css.p}>Amount of water:</p>
               <div className={css.addWater}>
