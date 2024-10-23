@@ -18,11 +18,11 @@
 @media screen and (min-width: 1440px) {
   .welcomeSection {
     margin: 0 auto;
-    background-image: url("../../assets/welcomePageImages/bg_desktop.png"),
-      url("../../assets/welcomePageImages/bg_desktop_circle.png");
+    background-image: url("../../assets/welcomePageImages/bg_desktop_circle.png"),
+      url("../../assets/welcomePageImages/bg_desktop.png");
     background-repeat: no-repeat, no-repeat;
-    background-position: bottom, 20px 23px;
-    background-size: 1440px auto, 1404px auto;
+    background-position: center 23px, bottom;
+    background-size: 1404px auto, 1440px auto;
   }
   .welcomeSectionContent {
     display: flex;
