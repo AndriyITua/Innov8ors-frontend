@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { logout } from "../../redux/auth/operationLogin";
+import { logout } from "../../redux/auth/operationLogout"
 import { TfiClose } from "react-icons/tfi";
 
 import css from "./UserLogoutForm.module.css";
