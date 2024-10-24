@@ -14,7 +14,6 @@
     background: #000000cc;
     display: flex;
     justify-content: center;
-    align-items: center;
     z-index: 1000;
 }
 
@@ -22,12 +21,22 @@
     position: relative;
     background: white;
     width: 280px;
-    height: 540px;
+    max-height: 540px;
     padding: 24px 12px;
+    overflow-y: auto;
     border-radius: 10px;
     margin-top: 40px;
-    overflow-y: auto;
-    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.modalWrap::-webkit-scrollbar {
+    display: none;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+.modalWrap::-webkit-scrollbar {
+    display: none;
 }
 
 .forLoder {
@@ -44,6 +53,7 @@
 .title {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 24px;
 }
 
 .button {
@@ -64,10 +74,8 @@
     display: flex;
     flex-direction: column;
     width: 240px;
-    height: 336px;
     gap: 24px;
     opacity: 0px;
-    padding: 24px 0;
 }
 
 .addWater {
@@ -217,6 +225,7 @@
     .modalWrap {
         width: 592px;
         height: 504px;
+        margin-top: 148px;
     }
     .modalContent {
         width: 544px;

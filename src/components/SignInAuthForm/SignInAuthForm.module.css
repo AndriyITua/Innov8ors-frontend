@@ -67,6 +67,11 @@
 .link {
   color: var(--primary-color-blue);
   line-height: 1.25;
+  transition: color 250ms ease-in-out;
+}
+
+.link:hover {
+  color: var(--secondary-color-orange);
 }
 
 .passwordWrapper {

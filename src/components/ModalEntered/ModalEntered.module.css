@@ -15,27 +15,27 @@
     display: flex;
     justify-content: center;
     z-index: 1000;
-    overflow-y: auto;
 }
 
 .modalWrap {
     position: relative;
     background: white;
     width: 280px;
-    height: 648px;
+    max-height: 648px;
+    overflow-y: auto;
     padding: 24px 12px;
     border-radius: 10px;
     margin-top: 40px;
-    margin-top: 40px;
+    margin-bottom: 40px;
 }
 .modalWrap::-webkit-scrollbar {
-    display: none; 
+    display: none;
 }
 /* body {
     overflow: hidden; 
 } */
 .container::-webkit-scrollbar {
-    display: none; 
+    display: none;
 }
 .modalWrap::-webkit-scrollbar {
     display: none;
@@ -77,7 +77,6 @@
     flex-direction: column;
     justify-content: space-between;
     width: 240px;
-    height: 336px;
     gap: 24px;
     opacity: 0px;
     /* padding: 24px; */
@@ -194,18 +193,18 @@
     font-weight: 700;
     line-height: 24px;
 }
-.item{
+.item {
     position: relative;
     display: flex;
     width: 256px;
     height: 52px;
     align-items: center;
     border-radius: 10px;
-padding: 8px 24px;
-margin-bottom: 24px;
-background-color: #ecf2ff;
+    padding: 8px 24px;
+    margin-bottom: 24px;
+    background-color: #ecf2ff;
 }
-.time{
+.time {
     align-items: center;
     justify-content: center;
     display: flex;
@@ -213,22 +212,22 @@ background-color: #ecf2ff;
     margin-right: 38px;
     margin-left: 12px;
 }
-.water{
+.water {
     font-weight: 400;
     font-size: 18px;
     line-height: 1.3;
     color: #407bff;
-    }
-.am{
+}
+.am {
     font-weight: 400;
     font-size: 12px;
     line-height: 200%;
     color: #2f2f2f;
 }
-.classesContainer{
+.classesContainer {
     width: 36px;
     height: 36px;
-    padding:3px 6px;
+    padding: 3px 6px;
 }
 @media screen and (min-width: 768px) {
     .modalWrap {

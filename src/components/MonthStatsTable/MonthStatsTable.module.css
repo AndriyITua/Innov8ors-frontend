@@ -1,3 +1,5 @@
+@import "../../styles/variables.css";
+
 .monthContainer {
   margin-top: 24px;
   max-width: 100%;
@@ -13,8 +15,12 @@
 .monthNavigation {
   display: flex;
   margin-bottom: 16px;
-  justify-content: space-between;
   align-items: center;
+}
+
+.monthTitle {
+  font-size: 24px;
+  line-height: 30px;
 }
 
 .arrowButton {
@@ -25,6 +31,7 @@
 
 .arrowButton:first-child {
   margin-right: 6px;
+  margin-left: 10px;
   margin-top: 4px;
 }
 
@@ -42,6 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 2px;
 }
 
 .spanInfo {
@@ -54,7 +62,7 @@
   flex-wrap: wrap;
   gap: 26px;
   row-gap: 16px;
-  /* position: relative; */
+  position: relative;
 }
 
 .dayCell {
@@ -65,37 +73,77 @@
 }
 
 .dayItem {
-  position: relative;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: var(--primery-color-white, #ffffff);
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: 1px solid #ff9d43;
   cursor: pointer;
   font-size: 14px;
   line-height: 18px;
 }
 
-.dayNumber {
-  font-size: 18px;
-  font-weight: bold;
-}
-
 .dayProgress {
-  color: var(--secondary-color-4, #9ebbff);
+  color: var(--secondary-color-light-blue, #9ebbff);
   font-size: 10px;
   font-weight: 400;
   margin-top: 4px;
+  padding-left: 2px;
+  line-height: 16px;
 }
 
 .incomplete {
-  outline: 1px solid #ff9d43;
+  outline: 1px solid var(--secondary-color-orange, #ff9d43);
 }
 
 .completed {
   outline: none;
-  background-color: white;
+  background-color: var(--primery-color-white, #ffffff);
+}
+
+@media screen and (min-width: 768px) {
+  .calendarContainer {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .daysContainer {
+    gap: 34px;
+    row-gap: 20px;
+  }
+
+  .dayProgress {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .dayItem {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .monthControl {
+    margin-left: 386px;
+  }
+  .monthTitle {
+    font-size: 26px;
+    line-height: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .monthControl {
+    margin-left: 274px;
+  }
+
+  .daysContainer {
+    gap: 22px;
+  }
+
+  .dayProgress {
+    font-size: 12px;
+    line-height: 18px;
+  }
 }

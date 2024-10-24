@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Avatar from "../../assets/icons/Avatar"; /* тимчасово */
 import UserLogoModal from "../UserLogoModal/UserLogoModal";
 import Modal from "react-modal";
 import { GoChevronDown } from "react-icons/go";
@@ -17,8 +16,10 @@ const UserLogo = () => {
   const handleToggleModal = () => {
     if (!isModalOpen) {
       const buttonRect = buttonRef.current.getBoundingClientRect();
+      const screenWidth = window.innerWidth;
+
       setModalPosition({
-        top: buttonRect.bottom + 5,
+        top: screenWidth >= 1440 ? buttonRect.bottom + 6 : buttonRect.bottom,
         left: buttonRect.right - 118,
       });
     }
@@ -29,8 +30,10 @@ const UserLogo = () => {
     const handleResize = () => {
       if (isModalOpen && buttonRef.current) {
         const buttonRect = buttonRef.current.getBoundingClientRect();
+        const screenWidth = window.innerWidth;
+
         setModalPosition({
-          top: buttonRect.bottom + 5,
+          top: screenWidth >= 1440 ? buttonRect.bottom + 6 : buttonRect.bottom,
           left: buttonRect.right - 118,
         });
       }
@@ -48,14 +51,15 @@ const UserLogo = () => {
         onClick={handleToggleModal}
         style={{ position: "relative" }}
       >
+        <span className={css.userName}>{user?.fullName || user?.email}</span>
         {user?.avatar ? (
-          <img src={user.avatar} alt={user.fullName} />
+          <img src={user.avatar} alt={user.fullName} className={css.avatar} />
         ) : (
-          <span>{user?.fullName?.[0]?.toUpperCase() || user?.email?.[0]}</span>
+          <span className={css.initial}>
+            {user?.fullName?.[0]?.toUpperCase() ||
+              user?.email?.[0]?.toUpperCase()}
+          </span>
         )}
-        {user?.fullName || user?.email}
-
-        <Avatar />
         <GoChevronDown className={css.icon} />
       </button>
 
@@ -64,7 +68,7 @@ const UserLogo = () => {
         onRequestClose={handleToggleModal}
         style={{
           overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundColor: "transparent",
           },
           content: {
             width: "118px",

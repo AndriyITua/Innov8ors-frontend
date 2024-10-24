@@ -9,9 +9,9 @@ const Header = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
-    <header>
+    <header className={css.header}>
       <Container>
-        <div className={css.header}>
+        <div className={css.div}>
           <Logo />
           {isLoggedIn ? <UserLogo /> : <UserAuth />}
         </div>
