@@ -1,7 +1,10 @@
-.modal {
+@import "../../styles/variables.css";
+
+.modalCalendar {
   position: absolute;
-  background-color: white;
+  background-color: var(--primary-color-white, #ffffff);
   border-radius: 10px;
+  box-sizing: border-box;
   padding: 24px 13px;
   width: 100%;
   max-width: 280px;
@@ -9,7 +12,7 @@
 }
 
 @media screen and (min-width: 321px) {
-  .modal {
+  .modalCalendar {
     width: auto;
     max-width: none;
     left: auto;
@@ -27,15 +30,33 @@
 .item {
   display: flex;
   gap: 6px;
-  font-size: 14px;
+  font-size: 16px;
+  align-items: center;
 }
 
 .info {
-  color: #407bff;
-  font-size: 16px;
+  color: var(--primary-color-blue, #407bff);
+  font-size: 18px;
+  line-height: 1.33em;
   font-weight: 500;
 }
 
 .date {
-  color: #407bff;
+  color: var(--primary-color-blue, #407bff);
+  font-size: 16px;
+  line-height: 1.25em;
+}
+
+@media screen and (min-width: 768px) {
+  .modalCalendar {
+    max-width: 292px;
+    padding: 24px 16px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .modalCalendar {
+    width: 292px;
+    transform: translate(-168%, -42%);
+  }
 }

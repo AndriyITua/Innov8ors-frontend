@@ -62,9 +62,7 @@ export const DaysGeneralStats = ({
     let rightDirection = 0;
 
     if (isMobileScreen) {
-      // modal.style.width = `80%`;
-      // modal.style.left = "10%";
-      const adjustedTop = Math.max(0, top - modalHeight - 10);
+      const adjustedTop = Math.max(0, top - modalHeight);
       modal.style.top = `${adjustedTop}px`;
       modal.style.transform = `translateX(0)`;
     } else {
@@ -76,6 +74,8 @@ export const DaysGeneralStats = ({
       modal.style.left = `${left - modalWidth}px`;
     } else if (rightDirection > modalWidth) {
       modal.style.left = `${left + width}px`;
+    } else if (rightDirection < 0) {
+      modal.style.left = `${window.innerWidth - modalWidth}px`;
     } else {
       modal.style.left = "50%";
       modal.style.transform = "translateX(-50%)";
@@ -87,7 +87,7 @@ export const DaysGeneralStats = ({
   return (
     <div
       ref={modalRef}
-      className={styles.modal}
+      className={styles.modalCalendar}
       style={{ visibility: onShow ? "visible" : "hidden" }}
     >
       <ul className={styles.list}>

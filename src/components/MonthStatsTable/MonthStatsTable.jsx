@@ -88,7 +88,7 @@ const MonthStatsTable = () => {
     <div className={styles.monthContainer}>
       <div className={styles.calendarContainer}>
         <div className={styles.monthNavigation}>
-          <h2>Month</h2>
+          <h2 className={styles.monthTitle}>Month</h2>
           <div className={styles.monthControl}>
             <button className={styles.arrowButton} onClick={goPrevMonth}>
               <MdArrowBackIos style={{ fontSize: "14px" }} />
@@ -119,7 +119,7 @@ const MonthStatsTable = () => {
                   handleSelectDay({ ...day, waterPerc: day.progress }, e)
                 }
               >
-                <div className={styles.dayProgress}>{day.date}</div>
+                <div className={styles.dayItem}>{day.date}</div>
               </div>
               <div className={styles.dayProgress}>{`${day.progress}%`}</div>
             </div>
