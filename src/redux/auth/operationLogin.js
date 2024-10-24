@@ -21,7 +21,8 @@ export const login = createAsyncThunk(
     try {
       const response = await apiInstance.post("/auth/login", credentials);
       notifySuccessToast("Successfully logged in!");
-      setAuthHeader(response.data.accessToken);
+      setAuthHeader(response.data.data.accessToken);
+
       return response.data;
     } catch (error) {
       notifyOnlogginError(error.response.data.message);
@@ -49,7 +50,8 @@ export const refreshAccessToken = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const response = await apiInstance.post("/auth/refresh");
-      return response.data.accessToken;
+      setAuthHeader(response.data.data.accessToken);
+      return response.data.data.accessToken;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
