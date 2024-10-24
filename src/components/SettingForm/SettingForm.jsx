@@ -15,25 +15,65 @@ const initialValues = {
   email: "",
   password: "",
   newPassword: "",
+  repeatNewPassword: "",
 };
 
 // паттерн для валидации имени
 const nameRegExp =
-  "^[a-zA-Zа-яА-Я]+(([' \\-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
+  "^[a-zA-Zа-яА-Я0-9]+(([' \\-][a-zA-Zа-яА-Я0-9 ])?[a-zA-Zа-яА-Я0-9]*)*$";
 
 // шаблон для валидации email
 const emailRegexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
-const ValidationSchema = Yup.object().shape({
+// шаблон валидации полей
+let ValidationSchema = Yup.object().shape({
   name: Yup.string()
-    .min(3, "Too short, min 3!")
-    .max(30, "Too long, max 30!")
-    .matches(nameRegExp, "Invalid input!")
-    .required("Enter your name!"),
+    .min(3, "too short, min 3!")
+    .max(30, "too long, max 30!")
+    .matches(nameRegExp, "invalid input!")
+    .required("enter your name!"),
   email: Yup.string()
-    .min(8, "Format example@mail.com")
-    .matches(emailRegexp, "Invalid input!")
-    .required("Enter your email!"),
+    .min(8, "format example@mail.com")
+    .matches(emailRegexp, "format example@mail.com")
+    .required("enter your email!"),
+  password: Yup.string()
+    .nullable() // Поле может быть пустым (null)
+    .min(8, "min 8 characters")
+    .max(64, "max 64 characters")
+    .notRequired() // Поле необязательно для заполнения
+    .test("password-check", "min 8 characters", function (value) {
+      if (value) {
+        return value.length >= 8; // Проверка только если есть значение
+      }
+      return true; // Если поле пустое, пропускаем проверку
+    }),
+  newPassword: Yup.string()
+    .nullable() // Разрешаем пустое значение
+    .notRequired() // Поле newPassword не обязательно для заполнения по умолчанию
+    .test(
+      "new-password-check",
+      "required if password entered",
+      function (value) {
+        const { password } = this.parent; // Доступ к полю password
+        if (password && password.length > 0) {
+          return value && value.length >= 8; // Проверка: если password не пустой, проверяем newPassword (минимум 8 символов)
+        }
+        return true; // Если password пустой, проверка пропускается
+      }
+    )
+    .min(8, "min 8 characters")
+    .max(64, "max 64 characters"),
+  repeatNewPassword: Yup.string()
+    .nullable()
+    .notRequired()
+    .test("repeat-new-password-check", "is required", function (value) {
+      const { newPassword } = this.parent; // Доступ к полю newPassword
+      if (newPassword && newPassword.length > 0) {
+        return value && value === newPassword; // Проверка: если newPassword заполнено, repeatNewPassword должен совпадать
+      }
+      return true; // Если newPassword пустое, проверки нет
+    })
+    .oneOf([Yup.ref("newPassword"), null], "passwords must match"), // Дополнительная проверка на совпадение паролей
 });
 
 const SettingForm = ({ closeModal }) => {
@@ -58,10 +98,10 @@ const SettingForm = ({ closeModal }) => {
       initialValues={initialValues}
       onSubmit={submit}
       validationSchema={ValidationSchema}
-      validateOnChange={false}
+      validateOnChange={true}
       validateOnBlur={false}
     >
-      {({ errors, touched, values }) => (
+      {({ errors, touched }) => (
         <Form className={css.form}>
           <div className={css.settingWrapper}>
             <h2 className={css.settingTitle}>Setting</h2>
@@ -128,22 +168,17 @@ const SettingForm = ({ closeModal }) => {
                         name="name"
                         id={`name-${id}`}
                         className={`${css.inputField} ${
-                          (console.log(`errors:`, errors),
-                          console.log(`touched:`, touched),
-                          console.log(`values:`, values),
                           errors.name && touched.name
                             ? `${css.inputError} ${css.placeholderError}`
-                            : "")
+                            : ""
                         }`}
                         placeholder="Name"
                       />
-                      {errors.name && (
-                        <ErrorMessage
-                          name="name"
-                          component="span"
-                          className={css.error}
-                        />
-                      )}
+                      <ErrorMessage
+                        name="name"
+                        component="span"
+                        className={css.error}
+                      />
                     </div>
                   </div>
 
@@ -156,7 +191,11 @@ const SettingForm = ({ closeModal }) => {
                         type="text"
                         name="email"
                         id={`email-${id}`}
-                        className={css.inputField}
+                        className={`${css.inputField} ${
+                          errors.email && touched.email
+                            ? `${css.inputError} ${css.placeholderError}`
+                            : ""
+                        }`}
                         placeholder="Email"
                       />
                       <ErrorMessage
@@ -175,12 +214,21 @@ const SettingForm = ({ closeModal }) => {
                   Outdated password
                   <div className={css.inputContainer}>
                     <Field
-                      className={css.passwordInputField}
+                      className={`${css.passwordInputField} ${
+                        errors.password && touched.password
+                          ? `${css.inputError} ${css.placeholderError}`
+                          : ""
+                      }`}
                       type={showPassword ? "text" : "password"}
-                      name="outdatedPassword"
+                      name="password"
                       id={`password-${id}`}
                       placeholder="Password"
                       autoComplete="new-password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="span"
+                      className={css.passwordError}
                     />
                     {showPassword ? (
                       <HiOutlineEye
@@ -202,11 +250,20 @@ const SettingForm = ({ closeModal }) => {
                   New password
                   <div className={css.inputContainer}>
                     <Field
-                      className={css.passwordInputField}
+                      className={`${css.passwordInputField} ${
+                        errors.newPassword && touched.newPassword
+                          ? `${css.inputError} ${css.placeholderError}`
+                          : ""
+                      }`}
                       type={showNewPassword ? "text" : "password"}
                       name="newPassword"
                       id={`newPassword-${id}`}
                       placeholder="Password"
+                    />
+                    <ErrorMessage
+                      name="newPassword"
+                      component="span"
+                      className={css.passwordError}
                     />
                     {showNewPassword ? (
                       <HiOutlineEye
@@ -232,11 +289,20 @@ const SettingForm = ({ closeModal }) => {
                   Repeat new password
                   <div className={css.inputContainer}>
                     <Field
-                      className={css.passwordInputField}
+                      className={`${css.passwordInputField} ${
+                        errors.repeatNewPassword && touched.repeatNewPassword
+                          ? `${css.inputError} ${css.placeholderError}`
+                          : ""
+                      }`}
                       type={showRepeatNewPassword ? "text" : "password"}
                       name="repeatNewPassword"
                       id={`repeatNewPassword-${id}`}
                       placeholder="Password"
+                    />
+                    <ErrorMessage
+                      name="repeatNewPassword"
+                      component="span"
+                      className={css.passwordError}
                     />
                     {showRepeatNewPassword ? (
                       <HiOutlineEye

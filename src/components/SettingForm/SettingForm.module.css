@@ -152,7 +152,16 @@ form {
 
 .error {
   position: absolute;
+  font-size: 11px;
   top: 45px;
+  left: 0;
+  color: red;
+}
+
+.passwordError {
+  position: absolute;
+  font-size: 11px;
+  top: 42px;
   left: 0;
   color: red;
 }

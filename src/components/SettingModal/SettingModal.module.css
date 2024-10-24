@@ -17,11 +17,11 @@
 }
 
 .card {
-  margin-bottom: 20px;
-
+  overflow-y: auto;
+  
   position: relative;
   width: 280px;
-  height: 860px;
+  max-height: 90vh;
   padding: 32px 12px;
   background-color: var(--primary-color-white);
   border-radius: 8px;
