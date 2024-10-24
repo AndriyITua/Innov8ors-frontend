@@ -22,11 +22,23 @@
   margin-right: 12px;
 }
 
-.button {
+.buttonDaily {
   width: 27px;
   height: 16px;
   padding: 0px;
   display: inline;
   background-color: transparent;
   color: #8baeff;
+}
+
+.buttonDaily:hover {
+  color: var(--secondary-color-orange);
+}
+
+.buttonDaily:active {
+  color: var(--secondary-color-orange);
+}
+
+.modal-open {
+  overflow: hidden;
 }

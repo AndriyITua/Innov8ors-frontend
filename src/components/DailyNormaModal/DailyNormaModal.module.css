@@ -1,3 +1,29 @@
+.modalDaily {
+  width: "280px";
+  height: "auto";
+  padding: "24px 12px";
+  top: "50%";
+  left: "50%";
+  right: "auto";
+  bottom: "auto";
+  margin-right: "-50%";
+  transform: "translate(-50%, -50%)";
+  border-radius: "10px";
+  overflow: "auto";
+}
+
+@media (min-width: 768px) {
+  .modalDaily {
+    width: 704px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .modalDaily {
+    width: 592px;
+  }
+}
+
 .modalContent {
   /* overflow-x: auto; */
   max-height: 80vh;
@@ -58,8 +84,8 @@ label input[type="radio"] {
   gap: 16px;
 }
 
-.wrap {
-}
+/* .wrap {
+} */
 
 .label {
   line-height: 1.5;
