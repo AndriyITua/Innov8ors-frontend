@@ -18,18 +18,7 @@ const SignupPage = lazy(() => import("../../pages/SignupPage/SignupPage"));
 const WelcomePage = lazy(() => import("../../pages/WelcomePage/WelcomePage"));
 
 export default function App() {
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  useEffect(() => {
-    if (
-      isLoggedIn &&
-      (location.pathname === "/signin" || location.pathname === "/signup")
-    ) {
-      navigate("/home");
-    }
-  }, [isLoggedIn, navigate, location.pathname]);
 
   const isRefreshing = useSelector(selectIsRefreshing);
 
@@ -44,7 +33,12 @@ export default function App() {
       <Suspense fallback={<p>Loading ....</p>}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
-            <Route path="/" element={<WelcomePage />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute component={<HomePage />} redirectTo="/welcome" />
+              }
+            />
             <Route
               path="welcome"
               element={
