@@ -23,13 +23,11 @@ export default function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/home");
-    } else if (
-      location.pathname !== "/signin" &&
-      location.pathname !== "/signup"
+    if (
+      isLoggedIn &&
+      (location.pathname === "/signin" || location.pathname === "/signup")
     ) {
-      navigate("/welcome");
+      navigate("/home");
     }
   }, [isLoggedIn, navigate, location.pathname]);
 
@@ -46,6 +44,7 @@ export default function App() {
       <Suspense fallback={<p>Loading ....</p>}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
+            <Route path="/" element={<WelcomePage />} />
             <Route
               path="welcome"
               element={
