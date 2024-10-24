@@ -78,8 +78,8 @@ export default function App() {
                 <PrivateRoute component={<HomePage />} redirectTo="/signin" />
               }
             />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </>
