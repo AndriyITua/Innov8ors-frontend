@@ -3,11 +3,14 @@ import css from "./ModalAddWater.module.css";
 import { IoCloseOutline, IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
 import Loader from "../Loader/Loader.jsx";
+import { useDispatch } from "react-redux";
+import { addWater } from "../../redux/water/opertionsEditWater.js";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
 
 export default function ModalAddWater({ isOpen, onClose }) {
+  const dispatch = useDispatch()
   const [water, setWater] = useState(50);
   const [disableButtonPluse, setDisableButtonPluse] = useState(false);
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
@@ -71,10 +74,14 @@ export default function ModalAddWater({ isOpen, onClose }) {
     console.log("На сервер:", { water, localTime });
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      onClose();
-    }, 800);
+    // await dispatch(addWater(values));
+    dispatch(addWater({ amount: water, time: localTime }));
+    setLoading(false);
+    onClose();
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   onClose();
+    // },[dispatch], 800 );
   };
 
   useEffect(() => {
