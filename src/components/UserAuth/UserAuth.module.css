@@ -13,9 +13,13 @@
   font-weight: 400;
   line-height: 20px;
   text-align: left;
-  color: #407bff;
+  color: var(--primary-color-blue, #407bff);
   margin-right: 8px;
   padding: 4px 0;
+}
+
+.span:hover {
+  color: var(--secondary-color-orange, #ff9d43);
 }
 
 @media screen and (min-width: 768px) {

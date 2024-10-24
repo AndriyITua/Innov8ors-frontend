@@ -22,7 +22,12 @@ const UserLogo = () => {
         top: screenWidth >= 1440 ? buttonRect.bottom + 6 : buttonRect.bottom,
         left: buttonRect.right - 118,
       });
+
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
     }
+
     setModalOpen(!isModalOpen);
   };
 
@@ -42,6 +47,12 @@ const UserLogo = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isModalOpen]);
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <>
