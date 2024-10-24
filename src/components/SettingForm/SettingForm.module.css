@@ -152,7 +152,16 @@ form {
 
 .error {
   position: absolute;
+  font-size: 11px;
   top: 45px;
+  left: 0;
+  color: red;
+}
+
+.passwordError {
+  position: absolute;
+  font-size: 11px;
+  top: 42px;
   left: 0;
   color: red;
 }
@@ -284,4 +293,14 @@ form {
     top: 30%;
     right: 3%;
   }
+}
+
+
+.placeholderError::placeholder {
+  color: var(--secondary-color-red);
+}
+
+.inputError {
+  border-color: var(--secondary-color-red);
+  color: var(--secondary-color-red)
 }
