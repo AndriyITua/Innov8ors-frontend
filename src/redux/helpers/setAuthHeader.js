@@ -1,5 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
+import { apiInstance } from "../../api/api.js";
 
 export const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  apiInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
