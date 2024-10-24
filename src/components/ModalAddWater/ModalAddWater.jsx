@@ -80,6 +80,9 @@ export default function ModalAddWater({ isOpen, onClose }) {
     if (isOpen) {
       setLocalTime(formattedTime);
       setWater(50);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
     }
   }, [isOpen, formattedTime]);
 

@@ -3,12 +3,13 @@ import toast, { ToastBar, Toaster } from "react-hot-toast";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
+import Loader from "../Loader/Loader";
 
 export default function SharedLayout() {
   return (
     <>
       <Header />
-      <Suspense fallback={<p>Loading ...</p>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
 
