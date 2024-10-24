@@ -47,7 +47,7 @@
     justify-content: center;
     background: white;
     width: 280px;
-    height: 540px;
+    height: 648px;
     padding: 24px 12px;
     border-radius: 10px;
     margin-top: 40px;
@@ -259,7 +259,7 @@
     }
     .forLoder {
         width: 704px;
-        height: 504px;
+        height: 580px;
     }
 }
 
@@ -275,6 +275,6 @@
     }
     .forLoder {
         width: 592px;
-        height: 504px;
+        height: 580px;
     }
 }
