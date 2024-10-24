@@ -14,9 +14,15 @@ export default function WaterRatioPanel() {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+  const getFontStyle = (currentValue, targetValue) => {
+    return {
+      fontSize: currentValue === targetValue ? '16px' : '12px',
+      fontWeight: currentValue === targetValue ? '500' : '400',
+    };
+  };
   return (
-    <>
-      <div>
+    <div className={css.container}>
+      <div className={css.panel}>
         <p className={css.title}>Today</p>
         <input
           className={css.input}
@@ -28,20 +34,21 @@ export default function WaterRatioPanel() {
           onChange={e => setValue(e.target.value)}
           style={{
             background: `linear-gradient(to right, #9ebbff ${value}%, #d7e3ff ${value}%)`,
+            pointerEvents: "none", // Блокує взаємодію з мишею
           }}
         ></input>
         <ul className={css.item}>
           <li className={css.lineContainer}>
-            <PiLineVertical className={css.line} />
-            <span className={css.startEnd}>0%</span>
+            <div><PiLineVertical className={css.line} /></div>
+            <span className={css.startEnd} style={ getFontStyle(value, 0)}>0%</span>
           </li>
           <li className={css.lineContainer}>
             <PiLineVertical className={css.line} />
-            50%
+            <span className={css.startEnd} style={ getFontStyle(value, 50) }>50%</span>
           </li>
           <li className={css.lineContainer}>
             <PiLineVertical className={css.line} />
-            <span className={css.startEnd}>100%</span>
+            <span className={css.startEnd}  style={ getFontStyle(value, 100)}>100%</span>
           </li>
         </ul>
       </div>
@@ -50,6 +57,6 @@ export default function WaterRatioPanel() {
         Add Water
       </button>
       <ModalAddWater isOpen={isModalOpen} onClose={handleCloseModal} />
-    </>
+    </div>
   );
 }

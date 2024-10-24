@@ -1,18 +1,53 @@
 .icon {
   width: 16px;
   height: 16px;
-  background: rgba(255, 255, 255, 1);
-  color: rgba(64, 123, 255, 1);
-}
-
-.button {
-  background: rgba(255, 255, 255, 1);
-}
-
-.button {
-  background-color: var(--primary-color-white, #ffffff);
-}
-
-.icon {
+  background: var(--primary-color-white, #ffffff);
   color: var(--primery-color-blue, #407bff);
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--primary-color-white, #ffffff);
+  border: none;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.initial {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color-light-gray, #d7e3ff);
+  border-radius: 50%;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: right;
+  color: var(--primary-color-black, #2f2f2f);
+}
+
+.userName {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: right;
+  color: var(--primary-color-black, #2f2f2f);
+}
+
+@media screen and (min-width: 768px) {
+  .userName {
+    font-size: 18px;
+    line-height: 24px;
+  }
 }

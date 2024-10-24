@@ -18,7 +18,6 @@ export default function TodayWaterList() {
         setIsModalOpen(true);
     }
     const closeModal =()=>{
-        setModalOpen(false)
         setIsModalOpen(false);
     }
     const handleDelete=()=>{
@@ -154,12 +153,12 @@ export default function TodayWaterList() {
                 </ul>
                 <hr className={css.divider} />
                 
+            </div>
                 <div className={css.buttonAddWaterCont}>
                     <button type="submit" className={css.button} onClick={handleOpenModal}>
                        <div className={css.plus}> <HiOutlinePlus className={css.icon}/></div>
                         Add water</button>
                 </div>
-            </div>
             <ModalEntered isOpen={isModalOpenEntr} onClose={handleCloseModalEntr}/>
             <ModalAddWater isOpen={ModalOpen} onClose={handleCloseModal}/>
             <DeleteModal isOpen={isModalOpen} onClose={closeModal} onDelete={handleDelete}/>

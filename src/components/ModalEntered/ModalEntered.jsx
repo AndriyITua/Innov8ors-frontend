@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import css from "./ModalEntered.module.css";
 import { IoCloseOutline, IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
 import Loader from "../Loader/Loader.jsx";
-import Glasses from "../../assets/icons/Glasses.jsx"
+import Glasses from "../../assets/icons/Glasses.jsx";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
@@ -14,6 +14,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
   const [disableButtonSave, setDisableButtonSave] = useState(false);
   const [loading, setLoading] = useState(false);
+  const backdropRef = useRef(null);
 
   const onPlusClickedHandler = () => {
     const newWaterAmount = water + ADD_WATER;
@@ -44,6 +45,29 @@ export default function ModalAddWater({ isOpen, onClose }) {
       setWater("");
     }
   };
+
+  useEffect(() => {
+    const handleEscape = event => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    const handleClickOutside = event => {
+      if (backdropRef.current && !backdropRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscape);
+    } else {
+      document.body.style.overflow = "";
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (water >= WATER_MAX_LIMIT) {
@@ -84,7 +108,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
           <Loader />
         </div>
       ) : (
-        <div className={css.modalWrap}>
+        <div className={css.modalWrap} ref={backdropRef}>
           <div className={css.title}>
             <h2>Edit the entered amount of water</h2>
             <button className={css.button} onClick={onClose}>
@@ -93,13 +117,15 @@ export default function ModalAddWater({ isOpen, onClose }) {
           </div>
           <div className={css.modalContent}>
             <div>
-                <ul className={css.item}>
-                   <div className={css.classesContainer}><Glasses/></div>
-                    <div className={css.time}>
-                        <li className={css.water}>200 ml</li>
-                        <li className={css.am}>14:00 PM</li>
-                    </div>
-                </ul>
+              <ul className={css.item}>
+                <div className={css.classesContainer}>
+                  <Glasses />
+                </div>
+                <div className={css.time}>
+                  <li className={css.water}>200 ml</li>
+                  <li className={css.am}>14:00 PM</li>
+                </div>
+              </ul>
               <h3 className={css.h3}>Choose a value:</h3>
               <p className={css.p}>Amount of water:</p>
               <div className={css.addWater}>
@@ -142,7 +168,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
             </div>
 
             <div className={css.boxButton}>
-              <p className={css.infoWater}>{water}ml</p>
+              <p className={css.infoWater}>200ml</p>
               <button
                 className={`${css.buttonSave} ${
                   disableButtonSave ? css.buttonDisabled : ""

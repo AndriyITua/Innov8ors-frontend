@@ -1,19 +1,13 @@
 @import url(../../styles/variables.css);
 .homePage {
   width: 100%;
-  /* height: 100%; */
-  /* height: 1356px; */
   background-image: url(../../assets/homePageImages/bgHomeMob.png),
     url(../../assets/homePageImages/bottleHomeMob.png);
-  background-size: 318px, 280px;
+  background-size: 320px, 280px;
   background-repeat: no-repeat, no-repeat;
-  background-position: center 52px, center 106px;
+  background-position: center 26px, center 81px;
   padding-bottom: 40px;
   overflow: hidden;
-}
-
-.norma {
-  margin-top: 24px;
 }
 
 .WaterRatio {
@@ -23,10 +17,88 @@
 
 .TodayMonthWrap {
   margin-top: 40px;
-  /* margin-top: 70px; */
   width: 280px;
-  /* height: 836px; */
   background-color: var(--secondary-color-smoke-white);
   border-radius: 10px;
   padding: 24px 8px;
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
+}
+
+@media (min-resolution: 2dppx) {
+  .homePage {
+    background-image: url(../../assets/homePageImages/bgHomeMob-x2.png),
+      url(../../assets/homePageImages/bottleHomeMob-x2.png);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .homePage {
+    background-image: url(../../assets/homePageImages/bottleHomeTablet-new.png),
+      url(../../assets/homePageImages/bgHomeTablet.png);
+    background-size: 521px, 768px;
+    background-position: center 11px, center 27px;
+    background-position: center 15px, center 0px;
+    padding-bottom: 44px;
+    margin-top: -16px;
+    padding-top: 16px;
+  }
+
+  .WaterRatio {
+    margin-top: 326px;
+    max-width: 704px;
+  }
+
+  .TodayMonthWrap {
+    width: 704px;
+    padding: 32px 24px;
+  }
+
+  @media (min-resolution: 2dppx) {
+    .homePage {
+      background-image: url(../../assets/homePageImages/bottleHomeTab-x2.png),
+        url(../../assets/homePageImages/bgHomeTab-x2.png);
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .homePage {
+    background-image: url(../../assets/homePageImages/bgHomeDesc.png);
+    /* url(../../assets/homePageImages/bottleHomeDesc.png); */
+    background-size: 1380px;
+    background-position: center 35px;
+    margin-top: 0px;
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+
+  .container {
+    position: relative;
+    background-image: url(../../assets/homePageImages/bottleHomeDesc.png);
+    background-size: 722px;
+    background-position: -64px -28px;
+    background-repeat: no-repeat;
+  }
+
+  .WaterRatio {
+    margin-top: 466px;
+  }
+
+  .TodayMonthWrap {
+    width: 592px;
+    height: 680px;
+    position: absolute;
+    top: -25px;
+    left: 623px;
+    margin-top: 0;
+  }
+
+  @media (min-resolution: 2dppx) {
+    .homePage {
+      background-image: url(../../assets/homePageImages/bgHomeDesk-x2.png);
+    }
+    .container {
+      background-image: url(../../assets/homePageImages/bottleHomeDesk-x2.png);
+    }
+  }
 }

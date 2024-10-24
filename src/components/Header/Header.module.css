@@ -1,14 +1,22 @@
 .header {
+  margin-bottom: 24px;
+}
+
+.div {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 8px;
-  margin-bottom: 24px;
 }
 
-.logo {
-  width: 102px;
-  height: 48px;
-  gap: 4px;
-  margin-bottom: 24px;
+@media screen and (min-width: 768px) {
+  .header {
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    margin-bottom: 20px;
+  }
 }

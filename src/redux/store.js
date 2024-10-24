@@ -10,18 +10,18 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { authReduser } from "./auth/slice";
 
-// Збереження токена в Local Storage
+import { authReducer } from "./auth/slice";
+import { setupAxiosInterceptors } from "../api/api.js";
+
 const authPersistConfig = {
-  key: "auth",
+  key: "auth-token",
   storage,
-  whitelist: ["token"],
+  whitelist: ["accessToken"],
 };
 
-const persistedAuthReducer = persistReducer(authPersistConfig, authReduser);
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
-// Початковий стан Redux
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
@@ -35,3 +35,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+setupAxiosInterceptors(store);

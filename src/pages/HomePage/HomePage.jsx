@@ -10,16 +10,24 @@ export default function HomePage() {
     <main>
       <section className={css.homePage}>
         <Container>
-          <section className={css.norma}>
-            <DailyNorma />
-          </section>
-          <section className={css.WaterRatio}>
-            <WaterRatioPanel />
-          </section>
-          <section className={css.TodayMonthWrap}>
-            <TodayWaterList />
-            <MonthStatsTable />
-          </section>
+          <div className={css.container}>
+            <ul>
+              <li>
+                <section className={css.norma}>
+                  <DailyNorma />
+                </section>
+              </li>
+              <li>
+                <section className={css.WaterRatio}>
+                  <WaterRatioPanel />
+                </section>
+              </li>
+            </ul>
+            <section className={css.TodayMonthWrap}>
+              <TodayWaterList />
+              <MonthStatsTable />
+            </section>
+          </div>
         </Container>
       </section>
     </main>

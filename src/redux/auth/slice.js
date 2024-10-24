@@ -1,20 +1,86 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { login, refreshAccessToken, refreshUser } from "./operationLogin.js";
+import { register } from "./operationRegister";
 
-// Стан даних про користувача
-const authSlise = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: {
-      fullNume: null,
+      username: null,
       email: null,
+      dailynormwater: null,
       gender: null,
-      dailyWaterNorm: null,
     },
+    accessToken: null,
     isLoggedIn: false,
     isRefreshing: false,
     isLoading: false,
-    isError: false,
+    isError: null,
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(login.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.isError = null;
+        state.isLoading = false;
+        state.isLoggedIn = true;
+        state.accessToken = payload.data.accessToken;
+      })
+      .addCase(login.rejected, (state, { payload }) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.accessToken = null;
+        state.isError = payload;
+      })
+      .addCase(refreshUser.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUser.fulfilled, state => {
+        state.isRefreshing = false;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(refreshUser.rejected, (state, { payload }) => {
+        state.isError = payload;
+        state.isLoggedIn = false;
+        state.isRefreshing = false;
+        state.accessToken = null;
+      })
+      .addCase(refreshAccessToken.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshAccessToken.fulfilled, (state, { payload }) => {
+        state.isRefreshing = false;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.isError = null;
+        state.accessToken = payload;
+      })
+      .addCase(refreshAccessToken.rejected, (state, { payload }) => {
+        state.isRefreshing = false;
+        state.isError = payload;
+        state.isLoggedIn = false;
+        state.accessToken = null;
+        state.isLoading = false;
+      })
+      .addCase(register.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.accessToken = payload.accessToken;
+        state.user = payload.data;
+      })
+      .addCase(register.rejected, (state, { payload }) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.accessToken = null;
+        state.isError = payload;
+      });
   },
 });
 
-export const authReduser = authSlise.reducer;
+export const authReducer = authSlice.reducer;

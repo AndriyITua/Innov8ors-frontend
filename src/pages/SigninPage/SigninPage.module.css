@@ -1,9 +1,4 @@
 @import "../../styles/variables.css";
-
-.section {
-  padding-top: 24px;
-}
-
 .container {
   position: relative;
   min-height: 90vh;
@@ -25,10 +20,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .section {
-    padding-top: 26px;
-    /* padding-bottom: 16px; */
-  }
   .container {
     padding: 0 32px;
     padding-top: 14px;
@@ -49,9 +40,6 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .section {
-    padding-top: 21px;
-  }
   .container {
     padding: 0 18px;
     padding-top: 141px;

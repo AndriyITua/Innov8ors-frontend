@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import css from "./ModalAddWater.module.css";
 import { IoCloseOutline, IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
@@ -13,6 +13,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
   const [disableButtonSave, setDisableButtonSave] = useState(false);
   const [loading, setLoading] = useState(false);
+  const backdropRef = useRef(null);
 
   const onPlusClickedHandler = () => {
     const newWaterAmount = water + ADD_WATER;
@@ -77,11 +78,29 @@ export default function ModalAddWater({ isOpen, onClose }) {
   };
 
   useEffect(() => {
+    const handleEscape = event => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    const handleClickOutside = event => {
+      if (backdropRef.current && !backdropRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
     if (isOpen) {
       setLocalTime(formattedTime);
       setWater(50);
+      document.body.style.overflow = "hidden";
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscape);
+    } else {
+      document.body.style.overflow = "";
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     }
-  }, [isOpen, formattedTime]);
+  }, [isOpen, formattedTime, onClose]);
 
   if (!isOpen) return null;
 
@@ -92,7 +111,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
           <Loader />
         </div>
       ) : (
-        <div className={css.modalWrap}>
+        <div className={css.modalWrap} ref={backdropRef}>
           <div className={css.title}>
             <h2>Add water</h2>
             <button className={css.button} onClick={onClose}>

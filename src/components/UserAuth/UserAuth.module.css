@@ -17,3 +17,10 @@
   margin-right: 8px;
   padding: 4px 0;
 }
+
+@media screen and (min-width: 768px) {
+  .span {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
