@@ -24,20 +24,32 @@
 }
 
 .arrowButton {
-  cursor: pointer;
+  background: none;
   border: none;
-  background-color: rgba(0, 0, 255, 0);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrowButton:disabled {
+  cursor: not-allowed;
+  opacity: 0;
+}
+
+.disabledArrow {
+  pointer-events: none;
+  opacity: 0;
 }
 
 .arrowButton:first-child {
-  margin-right: 6px;
-  margin-left: 10px;
-  margin-top: 4px;
+  margin-bottom: 2px;
+  left: 116px;
 }
 
 .arrowButton:last-child {
-  margin-left: 6px;
-  margin-top: 4px;
+  margin-bottom: 2px;
+  right: 44px;
 }
 
 .arrowButton .icon {
@@ -50,26 +62,29 @@
   align-items: center;
   justify-content: center;
   padding-top: 2px;
+  padding-left: 20px;
+  width: 100%;
 }
 
 .spanInfo {
   margin-top: 2px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .daysContainer {
-  width: 100%;
+  list-style: none;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 26px;
   row-gap: 16px;
-  position: relative;
 }
 
 .dayCell {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
 }
 
 .dayItem {
@@ -109,6 +124,19 @@
     max-width: 100%;
   }
 
+  .arrowButton:first-child {
+    left: 534px;
+  }
+
+  .arrowButton:last-child {
+    right: 70px;
+  }
+
+  .monthControl {
+    width: 194px;
+    margin-left: 386px;
+  }
+
   .daysContainer {
     gap: 34px;
     row-gap: 20px;
@@ -124,9 +152,6 @@
     line-height: 20px;
   }
 
-  .monthControl {
-    margin-left: 386px;
-  }
   .monthTitle {
     font-size: 26px;
     line-height: 32px;
@@ -136,6 +161,20 @@
 @media screen and (min-width: 1440px) {
   .monthControl {
     margin-left: 274px;
+  }
+
+  .arrowButton:first-child {
+    left: 390px;
+    margin-bottom: 0px;
+  }
+
+  .arrowButton:last-child {
+    right: 38px;
+    margin-bottom: 0px;
+  }
+
+  .monthControl {
+    width: 194px;
   }
 
   .daysContainer {
