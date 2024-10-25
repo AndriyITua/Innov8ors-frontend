@@ -2,7 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { login, refreshAccessToken, refreshUser } from "./operationLogin.js";
 import { logout } from "./operationLogout.js";
 
-import { updateUserPhoto } from "./operationUpdate.js";
+import {
+  updateUserPhoto,
+  updateUserInfo,
+  updateUserPassword,
+} from "./operationUpdate.js";
 
 const authSlice = createSlice({
   name: "auth",
@@ -91,9 +95,26 @@ const authSlice = createSlice({
 
       // блок для оновлення фото
       .addCase(updateUserPhoto.fulfilled, (state, { payload }) => {
+        state.isError = false;
         state.user.photo = payload.data.userphoto;
       })
       .addCase(updateUserPhoto.rejected, (state, { payload }) => {
+        state.isError = payload;
+      })
+
+      // блок для оновлення юзера
+      .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
+        state.isError = false;
+        state.user.username = payload.data.username;
+        state.user.email = payload.data.email;
+        state.user.gender = payload.data.gender;
+      })
+      .addCase(updateUserInfo.rejected, (state, { payload }) => {
+        state.isError = payload;
+      })
+
+      // блок для оновлення пароля
+      .addCase(updateUserPassword.rejected, (state, { payload }) => {
         state.isError = payload;
       });
   },

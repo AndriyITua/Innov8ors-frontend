@@ -5,7 +5,11 @@ import { selectUser } from "../../redux/auth/selectors";
 import {
   updateUserPhoto,
   updateUserInfo,
+  updateUserPassword,
 } from "../../redux/auth/operationUpdate";
+
+// шаблоны валидации 
+import { emailRegExp, nameRegExp } from "../../constants";
 
 import { MdOutlineFileUpload } from "react-icons/md";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
@@ -14,22 +18,17 @@ import * as Yup from "yup";
 
 import css from "./SettingForm.module.css";
 
-// паттерн для валидации имени
-const nameRegExp =
-  "^[a-zA-Zа-яА-Я0-9]+(([' \\-][a-zA-Zа-яА-Я0-9 ])?[a-zA-Zа-яА-Я0-9]*)*$";
-
-// шаблон для валидации email
-const emailRegexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-
 // шаблон валидации полей
 let ValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "too short, min 3!")
     .max(30, "too long, max 30!")
-    .matches(nameRegExp, "invalid input!"),
+    .matches(nameRegExp, "invalid input!")
+    .required("enter name"),
   email: Yup.string()
     .min(8, "format example@mail.com")
-    .matches(emailRegexp, "format example@mail.com"),
+    .matches(emailRegExp, "format example@mail.com")
+    .required("enter email"),
   password: Yup.string()
     .nullable() // Поле может быть пустым (null)
     .min(8, "min 8 characters")
@@ -104,20 +103,27 @@ const SettingForm = ({ closeModal }) => {
 
   // сабміт форми
   const submit = (values, actions) => {
-    console.log(values);
-
     // проверка на пароль - нет пароля - отправляем почту
     if (!values.password) {
       const { name, email, selectedOptions = "woman" } = values;
       const data = {
         username: name,
-        email: email,
+        email,
         gender: selectedOptions,
       };
-
       dispatch(updateUserInfo(data));
+      return;
     }
 
+    // если есть пароли - отправляем их
+    const { password, newPassword, repeatNewPassword } = values;
+    dispatch(
+      updateUserPassword({
+        password,
+        newPassword,
+        repeatNewPassword,
+      })
+    );
     actions.resetForm();
   };
 

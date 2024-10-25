@@ -1,6 +1,11 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import {
+  notifyOnlogginError,
+  notifySuccessToast,
+} from "../../helpers/hot-toasts.js";
+
 axios.defaults.baseURL = "https://innov8ors-backend.onrender.com";
 
 axios.defaults.withCredentials = true;
@@ -30,8 +35,10 @@ export const updateUserPhoto = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
+      notifySuccessToast("Successfully updated photo!");
       return response.data;
     } catch (error) {
+      notifyOnlogginError(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -57,13 +64,12 @@ export const updateUserInfo = createAsyncThunk(
       const token = reduxState.auth.accessToken;
       const id = reduxState.auth.user.id;
       setAuthHeader(token);
-
-      console.log(user);
-
       const response = await axios.patch(`user/${id}`, user);
       console.log(response.data);
+      notifySuccessToast("Successfully updated user info!");
       return response.data;
     } catch (error) {
+      notifyOnlogginError(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -78,7 +84,7 @@ export const updateUserInfo = createAsyncThunk(
   }
 );
 
-// оновлення user info
+// оновлення UserPassword
 export const updateUserPassword = createAsyncThunk(
   "auth/updateUserPassword",
   async (user, thunkAPI) => {
@@ -89,11 +95,11 @@ export const updateUserPassword = createAsyncThunk(
       const token = reduxState.auth.accessToken;
       const id = reduxState.auth.user.id;
       setAuthHeader(token);
-
-      const response = await axios.patch(`user/${id}/change-password`);
-      console.log(response.data);
+      const response = await axios.patch(`user/${id}/change-password`, user);
+      notifySuccessToast("Successfully updated password!");
       return response.data;
     } catch (error) {
+      notifyOnlogginError(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },
