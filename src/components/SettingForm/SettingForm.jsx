@@ -2,7 +2,10 @@ import { useState, useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
-import { updateUserPhoto } from "../../redux/auth/operationUpdate";
+import {
+  updateUserPhoto,
+  updateUserInfo,
+} from "../../redux/auth/operationUpdate";
 
 import { MdOutlineFileUpload } from "react-icons/md";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
@@ -10,15 +13,6 @@ import { TfiClose } from "react-icons/tfi";
 import * as Yup from "yup";
 
 import css from "./SettingForm.module.css";
-
-const initialValues = {
-  selectedOptions: [],
-  name: "",
-  email: "",
-  password: "",
-  newPassword: "",
-  repeatNewPassword: "",
-};
 
 // паттерн для валидации имени
 const nameRegExp =
@@ -32,12 +26,10 @@ let ValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "too short, min 3!")
     .max(30, "too long, max 30!")
-    .matches(nameRegExp, "invalid input!")
-    .required("enter your name!"),
+    .matches(nameRegExp, "invalid input!"),
   email: Yup.string()
     .min(8, "format example@mail.com")
-    .matches(emailRegexp, "format example@mail.com")
-    .required("enter your email!"),
+    .matches(emailRegexp, "format example@mail.com"),
   password: Yup.string()
     .nullable() // Поле может быть пустым (null)
     .min(8, "min 8 characters")
@@ -89,21 +81,42 @@ const SettingForm = ({ closeModal }) => {
   //дефолтне фото
   const defaultUrl = `https://img.freepik.com/free-photo/photorealistic-view-tree-nature-with-branches-trunk_23-2151478039.jpg`;
 
-  const { username, email, photo } = useSelector(selectUser);
+  const { username, email, photo, gender } = useSelector(selectUser);
   const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
   const userphoto = photo ?? defaultUrl;
+  const userGender = gender ?? "woman";
 
-  // функція вибору файла
+  const initialValues = {
+    selectedOptions: userGender,
+    name: "",
+    email: "",
+    password: "",
+    newPassword: "",
+    repeatNewPassword: "",
+  };
+
+  // функція вибору файлу
   const handleFileChange = event => {
     const file = event.target.files[0];
-    console.log(`file`, file);
     dispatch(updateUserPhoto(file));
   };
 
   // сабміт форми
   const submit = (values, actions) => {
     console.log(values);
+
+    // проверка на пароль - нет пароля - отправляем почту
+    if (!values.password) {
+      const { name, email, selectedOptions = "woman" } = values;
+      const data = {
+        username: name,
+        email: email,
+        gender: selectedOptions,
+      };
+
+      dispatch(updateUserInfo(data));
+    }
 
     actions.resetForm();
   };
@@ -162,7 +175,6 @@ const SettingForm = ({ closeModal }) => {
                         type="radio"
                         name="selectedOptions"
                         value="woman"
-                        checked
                       />
                       <span className={css.checkboxText}>Woman</span>
                     </label>

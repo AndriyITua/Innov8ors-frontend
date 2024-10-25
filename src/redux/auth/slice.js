@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { login, refreshAccessToken, refreshUser } from "./operationLogin.js";
 import { logout } from "./operationLogout.js";
 
+import { updateUserPhoto } from "./operationUpdate.js";
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -29,6 +31,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = true;
         state.accessToken = payload.data.accessToken;
+        state.user.id = payload.data.userId;
+        state.user.photo = payload.data.userphoto;
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.isLoggedIn = false;
@@ -72,15 +76,25 @@ const authSlice = createSlice({
       // блок для log out
       .addCase(logout.fulfilled, state => {
         state.user = {
+          id: null,
           username: null,
           email: null,
           dailynormwater: null,
           gender: null,
+          photo: null,
         };
         state.accessToken = null;
         state.isLoggedIn = false;
         state.isLoading = false;
         state.isError = null;
+      })
+
+      // блок для оновлення фото
+      .addCase(updateUserPhoto.fulfilled, (state, { payload }) => {
+        state.user.photo = payload.data.userphoto;
+      })
+      .addCase(updateUserPhoto.rejected, (state, { payload }) => {
+        state.isError = payload;
       });
   },
 });
