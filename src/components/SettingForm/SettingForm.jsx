@@ -8,7 +8,7 @@ import {
   updateUserPassword,
 } from "../../redux/auth/operationUpdate";
 
-// шаблоны валидации 
+// шаблоны валидации
 import { emailRegExp, nameRegExp } from "../../constants";
 
 import { MdOutlineFileUpload } from "react-icons/md";
@@ -84,6 +84,7 @@ const SettingForm = ({ closeModal }) => {
   const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
   const userphoto = photo ?? defaultUrl;
+  console.log(gender);
   const userGender = gender ?? "woman";
 
   const initialValues = {
@@ -112,6 +113,7 @@ const SettingForm = ({ closeModal }) => {
         gender: selectedOptions,
       };
       dispatch(updateUserInfo(data));
+      actions.resetForm();
       return;
     }
 
