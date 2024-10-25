@@ -16,7 +16,7 @@ max-width: 320px;
 height: 600px;
 margin: 0 auto;
 padding: 0 20px;
-background: url(../../assets/signupPageImages/bottle-image-signup.svg), url(../../assets/signupPageImages/background-image-signup.jpg);
+background: url(../../assets/signupPageImages/bottle-image-signup.svg), url(../../assets/signupPageImages/background-image-mobile.svg);
 background-size: 280px, 320px;
 background-repeat: no-repeat;
 background-position: 20px 375px, 0px 28px;
