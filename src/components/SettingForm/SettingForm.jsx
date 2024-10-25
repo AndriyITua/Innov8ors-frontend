@@ -86,9 +86,13 @@ const SettingForm = ({ closeModal }) => {
   const id = useId();
   const dispatch = useDispatch();
 
-  const { username, email } = useSelector(selectUser);
+  //дефолтне фото
+  const defaultUrl = `https://img.freepik.com/free-photo/photorealistic-view-tree-nature-with-branches-trunk_23-2151478039.jpg`;
+
+  const { username, email, photo } = useSelector(selectUser);
   const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
+  const userphoto = photo ?? defaultUrl;
 
   // функція вибору файла
   const handleFileChange = event => {
@@ -128,7 +132,7 @@ const SettingForm = ({ closeModal }) => {
                 <div className={css.photoCard}>
                   <img
                     className={css.photo}
-                    src={`https://img.freepik.com/free-photo/photorealistic-view-tree-nature-with-branches-trunk_23-2151478039.jpg`}
+                    src={userphoto}
                     alt={`modal photo`}
                   />
                 </div>
