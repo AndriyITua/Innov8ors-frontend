@@ -1,6 +1,8 @@
 import { useState, useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors";
+import { updateUserPhoto } from "../../redux/auth/operationUpdate";
 
 import { MdOutlineFileUpload } from "react-icons/md";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
@@ -77,17 +79,26 @@ let ValidationSchema = Yup.object().shape({
 });
 
 const SettingForm = ({ closeModal }) => {
-  const id = useId();
-  const dispatch = useDispatch();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatNewPassword, setRepeatNewPassword] = useState(false);
 
-  const submit = (values, actions) => {
-    //добавляем контакт
-    // dispatch(addContact(values));
+  const id = useId();
+  const dispatch = useDispatch();
 
+  const { username, email } = useSelector(selectUser);
+  const name = username ?? "David";
+  const useremail = email ?? "email@gmail.com";
+
+  // функція вибору файла
+  const handleFileChange = event => {
+    const file = event.target.files[0];
+    console.log(`file`, file);
+    dispatch(updateUserPhoto(file));
+  };
+
+  // сабміт форми
+  const submit = (values, actions) => {
     console.log(values);
 
     actions.resetForm();
@@ -131,6 +142,7 @@ const SettingForm = ({ closeModal }) => {
                     type="file"
                     id="fileInput"
                     accept="image/*"
+                    onChange={handleFileChange}
                   />
                 </div>
               </div>
@@ -172,7 +184,7 @@ const SettingForm = ({ closeModal }) => {
                             ? `${css.inputError} ${css.placeholderError}`
                             : ""
                         }`}
-                        placeholder="Name"
+                        placeholder={`${name}`}
                       />
                       <ErrorMessage
                         name="name"
@@ -196,7 +208,7 @@ const SettingForm = ({ closeModal }) => {
                             ? `${css.inputError} ${css.placeholderError}`
                             : ""
                         }`}
-                        placeholder="Email"
+                        placeholder={`${useremail}`}
                       />
                       <ErrorMessage
                         name="email"
