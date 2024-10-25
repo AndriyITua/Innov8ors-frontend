@@ -38,8 +38,7 @@
 }
 
 .inputContainer {
-    margin-bottom: 20px;
-    position: relative;
+    margin-bottom: 16px;
     width: 100%;
 }
 
@@ -53,6 +52,7 @@
     background-color: var(--primary-color-white);
     outline: none;
     padding-right: 12px;
+    position: relative;
 }
 
 
@@ -92,11 +92,11 @@
 }
 .error {
     display: block;
-    font-size: 14px;
+    font-size: 10px;
     color: var(--secondary-color-red);
     line-height: 18px;
-    /* margin-top: 4px; */
     position: absolute;
+    margin-top: 4px;
 }
 
 .button {
@@ -160,6 +160,20 @@ box-shadow: none;
 
     .button {
         width: 336px;
+        height: 44px;
+        padding: 10px 30px;
+        font-size: 18px;
+        line-height: 133%;
+    }
+
+}
+@media screen and (min-width: 1440px) {
+    .formSignup {
+        width: 384px;
+    }
+
+    .button {
+        width: 384px;
         height: 44px;
         padding: 10px 30px;
         font-size: 18px;
