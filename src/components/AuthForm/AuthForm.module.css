@@ -92,7 +92,7 @@
 }
 .error {
     display: block;
-    font-size: 10px;
+    font-size: 12px;
     color: var(--secondary-color-red);
     line-height: 18px;
     position: absolute;
