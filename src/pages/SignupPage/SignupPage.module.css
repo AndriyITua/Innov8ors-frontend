@@ -16,7 +16,7 @@ max-width: 320px;
 height: 600px;
 margin: 0 auto;
 padding: 0 20px;
-background: url(../../assets/signupPageImages/bottle-image-signup.svg), url(../../assets/signupPageImages/background-image-signup.jpg);
+background: url(../../assets/signupPageImages/bottle-image-signup.svg), url(../../assets/signupPageImages/background-image-mobile.svg);
 background-size: 280px, 320px;
 background-repeat: no-repeat;
 background-position: 20px 375px, 0px 28px;
@@ -33,7 +33,7 @@ background-position: 20px 375px, 0px 28px;
     }
 
     .container {
-        /* padding-top: 14px; */
+        padding-top: 14px;
         max-width: 768px;
         height: 680px;
         margin: 0 auto;
@@ -50,4 +50,17 @@ background-position: 20px 375px, 0px 28px;
         padding-bottom: 0px;
     }
     
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+        padding-top: 140px;
+        min-height: 100vh;
+        padding-right: 18px;
+        padding-left: 840px;
+        background-image: url(../../assets/signupPageImages/background-bottle-laptop.svg), url(../../assets/signupPageImages/Background-image-laptop.svg);
+        background-size: 856px, 1404px;
+        background-position: 40px 0, 18px 0;
+    }
 }
