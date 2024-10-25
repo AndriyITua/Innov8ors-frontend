@@ -1,4 +1,5 @@
 .modalDaily {
+  position: fixed;
   width: "280px";
   height: "auto";
   padding: "24px 12px";
@@ -7,9 +8,9 @@
   right: "auto";
   bottom: "auto";
   margin-right: "-50%";
-  transform: "translate(-50%, -50%)";
   border-radius: "10px";
   overflow: "auto";
+  scrollbar-width: none;
 }
 
 @media (min-width: 768px) {
@@ -25,7 +26,6 @@
 }
 
 .modalContent {
-  /* overflow-x: auto; */
   max-height: 80vh;
 }
 
