@@ -98,32 +98,41 @@ const MonthStatsTable = () => {
                 month: "long",
               })}, ${currentYear}`}
             </span>
-            {!(
-              currentYear === new Date().getFullYear() &&
-              currentMonth === new Date().getMonth()
-            ) && (
-              <button className={styles.arrowButton} onClick={goNextMonth}>
-                <MdArrowForwardIos style={{ fontSize: "14px" }} />
-              </button>
-            )}
+            <button
+              className={`${styles.arrowButton} ${
+                currentYear === new Date().getFullYear() &&
+                currentMonth === new Date().getMonth()
+                  ? styles.disabledArrow
+                  : ""
+              }`}
+              onClick={goNextMonth}
+              disabled={
+                currentYear === new Date().getFullYear() &&
+                currentMonth === new Date().getMonth()
+              }
+            >
+              <MdArrowForwardIos style={{ fontSize: "14px" }} />
+            </button>
           </div>
         </div>
-        <div className={styles.daysContainer}>
-          {days.map(day => (
-            <div className={styles.dayCell} key={day.date}>
-              <div
-                className={`${styles.dayItem} ${
-                  day.progress < 100 ? styles.incomplete : styles.completed
-                }`}
-                onClick={e =>
-                  handleSelectDay({ ...day, waterPerc: day.progress }, e)
-                }
-              >
-                <div className={styles.dayItem}>{day.date}</div>
-              </div>
-              <div className={styles.dayProgress}>{`${day.progress}%`}</div>
-            </div>
-          ))}
+        <div>
+          <ul className={styles.daysContainer}>
+            {days.map(day => (
+              <li className={styles.dayCell} key={day.date}>
+                <div
+                  className={`${styles.dayItem} ${
+                    day.progress < 100 ? styles.incomplete : styles.completed
+                  }`}
+                  onClick={e =>
+                    handleSelectDay({ ...day, waterPerc: day.progress }, e)
+                  }
+                >
+                  <div className={styles.dayDate}>{day.date}</div>
+                </div>
+                <div className={styles.dayProgress}>{`${day.progress}%`}</div>
+              </li>
+            ))}
+          </ul>
         </div>
         {selectedDay && (
           <DaysGeneralStats
