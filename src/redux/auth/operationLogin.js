@@ -9,18 +9,15 @@ import {
   notifySuccessToast,
 } from "../../helpers/hot-toasts.js";
 
-import { apiInstance } from "../../api/api.js";
-
 axios.defaults.baseURL = "https://innov8ors-backend.onrender.com";
 
 axios.defaults.withCredentials = true;
-
 
 export const login = createAsyncThunk(
   "auth/login",
   async (credentials, thunkApi) => {
     try {
-      const response = await apiInstance.post("/auth/login", credentials);
+      const response = await axios.post("/auth/login", credentials);
       notifySuccessToast("Successfully logged in!");
       setAuthHeader(response.data.data.accessToken);
 
@@ -50,7 +47,7 @@ export const refreshAccessToken = createAsyncThunk(
   "auth/refreshAccessToken",
   async (_, thunkApi) => {
     try {
-      const response = await apiInstance.post("/auth/refresh");
+      const response = await axios.post("/auth/refresh");
       setAuthHeader(response.data.data.accessToken);
       return response.data.data.accessToken;
     } catch (error) {
@@ -58,4 +55,3 @@ export const refreshAccessToken = createAsyncThunk(
     }
   }
 );
-

@@ -12,7 +12,7 @@ const authSlice = createSlice({
       gender: null,
     },
     accessToken: null,
-    isLoggedIn: true,
+    isLoggedIn: false,
     isRefreshing: false,
     isLoading: false,
     isError: null,
