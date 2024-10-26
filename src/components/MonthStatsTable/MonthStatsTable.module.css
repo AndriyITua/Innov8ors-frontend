@@ -109,6 +109,10 @@
   line-height: 16px;
 }
 
+.dayDate {
+  pointer-events: none;
+}
+
 .incomplete {
   outline: 1px solid var(--secondary-color-orange, #ff9d43);
 }
