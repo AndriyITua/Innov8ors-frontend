@@ -84,7 +84,6 @@ const SettingForm = ({ closeModal }) => {
   const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
   const userphoto = photo ?? defaultUrl;
-  console.log(gender);
   const userGender = gender ?? "woman";
 
   const initialValues = {
@@ -233,6 +232,7 @@ const SettingForm = ({ closeModal }) => {
                             : ""
                         }`}
                         placeholder={`${useremail}`}
+                        autoComplete={"email"}
                       />
                       <ErrorMessage
                         name="email"
@@ -259,7 +259,7 @@ const SettingForm = ({ closeModal }) => {
                       name="password"
                       id={`password-${id}`}
                       placeholder="Password"
-                      autoComplete="new-password"
+                      autoComplete={"new-password"}
                     />
                     <ErrorMessage
                       name="password"
@@ -295,6 +295,7 @@ const SettingForm = ({ closeModal }) => {
                       name="newPassword"
                       id={`newPassword-${id}`}
                       placeholder="Password"
+                      autoComplete={"new-password"}
                     />
                     <ErrorMessage
                       name="newPassword"
@@ -334,6 +335,7 @@ const SettingForm = ({ closeModal }) => {
                       name="repeatNewPassword"
                       id={`repeatNewPassword-${id}`}
                       placeholder="Password"
+                      autoComplete={"new-password"}
                     />
                     <ErrorMessage
                       name="repeatNewPassword"
