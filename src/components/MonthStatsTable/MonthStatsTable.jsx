@@ -28,13 +28,70 @@ const MonthStatsTable = () => {
   };
 
   const handleSelectDay = (day, event) => {
+    console.log(event);
     setSelectedDay(day);
+
+    const mobileScreen = window.innerWidth >= 320 && window.innerWidth < 768;
+    const tabletScreen = window.innerWidth >= 768 && window.innerWidth < 1440;
+    const desktopScreen = window.innerWidth >= 1440;
+
     const rect = event.target.getBoundingClientRect();
-    setModalPosition({
-      top: rect.top + window.scrollY,
-      left: rect.left + window.scrollX,
-      width: rect.width,
-    });
+
+    if (desktopScreen) {
+      if (
+        (day.date > 0 && day.date < 5) ||
+        (day.date > 10 && day.date < 15) ||
+        (day.date > 20 && day.date < 25) ||
+        day.date > 30
+      ) {
+        setModalPosition({
+          top: rect.top + window.scrollY - 15,
+          left: rect.left + window.scrollX + 36,
+          width: rect.width,
+        });
+      } else if (
+        (day.date > 4 && day.date < 11) ||
+        (day.date > 14 && day.date < 21) ||
+        (day.date > 24 && day.date < 31)
+      ) {
+        setModalPosition({
+          top: rect.top + window.scrollY - 15,
+          left: rect.left + window.scrollX - 244,
+          width: rect.width,
+        });
+      }
+    }
+    if (tabletScreen) {
+      if (
+        (day.date > 0 && day.date < 5) ||
+        (day.date > 10 && day.date < 15) ||
+        (day.date > 20 && day.date < 25) ||
+        day.date > 30
+      ) {
+        setModalPosition({
+          top: rect.top + window.scrollY - 10,
+          left: rect.left + window.scrollX - 8,
+          width: rect.width,
+        });
+      } else if (
+        (day.date > 4 && day.date < 11) ||
+        (day.date > 14 && day.date < 21) ||
+        (day.date > 24 && day.date < 31)
+      ) {
+        setModalPosition({
+          top: rect.top + window.scrollY - 10,
+          left: rect.left + window.scrollX + 5,
+          width: rect.width,
+        });
+      }
+    }
+    if (mobileScreen) {
+      setModalPosition({
+        top: rect.top + window.scrollY - 14,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+      });
+    }
   };
 
   const goPrevMonth = () => {
