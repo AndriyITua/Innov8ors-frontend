@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchUserById } from "../../redux/user/userOperations";
 import UserLogoModal from "../UserLogoModal/UserLogoModal";
 import Modal from "react-modal";
 import { GoChevronDown } from "react-icons/go";
@@ -9,7 +11,7 @@ Modal.setAppElement("#root");
 
 const UserLogo = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.user); // Використовуємо user з нового слайсу
   const buttonRef = useRef(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
@@ -54,6 +56,19 @@ const UserLogo = () => {
     };
   }, []);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userId = "64e70c21a1d0f93e33c8f2a6";
+    dispatch(fetchUserById(userId));
+  }, [dispatch]);
+
+  const getEmailLocalPart = email => {
+    if (!email) return "";
+    const atIndex = email.indexOf("@");
+    return atIndex !== -1 ? email.slice(0, atIndex) : email;
+  };
+
   return (
     <>
       <button
@@ -62,15 +77,25 @@ const UserLogo = () => {
         onClick={handleToggleModal}
         style={{ position: "relative" }}
       >
-        <span className={css.userName}>{user?.fullName || user?.email}</span>
-        {user?.avatar ? (
-          <img src={user.avatar} alt={user.fullName} className={css.avatar} />
+        {/* Використовуємо username або email */}
+        <span className={css.userName}>
+          {user.username || getEmailLocalPart(user.email)}
+        </span>
+
+        {/* Відображаємо фото, якщо воно є, або ініціал */}
+        {user.userphoto ? (
+          <img
+            src={user.userphoto}
+            alt={user.username || user.email}
+            className={css.avatar}
+          />
         ) : (
           <span className={css.initial}>
-            {user?.fullName?.[0]?.toUpperCase() ||
-              user?.email?.[0]?.toUpperCase()}
+            {user.username?.[0]?.toUpperCase() ||
+              user.email?.[0]?.toUpperCase()}
           </span>
         )}
+
         <GoChevronDown className={css.icon} />
       </button>
 
