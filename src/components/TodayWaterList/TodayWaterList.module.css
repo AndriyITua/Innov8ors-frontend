@@ -8,7 +8,7 @@
     overflow-y: auto;
     overflow-x: hidden;  
     width: 264px;
-    height: 200px;
+    height: 212px;
    
 }
 .title{
@@ -192,7 +192,7 @@ color: #2f2f2f;
     }
     .contItem{
         width: 656px;
-        height: 188px;
+        /* height: 188px; */
     }
     .item{
         width: 646px;

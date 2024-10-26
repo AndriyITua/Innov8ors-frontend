@@ -1,3 +1,4 @@
+
 import { HiOutlinePlus } from "react-icons/hi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { useEffect, useState } from "react";
@@ -49,43 +50,46 @@ export default function TodayWaterList() {
     const handleCloseModalEntr = () => {
         setModalOpenEntr(false);
     };
+    const formatTime = (isoString) => {
+        const date = new Date(isoString);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
 
     return (
         <div className={css.container}>
             <p className={css.title}>Today</p>
             <div className={css.contItem}>
-                {records.length> 0 ? (
+                {records.length> 0 && (
                     records.map( (record) => (
-                     <div key={record._id}>
-                        	<ul className={css.item}>
-                            	<li>
-                                	<img className={css.img} src={glassWater} alt="glass water"/>
-                            	</li>
-                            	<div className={css.time}>
-                            	<li className={css.water}>{record.amount} ml</li>
-                            	<li className={css.am}>{record.createdAt}pm</li>
+                        <div key={record._id}>
+                            	<ul className={css.item}>
+                                	<li>
+                                    	<img className={css.img} src={glassWater} alt="glass water"/>
+                                	</li>
+                                	<div className={css.time}>
+                                	<li className={css.water}>{record.amount} ml</li>
+                                	<li className={css.am}>{formatTime(record.createdAt)} PM</li>
+                            	</div>
+                            	<div className={css.editDel}>
+                                	<li>
+                                    	<button className={css.buttonIcon} onClick={handleOpenModalEntr}><HiOutlinePencilSquare/></button>
+                                	</li>
+                                	<li>
+                                   	<button onClick={()=>openModal()} className={css.buttonDel}>
+                                    	<img src={deleteW} alt="Delete"/>
+                                    	</button>
+                                	</li>
+                            	</div>
+                        	</ul>
+                        	<hr className={css.divider} />
                         	</div>
-                        	<div className={css.editDel}>
-                            	<li>
-                                	<button className={css.buttonIcon} onClick={handleOpenModalEntr}><HiOutlinePencilSquare/></button>
-                            	</li>
-                            	<li>
-                               	<button onClick={()=>openModal()} className={css.buttonDel}>
-                                	<img src={deleteW} alt="Delete"/>
-                                	</button>
-                            	</li>
-                        	</div>
-                    	</ul>
-                    	<hr className={css.divider} />
-                    	</div>
                  	))
-                ):(
+                )}
                 <div className={css.buttonAddWaterCont}>
                     <button type="submit" className={css.button} onClick={handleOpenModal}>
                        <div className={css.plus}> <HiOutlinePlus className={css.icon}/></div>
                         Add water</button>
                 </div>
-            )}
             </div>
             <ModalEntered isOpen={isModalOpenEntr} onClose={handleCloseModalEntr}/>
             <ModalAddWater isOpen={ModalOpen} onClose={handleCloseModal}/>

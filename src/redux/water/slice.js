@@ -42,7 +42,7 @@ const waterSlice = createSlice({
             })
             .addCase(featchWater.fulfilled, (state, action) => {
                 console.log("🚀 ~ action:", action);
-                state.records = action.payload.data ||[] ; // Якщо payload містить вкладене поле data
+                state.water.records = action.payload.data.records ||[] ; // Якщо payload містить вкладене поле data
     console.log("🚀 ~ state.records:", state.records);
                 // state.water.records = action.payload;
                 // console.log("🚀 ~ .addCase ~  state.water:",  state.records.amount)
