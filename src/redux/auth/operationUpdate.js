@@ -65,7 +65,6 @@ export const updateUserInfo = createAsyncThunk(
       const id = reduxState.auth.user.id;
       setAuthHeader(token);
       const response = await axios.patch(`user/${id}`, user);
-      console.log(response.data);
       notifySuccessToast("Successfully updated user info!");
       return response.data;
     } catch (error) {
