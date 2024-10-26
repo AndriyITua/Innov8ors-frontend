@@ -44,8 +44,8 @@ const MonthStatsTable = () => {
         day.date > 30
       ) {
         setModalPosition({
-          top: rect.top + window.scrollY - 15,
-          left: rect.left + window.scrollX + 36,
+          top: rect.top + window.scrollY - 8,
+          left: rect.left + window.scrollX + 48,
           width: rect.width,
         });
       } else if (
@@ -54,8 +54,8 @@ const MonthStatsTable = () => {
         (day.date > 24 && day.date < 31)
       ) {
         setModalPosition({
-          top: rect.top + window.scrollY - 15,
-          left: rect.left + window.scrollX - 244,
+          top: rect.top + window.scrollY - 8,
+          left: rect.left + window.scrollX - 236,
           width: rect.width,
         });
       }
@@ -68,8 +68,8 @@ const MonthStatsTable = () => {
         day.date > 30
       ) {
         setModalPosition({
-          top: rect.top + window.scrollY - 10,
-          left: rect.left + window.scrollX - 8,
+          top: rect.top + window.scrollY - 2,
+          left: rect.left + window.scrollX - 18,
           width: rect.width,
         });
       } else if (
@@ -78,15 +78,15 @@ const MonthStatsTable = () => {
         (day.date > 24 && day.date < 31)
       ) {
         setModalPosition({
-          top: rect.top + window.scrollY - 10,
-          left: rect.left + window.scrollX + 5,
+          top: rect.top + window.scrollY - 2,
+          left: rect.left + window.scrollX + 20,
           width: rect.width,
         });
       }
     }
     if (mobileScreen) {
       setModalPosition({
-        top: rect.top + window.scrollY - 14,
+        top: rect.top + window.scrollY - 2,
         left: rect.left + window.scrollX,
         width: rect.width,
       });
