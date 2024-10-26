@@ -31,3 +31,18 @@ export const fetchUserById = createAsyncThunk(
     },
   }
 );
+
+export const getUserData = createAsyncThunk(
+  "user/getUser",
+  async (_, thunkAPi) => {
+    const state = thunkAPi.getState();
+    const userId = state.auth.userId;
+    try {
+      const res = await axios.get(`/user/${userId}`);
+
+      return res.data;
+    } catch (error) {
+      return thunkAPi.rejectWithValue(error.message);
+    }
+  }
+);

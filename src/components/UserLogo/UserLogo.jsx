@@ -80,9 +80,9 @@ const UserLogo = () => {
         <span className={css.userName}>
           {user.username || getEmailLocalPart(user.email)}
         </span>
-        {user.photo ? (
+        {user.userphoto ? (
           <img
-            src={user.photo}
+            src={user.userphoto}
             alt={user.username || user.email}
             className={css.avatar}
           />
