@@ -85,7 +85,7 @@ const SettingForm = ({ closeModal }) => {
   const userGender = gender ?? "woman";
   const userphoto = photo ?? (gender === "man" ? defaultMan : defaultWoman);
 
-
+  // начальные значения в формике
   const initialValues = {
     selectedOptions: userGender,
     name: `${name}`,
@@ -133,8 +133,8 @@ const SettingForm = ({ closeModal }) => {
       initialValues={initialValues}
       onSubmit={submit}
       validationSchema={ValidationSchema}
-      enableReinitialize={true}
-      validateOnChange={true}
+      enableReinitialize={true} // перезапись начальных значений при их изменении 
+      validateOnChange={true} // валидации при изменении 
       validateOnBlur={false}
     >
       {({ errors, touched }) => (
