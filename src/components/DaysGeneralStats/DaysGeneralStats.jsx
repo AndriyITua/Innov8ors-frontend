@@ -56,7 +56,7 @@ export const DaysGeneralStats = ({
     const modal = modalRef.current;
     const modalWidth = modal.offsetWidth;
     const modalHeight = modal.offsetHeight;
-    const isMobileScreen = window.innerWidth <= 320;
+    const isMobileScreen = window.innerWidth >= 320 && window.innerWidth < 768;
 
     let leftDirectin = 0;
     let rightDirection = 0;
