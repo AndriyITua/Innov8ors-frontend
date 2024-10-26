@@ -2,8 +2,6 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setAuthHeader } from "../helpers/setAuthHeader.js";
 
-axios.defaults.baseURL = "https://innov8ors-backend.onrender.com";
-
 export const fetchUserById = createAsyncThunk(
   "user/fetchUserById",
   async (user, thunkAPI) => {
@@ -15,7 +13,7 @@ export const fetchUserById = createAsyncThunk(
       setAuthHeader(token);
       const response = await axios.get(`user/${id}`, user);
 
-      return response.data; // Повертаємо дані про користувача з API
+      return response.data;
     } catch (error) {
       console.error(
         "Error fetching user:",
@@ -28,7 +26,6 @@ export const fetchUserById = createAsyncThunk(
   },
   {
     condition: (_, thunkAPI) => {
-      // если token !== null (т.е. true), то запрос на сервер будет выполнен
       const reduxState = thunkAPI.getState();
       return reduxState.auth.accessToken !== null;
     },

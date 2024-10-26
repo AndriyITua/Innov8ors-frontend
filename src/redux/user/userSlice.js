@@ -5,7 +5,8 @@ const initialState = {
   id: null,
   username: null,
   email: null,
-  userphoto: null, // Поле для фото користувача
+  gender: null,
+  userphoto: null,
   isLoading: false,
   error: null,
 };
@@ -25,7 +26,7 @@ const userSlice = createSlice({
         state.id = payload._id;
         state.username = payload.data.username;
         state.email = payload.data.email;
-        state.userphoto = payload.data.userphoto || null; // Зберігаємо фото, якщо воно є
+        state.userphoto = payload.data.userphoto || null;
       })
       .addCase(fetchUserById.rejected, (state, { payload }) => {
         state.isLoading = false;

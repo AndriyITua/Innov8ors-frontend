@@ -11,7 +11,7 @@ Modal.setAppElement("#root");
 
 const UserLogo = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const user = useSelector(state => state.user); // Використовуємо user з нового слайсу
+  const user = useSelector(state => state.user);
   const buttonRef = useRef(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
@@ -59,8 +59,10 @@ const UserLogo = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const userId = "64e70c21a1d0f93e33c8f2a6";
-    dispatch(fetchUserById(userId));
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      dispatch(fetchUserById(storedUserId));
+    }
   }, [dispatch]);
 
   const getEmailLocalPart = email => {
@@ -77,12 +79,9 @@ const UserLogo = () => {
         onClick={handleToggleModal}
         style={{ position: "relative" }}
       >
-        {/* Використовуємо username або email */}
         <span className={css.userName}>
           {user.username || getEmailLocalPart(user.email)}
         </span>
-
-        {/* Відображаємо фото, якщо воно є, або ініціал */}
         {user.userphoto ? (
           <img
             src={user.userphoto}
