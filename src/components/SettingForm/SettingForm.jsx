@@ -10,6 +10,7 @@ import {
 
 // шаблоны валидации
 import { emailRegExp, nameRegExp } from "../../constants";
+import { defaultMan, defaultWoman } from "../../constants";
 
 import { MdOutlineFileUpload } from "react-icons/md";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
@@ -77,14 +78,12 @@ const SettingForm = ({ closeModal }) => {
   const id = useId();
   const dispatch = useDispatch();
 
-  //дефолтне фото
-  const defaultUrl = `https://img.freepik.com/free-photo/photorealistic-view-tree-nature-with-branches-trunk_23-2151478039.jpg`;
-
   const { username, email, photo, gender } = useSelector(selectUser);
   const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
-  const userphoto = photo ?? defaultUrl;
   const userGender = gender ?? "woman";
+  const userphoto = photo ?? (gender === "man" ? defaultMan : defaultWoman);
+  
 
   const initialValues = {
     selectedOptions: userGender,
