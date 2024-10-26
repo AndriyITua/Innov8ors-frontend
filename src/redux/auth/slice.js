@@ -19,6 +19,7 @@ const authSlice = createSlice({
       gender: null,
       photo: null,
     },
+    userId: null,
     accessToken: null,
     isLoggedIn: false,
     isRefreshing: false,
@@ -35,7 +36,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = true;
         state.accessToken = payload.data.accessToken;
-        state.user.id = payload.data.userId;
+        state.userId = payload.data.userId;
         state.user.photo = payload.data.userphoto;
       })
       .addCase(login.rejected, (state, { payload }) => {
@@ -47,11 +48,12 @@ const authSlice = createSlice({
       .addCase(refreshUser.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.fulfilled, state => {
+      .addCase(refreshUser.fulfilled, (state, { payload }) => {
         state.isRefreshing = false;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.isError = null;
+        state.user = payload.data;
       })
       .addCase(refreshUser.rejected, (state, { payload }) => {
         state.isError = payload;
