@@ -15,12 +15,6 @@ const UserLogo = () => {
   const buttonRef = useRef(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
-  const getUserNameOrEmail = () => {
-    if (user?.username) return user.username;
-    if (user?.email) return user.email.split("@")[0];
-    return null;
-  };
-
   const handleToggleModal = () => {
     if (!isModalOpen) {
       const buttonRect = buttonRef.current.getBoundingClientRect();
@@ -83,7 +77,6 @@ const UserLogo = () => {
         onClick={handleToggleModal}
         style={{ position: "relative" }}
       >
-<<<<<<< Updated upstream
         {/* Використовуємо username або email */}
         <span className={css.userName}>
           {user.username || getEmailLocalPart(user.email)}
@@ -100,15 +93,6 @@ const UserLogo = () => {
           <span className={css.initial}>
             {user.username?.[0]?.toUpperCase() ||
               user.email?.[0]?.toUpperCase()}
-=======
-        <span className={css.userName}>{getUserNameOrEmail()}</span>
-        {user?.avatar ? (
-          <img src={user.avatar} alt={user.username} className={css.avatar} />
-        ) : (
-          <span className={css.initial}>
-            {user?.username?.[0]?.toUpperCase() ||
-              user?.email?.[0]?.toUpperCase()}
->>>>>>> Stashed changes
           </span>
         )}
 
