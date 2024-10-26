@@ -208,6 +208,7 @@ const SettingForm = ({ closeModal }) => {
                             : ""
                         }`}
                         placeholder={`${name}`}
+                        autoComplete={"current-name"}
                       />
                       <ErrorMessage
                         name="name"
@@ -232,7 +233,7 @@ const SettingForm = ({ closeModal }) => {
                             : ""
                         }`}
                         placeholder={`${useremail}`}
-                        autoComplete={"email"}
+                        autoComplete={"current-email"}
                       />
                       <ErrorMessage
                         name="email"
