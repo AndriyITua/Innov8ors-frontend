@@ -1,38 +1,58 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addWater } from "./opertionsEditWater";
+import { addWater } from "./opertionsEditWater.js";
+import { featchWater } from "./opertionsEditWater";
 
 const waterSlice = createSlice({
     name:"water",
     initialState:{
         water:{
-            totalConsumed:null,
-            dailyRate: null,
+            totalConsumed:0,
+            dailyRate: 0,
             records:[
                 {
                     amount: null,
                     createdAt: null,
-                    updatedAt: null,
+                    updatedAt: 0,
                 }
             ]
         },
         isLoading: false,
-        erorr: null,
+        error: null,
     },
     extraReducers: builder =>{
         builder
-            .addCase(addWater.pending,(state)=>{
+        .addCase(addWater.pending,(state)=>{
+            state.isLoading = true;
+            state.error = false;
+        })
+        .addCase(addWater.fulfilled, (state, action)=>{
+            console.log("Отримано відповідь:", action.payload);
+            state.isLoading = false;
+            state.error = null;
+            state.water.records.push(action.payload);
+            state.water.totalConsumed += action.payload.amount;
+        })
+        .addCase(addWater.rejected,(state)=>{
+            state.isLoading = false;
+            state.error = true;
+        })
+            .addCase(featchWater.pending, (state) => {
                 state.isLoading = true;
-                state.erorr = false;
+                state.error = null;
             })
-            .addCase(addWater.fulfilled, (state, action)=>{
+            .addCase(featchWater.fulfilled, (state, action) => {
+                console.log("🚀 ~ action:", action);
+                state.water.records = action.payload.data.records ||[] ; // Якщо payload містить вкладене поле data
+    console.log("🚀 ~ state.records:", state.records);
+                // state.water.records = action.payload;
+                // console.log("🚀 ~ .addCase ~  state.water:",  state.records.amount)
                 state.isLoading = false;
-                state.erorr = null;
-                state.water.records.push(action.payload);
-                state.water.totalConsumed += action.payload.amount;
+                state.error = null;
+                // state.water.records.push(action.payload);
             })
-            .addCase(addWater.rejected,(state)=>{
+            .addCase(featchWater.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = true;
+                state.error = action.payload || "Помилка отримання даних";
             })
     }
 })

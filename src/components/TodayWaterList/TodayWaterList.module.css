@@ -8,7 +8,7 @@
     overflow-y: auto;
     overflow-x: hidden;  
     width: 264px;
-    height: 200px;
+    height: 212px;
    
 }
 .title{
@@ -105,8 +105,8 @@ color: #407bff;
 text-decoration: none;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
+    /* justify-content: flex-start; */
+    /* gap: 8px; */
     /* padding: 0 0 0 4px; */
     cursor: pointer;
 }  
@@ -122,9 +122,9 @@ text-decoration: none;
 }
     
 .icon{
-    width:8px;
-    height:8px;
-    stroke-width: 1px;
+    width:12px;
+    height:12px;
+    stroke-width: 3px;
 }
 .img{
     width: 26px;
@@ -178,8 +178,8 @@ color: #2f2f2f;
     background-color: #6faaff; 
 }
 .plus{
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     padding: 4px;
     display: flex;
     align-items: center;
@@ -192,7 +192,7 @@ color: #2f2f2f;
     }
     .contItem{
         width: 656px;
-        height: 188px;
+        /* height: 188px; */
     }
     .item{
         width: 646px;
@@ -217,7 +217,7 @@ color: #2f2f2f;
     }
     .contItem{
         width: 544px;
-        height: 212px;
+        /* height: 212px; */
     }
     .item{
         width: 534px;
