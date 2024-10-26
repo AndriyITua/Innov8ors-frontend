@@ -83,7 +83,6 @@ const SettingForm = ({ closeModal }) => {
   const useremail = email ?? "email@gmail.com";
   const userGender = gender ?? "woman";
   const userphoto = photo ?? (gender === "man" ? defaultMan : defaultWoman);
-  
 
   const initialValues = {
     selectedOptions: userGender,
@@ -178,6 +177,7 @@ const SettingForm = ({ closeModal }) => {
                   <div className={css.checkGender}>
                     <label className={css.genderLabel}>
                       <Field
+                        className={css.genderLabelRadio}
                         type="radio"
                         name="selectedOptions"
                         value="woman"
@@ -185,7 +185,12 @@ const SettingForm = ({ closeModal }) => {
                       <span className={css.checkboxText}>Woman</span>
                     </label>
                     <label className={css.genderLabel}>
-                      <Field type="radio" name="selectedOptions" value="man" />
+                      <Field
+                        className={css.genderLabelRadio}
+                        type="radio"
+                        name="selectedOptions"
+                        value="man"
+                      />
                       <span className={css.checkboxText}>Man</span>
                     </label>
                   </div>
