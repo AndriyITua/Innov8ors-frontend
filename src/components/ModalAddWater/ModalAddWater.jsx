@@ -71,11 +71,11 @@ export default function ModalAddWater({ isOpen, onClose }) {
   }, [water]);
 
   const handleSave = () => {
-    console.log("На сервер:", { water, localTime });
+    console.log("На сервер:", { water, localTime});
     setLoading(true);
 
     // await dispatch(addWater(values));
-    dispatch(addWater({ amount: water, time: localTime }));
+    dispatch(addWater({amount: water }));
     setLoading(false);
     onClose();
     // setTimeout(() => {
@@ -154,8 +154,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
                 type="text"
                 value={localTime}
                 onChange={handleTimeChange}
-                className={css.input}
-              />
+                className={css.input}/>
             </div>
 
             <div>
