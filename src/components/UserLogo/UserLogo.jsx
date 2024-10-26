@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { fetchUserById } from "../../redux/user/userOperations";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUserById } from "../../redux/auth/operationUserId";
 import UserLogoModal from "../UserLogoModal/UserLogoModal";
 import Modal from "react-modal";
 import { GoChevronDown } from "react-icons/go";
@@ -11,7 +10,10 @@ Modal.setAppElement("#root");
 
 const UserLogo = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const user = useSelector(state => state.user);
+  const userId = useSelector(state => state.auth.user.id);
+  const user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
+
   const buttonRef = useRef(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
@@ -24,7 +26,6 @@ const UserLogo = () => {
         top: screenWidth >= 1440 ? buttonRect.bottom + 6 : buttonRect.bottom,
         left: buttonRect.right - 118,
       });
-
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -56,14 +57,11 @@ const UserLogo = () => {
     };
   }, []);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    const storedUserId = localStorage.getItem("userId");
-    if (storedUserId) {
-      dispatch(fetchUserById(storedUserId));
+    if (userId) {
+      dispatch(fetchUserById(userId));
     }
-  }, [dispatch]);
+  }, [userId, dispatch]);
 
   const getEmailLocalPart = email => {
     if (!email) return "";
@@ -82,9 +80,9 @@ const UserLogo = () => {
         <span className={css.userName}>
           {user.username || getEmailLocalPart(user.email)}
         </span>
-        {user.userphoto ? (
+        {user.photo ? (
           <img
-            src={user.userphoto}
+            src={user.photo}
             alt={user.username || user.email}
             className={css.avatar}
           />
@@ -102,9 +100,7 @@ const UserLogo = () => {
         isOpen={isModalOpen}
         onRequestClose={handleToggleModal}
         style={{
-          overlay: {
-            backgroundColor: "transparent",
-          },
+          overlay: { backgroundColor: "transparent" },
           content: {
             width: "118px",
             height: "88px",
