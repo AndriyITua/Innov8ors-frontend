@@ -2,13 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { addWater } from "./opertionsEditWater.js";
 import { featchWater } from "./opertionsEditWater";
 import { deleteWaterRecord } from "./operationsDelete.js";
+import { patchWater } from "./opertionsEditWater.js";
 
 const waterSlice = createSlice({
   name: "water",
   initialState: {
     water: {
       totalConsumed: 0,
-      dailyRate: 0,
+      dailyRate: 1500,
       records: [
         {
           amount: null,
@@ -27,11 +28,10 @@ const waterSlice = createSlice({
         state.error = false;
       })
       .addCase(addWater.fulfilled, (state, action) => {
-        console.log("Отримано відповідь:", action.payload);
         state.isLoading = false;
         state.error = null;
-        state.water.records.push(action.payload);
-        state.water.totalConsumed += action.payload.amount;
+        state.water.records.push(action.payload.data);
+        state.water.totalConsumed += action.payload.data.amount;
       })
       .addCase(addWater.rejected, state => {
         state.isLoading = false;
@@ -42,14 +42,10 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(featchWater.fulfilled, (state, action) => {
-        console.log("🚀 ~ action:", action);
-        state.water.records = action.payload.data.records || []; // Якщо payload містить вкладене поле data
-        console.log("🚀 ~ state.records:", state.records);
-        // state.water.records = action.payload;
-        // console.log("🚀 ~ .addCase ~  state.water:",  state.records.amount)
+        state.water.records = action.payload.data.records || [];
+        state.water.totalConsumed = action.payload.data.totalConsumed;
         state.isLoading = false;
         state.error = null;
-        // state.water.records.push(action.payload);
       })
       .addCase(featchWater.rejected, (state, action) => {
         state.isLoading = false;
@@ -68,7 +64,26 @@ const waterSlice = createSlice({
       .addCase(deleteWaterRecord.rejected, state => {
         state.isLoading = false;
         state.error = true;
-      });
+      })
+      
+      .addCase(patchWater.pending, (state)=>{
+        state.isLoading = true;
+    })
+    .addCase(patchWater.fulfilled, (state, action)=>{
+        state.isLoading = false;
+        state.error = null;
+        const updatedRecordIndex = state.water.records.findIndex(
+            (record) => record._id === action.payload._id
+        );
+        if (updatedRecordIndex !== -1) {
+            // Оновлення запису у стані
+            state.water.records[updatedRecordIndex] = action.payload;
+        }
+    })
+    .addCase(patchWater.rejected, (state, action) => {
+        state.isloading = false;
+        state.error = action.payload;
+    });
   },
 });
 export const waterReducer = waterSlice.reducer;

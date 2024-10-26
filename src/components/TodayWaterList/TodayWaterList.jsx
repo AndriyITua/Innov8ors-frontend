@@ -15,15 +15,28 @@ import { deleteWaterRecord } from "../../redux/water/operationsDelete";
 export default function TodayWaterList() {
   const records = useSelector(selectWaterRecords);
   const dispatch = useDispatch();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selectedEntry, setselectedEntry] = useState(null);
   const [ModalOpen, setModalOpen] = useState(false);
+
   const [isModalOpenEntr, setModalOpenEntr] = useState(false);
+  const [isSetectedEntery, isSetSelectedEntery] = useState(null)
 
   useEffect(() => {
-    dispatch(featchWater());
+    const lastUpdateDate = localStorage.getItem("lastUpdateDate")
+    const today = new Date().toDateString();
+    
+    if (lastUpdateDate !== today) {
+      localStorage.setItem("lastUpdateDate", today);
+      dispatch(featchWater());
+    } else {
+      dispatch(featchWater());
+    }
   }, [dispatch]);
 
+  //модалка видаленння води 
   const openModal = entryId => {
     setselectedEntry(entryId);
     setIsModalOpen(true);
@@ -37,7 +50,6 @@ export default function TodayWaterList() {
     if (selectedEntry) {
       try {
         await dispatch(deleteWaterRecord(selectedEntry)).unwrap();
-        console.log("Deleting entry:", selectedEntry);
         dispatch(featchWater());
       } catch (error) {
         console.error("Failed to delete entry:", error);
@@ -46,25 +58,26 @@ export default function TodayWaterList() {
       }
     }
   };
-
+// модалка додавання води 
   const handleOpenModal = () => {
     setModalOpen(true);
   };
   const handleCloseModal = () => {
     setModalOpen(false);
   };
-
-  const handleOpenModalEntr = () => {
+//модалка редагування води
+  const handleOpenModalEntr = (idEntery) => {
+    isSetSelectedEntery(idEntery)
     setModalOpenEntr(true);
   };
   const handleCloseModalEntr = () => {
+    isSetSelectedEntery(null)
     setModalOpenEntr(false);
   };
   const formatTime = isoString => {
     const date = new Date(isoString);
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
-  console.log("🚀 ~ TodayWaterList ~ Records:", records);
   return (
     <div className={css.container}>
       <p className={css.title}>Today</p>
@@ -84,7 +97,7 @@ export default function TodayWaterList() {
                   <li>
                     <button
                       className={css.buttonIcon}
-                      onClick={handleOpenModalEntr}
+                      onClick={()=> handleOpenModalEntr(record._id)}
                     >
                       <HiOutlinePencilSquare />
                     </button>
@@ -116,7 +129,11 @@ export default function TodayWaterList() {
           </button>
         </div>
       </div>
-      <ModalEntered isOpen={isModalOpenEntr} onClose={handleCloseModalEntr} />
+      <ModalEntered 
+      isOpen={isModalOpenEntr} 
+      onClose={handleCloseModalEntr}
+      idRecord={isSetectedEntery}
+      />
       <ModalAddWater isOpen={ModalOpen} onClose={handleCloseModal} />
       <DeleteModal
         isOpen={isModalOpen}

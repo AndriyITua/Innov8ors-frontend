@@ -13,7 +13,6 @@ export const addWater = createAsyncThunk(
         try {
             const reduxState = thunkApi.getState();
             const token = reduxState.auth.accessToken;
-            console.log("🚀 ~ async ~ token:", token)
             setAuthHeader(token); 
             const response = await axios.post("/water", water);
             return response.data;
@@ -34,12 +33,22 @@ export const featchWater = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const response = await axios.get("/water/today")
-            console.log("Response data:", response.data); // Перевіряємо response
-            return response.data; // Або ж response.data.records, якщо дані вкладені глибше
+            return response.data; 
         } catch (error) {
-            console.error("Error fetching water data:", error);
             return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
+export const patchWater = createAsyncThunk(
+    "water/patchWater",
+    async ({id, data}, thunkAPI)=>{
+        try {
+            
+            const response = await axios.patch(`/water/${id}`, data);
+            return response.data.id;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+)
 
