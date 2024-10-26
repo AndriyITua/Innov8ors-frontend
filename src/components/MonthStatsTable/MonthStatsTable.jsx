@@ -28,7 +28,6 @@ const MonthStatsTable = () => {
   };
 
   const handleSelectDay = (day, event) => {
-    console.log(event);
     setSelectedDay(day);
 
     const mobileScreen = window.innerWidth >= 320 && window.innerWidth < 768;
