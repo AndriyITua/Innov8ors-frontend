@@ -13,7 +13,7 @@ const waterSlice = createSlice({
       records: [
         {
           amount: null,
-          createdAt: null,
+          createdAt: 0,
           updatedAt: 0,
         },
       ],
@@ -78,6 +78,7 @@ const waterSlice = createSlice({
         if (updatedRecordIndex !== -1) {
             // Оновлення запису у стані
             state.water.records[updatedRecordIndex] = action.payload;
+            console.log('Updated records:', state.water.records); 
         }
     })
     .addCase(patchWater.rejected, (state, action) => {
