@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { CgClose } from "react-icons/cg";
 import css from "./DailyNormaModal.module.css";
 import { putWaterRate } from "../../redux/water/operationsDaily.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast, Toaster } from "react-hot-toast";
 import { useEffect } from "react";
+import { selectDailyRate } from "../../redux/water/selectors.js";
 
 // const customStyles = {
 //   overlay: {
@@ -14,9 +15,11 @@ import { useEffect } from "react";
 
 export default function DailyNormaModal({ isOpen, onClose }) {
   const dispatch = useDispatch();
+  const rate = useSelector(selectDailyRate);
+  const dailyNorma = rate.dailyNorma / 1000 || "waterIntake";
 
   const calculateWaterIntake = (weight, activityTime, gender) => {
-    if (!weight || !activityTime) return 1.8;
+    if (!weight || !activityTime) return 0;
     const M = Number(weight);
     const T = Number(activityTime);
     let V;
@@ -25,7 +28,7 @@ export default function DailyNormaModal({ isOpen, onClose }) {
     } else {
       V = M * 0.04 + T * 0.6;
     }
-    return V;
+    return V.toFixed(1);
   };
 
   useEffect(() => {
@@ -33,22 +36,23 @@ export default function DailyNormaModal({ isOpen, onClose }) {
       document.body.style.position = "fixed";
       document.body.style.top = `-${window.scrollY}px`;
     } else {
-      const scrollY = document.body.style.top;
+      const scrollY = parseInt(document.body.style.top) || 0;
       document.body.style.position = "";
       document.body.style.top = "";
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      window.scrollTo(0, Math.abs(scrollY));
     }
   }, [isOpen]);
 
   const handleSubmit = async values => {
     const waterAmount =
       parseFloat(
-        values.waterIntake ||
-          calculateWaterIntake(
-            values.weight,
-            values.activityTime,
-            values.gender
-          )
+        values.waterIntake
+        // ||
+        //   calculateWaterIntake(
+        //     values.weight,
+        //     values.activityTime,
+        //     values.gender
+        //   )
       ) * 1000;
     const result = await dispatch(putWaterRate({ dailyNorma: waterAmount }));
     if (putWaterRate.fulfilled.match(result)) {
@@ -75,40 +79,48 @@ export default function DailyNormaModal({ isOpen, onClose }) {
     >
       <div className={css.modalDaily} tabIndex="0">
         <div className={css.modalContent}>
-          <h2 className={css.title}>My daily norma</h2>
-          <button className={css.clsButton} onClick={handleClose}>
+          <h2 className={css.titleDaily}>My daily norma</h2>
+          <button className={css.clsButton} onClick={onClose}>
             <CgClose />
           </button>
         </div>
 
-        <p className={css.gender}>
-          For woman:
-          <span className={css.genderSpan}> V=(M*0,03) + (T*0,4)</span>
-        </p>
-        <p className={css.gender}>
-          For man:
-          <span className={css.genderSpan}> V=(M*0,04) + (T*0,6)</span>
-        </p>
-        <p className={css.description}>
-          <span className={css.genderSpan}>*</span> V is the volume of the water
-          norm in liters per day, M is your body weight, T is the time of active
-          sports, or another type of activity commensurate in terms of loads (in
-          the absence of these, you must set 0)
-        </p>
+        <div className={css.calculation}>
+          <p className={css.gender}>
+            For woman:
+            <span className={css.genderSpan}> V=(M*0,03) + (T*0,4)</span>
+          </p>
+          <p className={css.gender}>
+            For man:
+            <span className={css.genderSpan}> V=(M*0,04) + (T*0,6)</span>
+          </p>
+        </div>
+
+        <div className={css.descrDaily}>
+          <p className={css.description}>
+            <span className={css.genderSpan}>*</span> V is the volume of the
+            water norm in liters per day, M is your body weight, T is the time
+            of active sports, or another type of activity commensurate in terms
+            of loads (in the absence of these, you must set 0)
+          </p>
+        </div>
 
         <Formik
           initialValues={{
             weight: "",
             activityTime: "",
             gender: "female",
-            waterIntake: "",
+            waterIntake: dailyNorma.toString(),
           }}
           onSubmit={handleSubmit}
-          className={css.form}
         >
           {({ values }) => (
-            <Form>
-              <h3 className={css.rate}>Calculate your rate:</h3>
+            <Form className={css.form}>
+              <h3
+              // className={css.rate}
+              >
+                Calculate your rate:
+              </h3>
               <div className={css.radioGroup}>
                 <label className={css.radioBtn}>
                   <Field type="radio" name="gender" value="female" />
@@ -121,7 +133,9 @@ export default function DailyNormaModal({ isOpen, onClose }) {
               </div>
 
               <div className={css.wrap}>
-                <label className={css.label}>Your weight in kilograms:</label>
+                <label className={css.labelDaily}>
+                  Your weight in kilograms:
+                </label>
                 <Field
                   name="weight"
                   className={css.inputNumber}
@@ -132,7 +146,7 @@ export default function DailyNormaModal({ isOpen, onClose }) {
               </div>
 
               <div className={css.wrap}>
-                <label className={css.label}>
+                <label className={css.labelDaily}>
                   The time of active participation in sports or other activities
                   with a high physical. load in hours:
                 </label>
@@ -169,7 +183,8 @@ export default function DailyNormaModal({ isOpen, onClose }) {
                   placeholder="Water Intake"
                   type="text"
                   value={
-                    values.waterIntake ||
+                    // values.waterIntake ||
+                    // { " "} ||
                     calculateWaterIntake(
                       values.weight,
                       values.activityTime,
@@ -179,9 +194,11 @@ export default function DailyNormaModal({ isOpen, onClose }) {
                 />
                 <ErrorMessage name="waterIntake" component="span" />
               </div>
-              <button className={css.saveBtn} onClick={handleSubmit}>
-                Save
-              </button>
+              <div className={css.btnSave}>
+                <button className={css.saveBtn} onClick={handleSubmit}>
+                  Save
+                </button>
+              </div>
             </Form>
           )}
         </Formik>
@@ -190,5 +207,3 @@ export default function DailyNormaModal({ isOpen, onClose }) {
     </div>
   );
 }
-
-// export default DailyNormaModal;
