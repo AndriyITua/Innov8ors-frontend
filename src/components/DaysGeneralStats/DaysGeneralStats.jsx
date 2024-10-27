@@ -6,7 +6,6 @@ import {
   selectWaterPercentage,
   selectServingsCount,
 } from "../../redux/water/selectors.js";
-import { fethceWaterMonth } from "../../redux/water/operationsMonth.js";
 
 export const DaysGeneralStats = ({
   selectedDay,
@@ -23,17 +22,11 @@ export const DaysGeneralStats = ({
 
   useEffect(() => {
     if (onShow) {
-      console.log("Fetching water data for selected day:", selectedDay);
       const { year } = selectedDay; // Додайте рік
-      dispatch(fethceWaterMonth({ year, month: selectedDay.month })); // Використовуйте month з selectedDay
     }
   }, [dispatch, onShow, selectedDay]);
 
-  useEffect(() => {
-    console.log("Daily Norm:", dailyNorm);
-    console.log("Water Percentage:", waterPerc);
-    console.log("Servings Count:", servingsCount);
-  }, [dailyNorm, waterPerc, servingsCount]);
+  useEffect(() => {}, [dailyNorm, waterPerc, servingsCount]);
 
   const monthNames = [
     "January",

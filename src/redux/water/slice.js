@@ -88,12 +88,10 @@ const waterSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(fethceWaterMonth.pending, state => {
-        console.log("Fetching water month data...");
         state.isLoading = true;
         state.error = null;
       })
       .addCase(fethceWaterMonth.fulfilled, (state, action) => {
-        console.log("Fetched water month data:", action.payload.data);
         state.isLoading = false;
         state.error = null;
         state.water.consumptionCount = action.payload.data.consumptionCount;

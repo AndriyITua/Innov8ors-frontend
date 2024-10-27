@@ -2,21 +2,35 @@ import { useState, useEffect, useRef } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
 import { DaysGeneralStats } from "../DaysGeneralStats/DaysGeneralStats";
-import { selectWaterPercentage } from "../../redux/water/selectors.js";
+import {
+  selectWaterPercentage,
+  selectWaterRecords,
+} from "../../redux/water/selectors.js";
 import styles from "./MonthStatsTable.module.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fethceWaterMonth } from "../../redux/water/operationsMonth.js";
 
 const MonthStatsTable = () => {
   const waterPerc = useSelector(selectWaterPercentage);
+  const waterRecords = useSelector(selectWaterRecords);
+  console.log(waterRecords);
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
   const [modalPosition, setModalPosition] = useState(null);
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  // const [selectedDayInfo, setSelectedDayInfo] = useState();
   const modalRef = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     generateDays(currentYear, currentMonth);
+    dispatch(
+      fethceWaterMonth({
+        year: currentYear,
+        month: currentMonth,
+      })
+    );
   }, [currentYear, currentMonth]);
 
   const generateDays = (year, month) => {
@@ -181,7 +195,13 @@ const MonthStatsTable = () => {
         <div>
           <ul className={styles.daysContainer}>
             {days.map(day => (
-              <li className={styles.dayCell} key={day.date}>
+              <li
+                className={styles.dayCell}
+                key={day.date}
+                onClick={event => {
+                  setSelectedDay(event.target.innerText);
+                }}
+              >
                 <div
                   className={`${styles.dayItem} ${
                     day.progress < 100 ? styles.incomplete : styles.completed
