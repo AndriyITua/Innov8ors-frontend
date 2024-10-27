@@ -1,6 +1,6 @@
 import { useState } from "react";
 import css from "./DailyNorma.module.css";
-import { DailyNormaModal } from "../DailyNormaModal/DailyNormaModal.jsx";
+import { DailyNormaModal } from "../DailyNormaModal/DailyNormaModal";
 import { selectDailyRate } from "../../redux/water/selectors.js";
 import { useSelector } from "react-redux";
 
