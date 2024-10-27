@@ -91,6 +91,7 @@ const authSlice = createSlice({
           gender: null,
           photo: null,
         };
+        state.userId = null;
         state.accessToken = null;
         state.isLoggedIn = false;
         state.isLoading = false;

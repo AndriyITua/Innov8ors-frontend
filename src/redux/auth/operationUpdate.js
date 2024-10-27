@@ -21,9 +21,8 @@ export const updateUserPhoto = createAsyncThunk(
     try {
       // читаем редакс state с помощью метода thunkAPI getState
       const reduxState = thunkAPI.getState();
-
       const token = reduxState.auth.accessToken;
-      
+
       setAuthHeader(token);
 
       // Создаем объект FormData и добавляем файл
@@ -60,9 +59,7 @@ export const updateUserInfo = createAsyncThunk(
     try {
       // читаем редакс state с помощью метода thunkAPI getState
       const reduxState = thunkAPI.getState();
-
       const token = reduxState.auth.accessToken;
-      
       setAuthHeader(token);
       const response = await axios.patch(`user/userInfo`, user);
       notifySuccessToast("Successfully updated user info!");
@@ -90,9 +87,7 @@ export const updateUserPassword = createAsyncThunk(
     try {
       // читаем редакс state с помощью метода thunkAPI getState
       const reduxState = thunkAPI.getState();
-
       const token = reduxState.auth.accessToken;
-      
       setAuthHeader(token);
       const response = await axios.patch(`user/userInfo/change-password`, user);
       notifySuccessToast("Successfully updated password!");
