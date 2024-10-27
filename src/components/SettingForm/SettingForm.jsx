@@ -1,12 +1,14 @@
 import { useState, useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/selectors";
+import { selectUser, selectLoading } from "../../redux/auth/selectors";
 import {
   updateUserPhoto,
   updateUserInfo,
   updateUserPassword,
 } from "../../redux/auth/operationUpdate";
+
+import { RotatingLines } from "react-loader-spinner";
 
 // шаблоны валидации
 import { emailRegExp, nameRegExp } from "../../constants";
@@ -79,6 +81,7 @@ const SettingForm = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   // дефолтные значения
+  const isLoading = useSelector(selectLoading);
   const { username, email, photo, gender } = useSelector(selectUser);
   const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
@@ -133,8 +136,8 @@ const SettingForm = ({ closeModal }) => {
       initialValues={initialValues}
       onSubmit={submit}
       validationSchema={ValidationSchema}
-      enableReinitialize={true} // перезапись начальных значений при их изменении 
-      validateOnChange={true} // валидации при изменении 
+      enableReinitialize={true} // перезапись начальных значений при их изменении
+      validateOnChange={true} // валидации при изменении
       validateOnBlur={false}
     >
       {({ errors, touched }) => (
@@ -158,17 +161,35 @@ const SettingForm = ({ closeModal }) => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="fileInput" className={css.uploadLabel}>
-                    <MdOutlineFileUpload />
-                    <span className={css.uploadPhotoText}>Upload photo</span>
-                  </label>
-                  <input
-                    className={css.uploadInput}
-                    type="file"
-                    id="fileInput"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                  />
+                  {!isLoading ? (
+                    <>
+                      <label htmlFor="fileInput" className={css.uploadLabel}>
+                        <MdOutlineFileUpload />
+                        <span className={css.uploadPhotoText}>
+                          Upload photo
+                        </span>
+                      </label>
+                      <input
+                        className={css.uploadInput}
+                        type="file"
+                        id="fileInput"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                      />
+                    </>
+                  ) : (
+                    <RotatingLines
+                      visible={true}
+                      height="18px"
+                      width="18px"
+                      color="blue"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      ariaLabel="rotating-lines-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                    />
+                  )}
                 </div>
               </div>
             </div>
@@ -374,8 +395,22 @@ const SettingForm = ({ closeModal }) => {
             </div>
           </div>
 
-          <button type="submit" className={css.button}>
-            Save
+          <button type="submit" className={css.button} disabled={isLoading}>
+            {!isLoading ? (
+              "Save"
+            ) : (
+              <RotatingLines
+                visible={true}
+                height="18px"
+                width="18px"
+                color="blue"
+                strokeWidth="5"
+                animationDuration="0.75"
+                ariaLabel="rotating-lines-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            )}
           </button>
         </Form>
       )}
