@@ -1,7 +1,7 @@
 import { useState, useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/selectors";
+import { selectLoading, selectUser } from "../../redux/auth/selectors";
 import {
   updateUserPhoto,
   updateUserInfo,
@@ -79,6 +79,7 @@ const SettingForm = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   // дефолтные значения
+  const isLoading = useSelector(selectLoading);
   const { username, email, photo, gender } = useSelector(selectUser);
   const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
@@ -98,17 +99,21 @@ const SettingForm = ({ closeModal }) => {
   // функція вибору файлу
   const handleFileChange = event => {
     const file = event.target.files[0];
+    // проверка на отмену выбора файла
+    if (!file) {
+      return;
+    }
     dispatch(updateUserPhoto(file));
   };
 
   // сабміт форми
   const submit = (values, actions) => {
+        
     // проверка на пароль - нет пароля - отправляем почту
     if (!values.password) {
-      const { name, email, selectedOptions = "woman" } = values;
+      const { name, selectedOptions = "woman" } = values;
       const data = {
         username: name,
-        email,
         gender: selectedOptions,
       };
       dispatch(updateUserInfo(data));
@@ -133,8 +138,8 @@ const SettingForm = ({ closeModal }) => {
       initialValues={initialValues}
       onSubmit={submit}
       validationSchema={ValidationSchema}
-      enableReinitialize={true} // перезапись начальных значений при их изменении 
-      validateOnChange={true} // валидации при изменении 
+      enableReinitialize={true} // перезапись начальных значений при их изменении
+      validateOnChange={true} // валидации при изменении
       validateOnBlur={false}
     >
       {({ errors, touched }) => (
@@ -168,6 +173,7 @@ const SettingForm = ({ closeModal }) => {
                     id="fileInput"
                     accept="image/*"
                     onChange={handleFileChange}
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -374,7 +380,7 @@ const SettingForm = ({ closeModal }) => {
             </div>
           </div>
 
-          <button type="submit" className={css.button}>
+          <button type="submit" className={css.button} disabled={isLoading}>
             Save
           </button>
         </Form>
