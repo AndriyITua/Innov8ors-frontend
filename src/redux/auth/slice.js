@@ -103,20 +103,28 @@ const authSlice = createSlice({
       })
 
       // блок для оновлення фото
+      .addCase(updateUserPhoto.pending, state => {
+        state.isLoading = true;
+      })
       .addCase(updateUserPhoto.fulfilled, (state, { payload }) => {
         state.isError = false;
         state.user.photo = payload.data.userphoto;
+        state.isLoading = false;
       })
       .addCase(updateUserPhoto.rejected, (state, { payload }) => {
         state.isError = payload;
       })
 
       // блок для оновлення юзера
+      .addCase(updateUserInfo.pending, state => {
+        state.isLoading = true;
+      })
       .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
         state.isError = false;
         state.user.username = payload.data.username;
         state.user.email = payload.data.email;
         state.user.gender = payload.data.gender;
+        state.isLoading = false;
       })
       .addCase(updateUserInfo.rejected, (state, { payload }) => {
         state.isError = payload;
