@@ -81,8 +81,9 @@ export default function TodayWaterList() {
     <div className={css.container}>
       <p className={css.title}>Today</p>
       <div className={css.contItem}>
-        {records.length > 0 &&
-          records.map(record => (
+        {records.length > 0 && records.some(record => record && record.amount) ?(
+         records.map(record => (
+          record && record.amount && ( 
             <div key={record._id}>
                 <ul className={css.item}>
                   <li >
@@ -113,7 +114,9 @@ export default function TodayWaterList() {
                 </ul>
                 <hr className={css.divider} />
               </div>
-          ))}
+          )
+          ))
+        ): null}
         <div className={css.buttonAddWaterCont}>
           <button
             type="submit"
