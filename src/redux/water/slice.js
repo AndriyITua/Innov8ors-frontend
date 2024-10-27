@@ -16,7 +16,7 @@ const waterSlice = createSlice({
       records: [
         {
           amount: null,
-          createdAt: null,
+          consumptionTime: null,
           updatedAt: 0,
         },
       ],

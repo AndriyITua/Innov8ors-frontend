@@ -73,10 +73,7 @@ export default function TodayWaterList() {
     isSetSelectedEntery(null)
     setModalOpenEntr(false);
   };
-  const formatTime = isoString => {
-    const date = new Date(isoString);
-    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  };
+  
   return (
     <div className={css.container}>
       <p className={css.title}>Today</p>
@@ -91,7 +88,7 @@ export default function TodayWaterList() {
                   </li>
                   <div className={css.time}>
                     <li  className={css.water}>{record.amount} ml</li>
-                    <li   className={css.am}>{formatTime(record.createdAt)} PM</li>
+                    <li   className={css.am}>{record.consumptionTime }</li>
                   </div>
                   <div className={css.editDel}>
                     <li  >

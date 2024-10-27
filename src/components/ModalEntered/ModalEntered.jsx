@@ -7,6 +7,7 @@ import Glasses from "../../assets/icons/Glasses.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectWaterRecords } from "../../redux/water/selectors.js";
 import { featchWater, patchWater } from "../../redux/water/opertionsEditWater.js";
+// import { asyncThunkCreator } from "@reduxjs/toolkit";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
@@ -16,47 +17,61 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
   const waterRecords = useSelector(selectWaterRecords);
 
   const record = waterRecords.find((rec) => rec._id === idRecord)
+  
 
   const [water, setWater] = useState(record?.amount || 50);
+  const [localTime, setLocalTime] = useState(record?.consumptionTime || "");
   const [disableButtonPluse, setDisableButtonPluse] = useState(false);
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
   const [disableButtonSave, setDisableButtonSave] = useState(false);
   const [loading, setLoading] = useState(false);
-  const backdropRef = useRef(null);
 
+  const [waterInput, setWaterInput] = useState(water)
+  const backdropRef = useRef(null);
+  
+  
   useEffect(() => {
     setWater(record?.amount || 50);
-    setLocalTime(record?.createdAt || "");
+    setLocalTime(record?.consumptionTime || "");
   }, [idRecord, record]);
-
+  
   const onPlusClickedHandler = () => {
-    const newWaterAmount = water + ADD_WATER;
-    setWater(newWaterAmount);
+    const newWaterAmount = waterInput + ADD_WATER;
+    setWaterInput(newWaterAmount);
   };
-
+  
   const onMinusClickedHandler = () => {
-    const newWaterAmount = water - ADD_WATER;
-    setWater(newWaterAmount);
+    const newWaterAmount = waterInput - ADD_WATER;
+    setWaterInput(newWaterAmount)
   };
+  
+  useEffect(() => {
+    setDisableButtonPluse(waterInput >= WATER_MAX_LIMIT);
+    setDisableButtonMinuse(waterInput <= 0);
+    setDisableButtonSave(waterInput > WATER_MAX_LIMIT || water <= 0);
+  }, [waterInput]);
 
-  // const time = new Date();
-  // const hours = time.getHours();
-  // const minutes = time.getMinutes();
-  // const formattedTime = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
+  const generateTimeOptions = () => {
+    const times = [];
+    for (let hour = 0; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 5) {
+        const hourString = hour.toString().padStart(2, '0');
+        const minuteString = minute.toString().padStart(2, '0');
+        times.push(`${hourString}:${minuteString}`);
+      }
+    }
+    return times;
+  };
+  const timeOptions = generateTimeOptions();
+  const time = new Date();
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
+  const formattedTime = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
 
-  const [localTime, setLocalTime] = useState(record?.createdAt || "");
-
+  const [localTiInput, setLocalTimeInput] = useState(formattedTime);
+  useEffect(() => {}, [localTiInput]);
   const handleTimeChange = event => {
-    const inputTime = event.target.value;
-    const [hours, minutes] = inputTime.split(':').map(Number);
-    
-    // Створіть новий об'єкт Date з вибраним часом
-    const now = new Date();
-    now.setHours(hours, minutes, 0);
-  const formattedTime = now.toISOString()
-    console.log("Formatted Time:", formattedTime);
-    setLocalTime(formattedTime);
-    // setLocalTime(event.target.value);
+    setLocalTimeInput(event.target.value)
   };
 
   const handleWaterChange = event => {
@@ -91,40 +106,20 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (water >= WATER_MAX_LIMIT) {
-      setDisableButtonPluse(true);
-    } else {
-      setDisableButtonPluse(false);
-    }
-
-    if (water <= 0) {
-      setDisableButtonMinuse(true);
-    } else {
-      setDisableButtonMinuse(false);
-    }
-
-    if (water > WATER_MAX_LIMIT || water <= 0) {
-      setDisableButtonSave(true);
-    } else {
-      setDisableButtonSave(false);
-    }
-  }, [water]);
 
   const handleSave = () => {
     setLoading(true);
-    dispatch(patchWater({ id: idRecord, data: { amount: water}}))
-    dispatch(featchWater())
+    const [hour, minute] = localTiInput.split(":");
+    const hourInt = parseInt(hour, 10);
+    const period = hourInt >= 12 ? "PM" : "AM";
+    const adjustedHour = hourInt % 12 || 12;
+    const formattedLocalTime = `${adjustedHour}:${minute} ${period}`;
+    dispatch(patchWater({ id: idRecord, data: { amount: water, consumptionTime: formattedLocalTime}}))
     setLoading(false);
+    dispatch(featchWater())
     onClose();
+  };
 
-  };
-  // , createdAt: localTime 
-  const formatTime = isoString => {
-    if (!isoString) return '';
-    const date = new Date(isoString);
-    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit",});
-  };
 
   if (!isOpen) return null;
 
@@ -150,7 +145,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
                 </div>
                 <div className={css.time}>
                   <li className={css.water}>{water} ml</li>
-                  <li className={css.am}>{formatTime(localTime)} PM</li>
+                  <li className={css.am}>{localTime}</li>
                 </div>
               </ul>
               <h3 className={css.h3}>Choose a value:</h3>
@@ -176,26 +171,33 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
 
             <div>
               <p className={css.p}>Recording time:</p>
+              
               <input
                 type="time"
-                value={formatTime(localTime)}
+                value={localTiInput}
                 onChange={handleTimeChange}
                 className={css.input}
+                list="time-options" // Прив’язка до datalist
               />
+              <datalist id="time-options">
+      {timeOptions.map((time) => (
+        <option key={time} value={time} />
+      ))}
+    </datalist>
             </div>
 
             <div>
               <h3 className={css.h3}>Enter the value of the water used:</h3>
               <input
                 type="text"
-                value={water}
+                value={waterInput}
                 onChange={handleWaterChange}
                 className={css.input}
               />
             </div>
 
             <div className={css.boxButton}>
-              <p className={css.infoWater}>{water}ml</p>
+              <p className={css.infoWater}>{waterInput}ml</p>
               <button
                 className={`${css.buttonSave} ${
                   disableButtonSave ? css.buttonDisabled : ""

@@ -4,7 +4,7 @@ import { IoCloseOutline, IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
 import Loader from "../Loader/Loader.jsx";
 import { useDispatch } from "react-redux";
-import { addWater } from "../../redux/water/opertionsEditWater.js";
+import { addWater, featchWater } from "../../redux/water/opertionsEditWater.js";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
@@ -72,15 +72,18 @@ export default function ModalAddWater({ isOpen, onClose }) {
 
   const handleSave = () => {
     setLoading(true);
+    const [hour, minute] = localTime.split(":");
+    const hourInt = parseInt(hour, 10);
+    const period = hourInt >= 12 ? "PM" : "AM";
+    const adjustedHour = hourInt % 12 || 12;
+    const formattedLocalTime = `${adjustedHour}:${minute} ${period}`;
 
-    // await dispatch(addWater(values));
-    dispatch(addWater({amount: water }));
+
+    dispatch(addWater({amount: water, consumptionTime: formattedLocalTime}));
+    dispatch(featchWater())
     setLoading(false);
     onClose();
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   onClose();
-    // },[dispatch], 800 );
+
   };
 
   useEffect(() => {
