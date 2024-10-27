@@ -54,7 +54,11 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
         state.isError = null;
-        state.user = payload.data;
+        state.user.id = payload.data._id;
+        state.user.username = payload.data.username;
+        state.user.email = payload.data.email;
+        state.user.dailynormwater = payload.data.dailynormwater;
+        state.user.gender = payload.data.gender;
         state.user.photo = payload.data.userphoto;
       })
       .addCase(refreshUser.rejected, (state, { payload }) => {
@@ -91,6 +95,7 @@ const authSlice = createSlice({
           gender: null,
           photo: null,
         };
+        state.userId = null;
         state.accessToken = null;
         state.isLoggedIn = false;
         state.isLoading = false;

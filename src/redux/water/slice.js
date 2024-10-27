@@ -3,6 +3,7 @@ import { addWater } from "./opertionsEditWater.js";
 import { featchWater } from "./opertionsEditWater";
 import { deleteWaterRecord } from "./operationsDelete.js";
 import { patchWater } from "./opertionsEditWater.js";
+import { fethceWaterMonth } from "./operationsMonth.js";
 
 const waterSlice = createSlice({
   name: "water",
@@ -10,10 +11,12 @@ const waterSlice = createSlice({
     water: {
       totalConsumed: 0,
       dailyRate: 1500,
+      consumptionCount: 0,
+      percentage: 0,
       records: [
         {
           amount: null,
-          createdAt: 0,
+          createdAt: null,
           updatedAt: 0,
         },
       ],
@@ -65,26 +68,43 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.error = true;
       })
-      
-      .addCase(patchWater.pending, (state)=>{
+
+      .addCase(patchWater.pending, state => {
         state.isLoading = true;
-    })
-    .addCase(patchWater.fulfilled, (state, action)=>{
+      })
+      .addCase(patchWater.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const updatedRecordIndex = state.water.records.findIndex(
-            (record) => record._id === action.payload._id
+          record => record._id === action.payload._id
         );
         if (updatedRecordIndex !== -1) {
-            // Оновлення запису у стані
-            state.water.records[updatedRecordIndex] = action.payload;
-            console.log('Updated records:', state.water.records); 
+          // Оновлення запису у стані
+          state.water.records[updatedRecordIndex] = action.payload;
         }
-    })
-    .addCase(patchWater.rejected, (state, action) => {
+      })
+      .addCase(patchWater.rejected, (state, action) => {
         state.isloading = false;
         state.error = action.payload;
-    });
+      })
+      .addCase(fethceWaterMonth.pending, state => {
+        console.log("Fetching water month data...");
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fethceWaterMonth.fulfilled, (state, action) => {
+        console.log("Fetched water month data:", action.payload.data);
+        state.isLoading = false;
+        state.error = null;
+        state.water.consumptionCount = action.payload.data.consumptionCount;
+        state.water.dailyRate = action.payload.data.dailyRate;
+        state.water.percentage = action.payload.data.percentage;
+      })
+      .addCase(fethceWaterMonth.rejected, (state, action) => {
+        console.error("Error fetching water month data:", action.payload);
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 export const waterReducer = waterSlice.reducer;
