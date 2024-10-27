@@ -113,7 +113,6 @@ const authSlice = createSlice({
 
       // блок для оновлення юзера
       .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.isError = false;
         state.user.username = payload.data.username;
         state.user.email = payload.data.email;
