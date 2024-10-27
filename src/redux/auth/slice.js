@@ -135,6 +135,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user.id = payload.data._id;
         state.user.username = payload.data.username;
+        state.user.gender = payload.data.gender;
         state.user.email = payload.data.email;
         state.user.photo = payload.data.userphoto || null;
       })
