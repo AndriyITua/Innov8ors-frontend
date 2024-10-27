@@ -71,7 +71,6 @@ export default function ModalAddWater({ isOpen, onClose }) {
   }, [water]);
 
   const handleSave = () => {
-    console.log("На сервер:", { water, localTime});
     setLoading(true);
 
     // await dispatch(addWater(values));
