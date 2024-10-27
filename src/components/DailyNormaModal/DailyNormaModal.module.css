@@ -1,16 +1,34 @@
 .modalDaily {
   position: fixed;
-  width: "280px";
-  height: "auto";
-  padding: "24px 12px";
-  top: "50%";
-  left: "50%";
-  right: "auto";
-  bottom: "auto";
-  margin-right: "-50%";
-  border-radius: "10px";
-  overflow: "auto";
+  width: 280px;
+  height: auto;
+  padding: 24px 12px;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: auto;
   scrollbar-width: none;
+}
+
+.modalOverlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  z-index: 1000;
 }
 
 @media (min-width: 768px) {
@@ -43,6 +61,12 @@
   padding: 0;
 }
 
+/* .formula {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+} */
+
 .gender {
   margin-top: 24px;
   display: flex;
@@ -63,6 +87,12 @@
   margin-top: 12px;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .rate {
   font-weight: 500;
   font-size: 18px;
@@ -70,18 +100,18 @@
   margin-bottom: 16px;
 }
 
-label input[type="radio"] {
-  margin-right: 8px;
+.radioGroup {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .radioBtn {
   margin-right: 24px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.radioText {
+  margin-left: 8px;
 }
 
 /* .wrap {

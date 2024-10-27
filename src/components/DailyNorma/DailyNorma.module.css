@@ -1,4 +1,4 @@
-.div {
+.divDaily {
   width: 167px;
   height: 74px;
   padding: 8px 20px;
@@ -11,6 +11,13 @@
   font-size: 18px;
   /* line-height: 24px; */
   margin-bottom: 12px;
+}
+
+.containerDaily {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: end;
 }
 
 .litres {
