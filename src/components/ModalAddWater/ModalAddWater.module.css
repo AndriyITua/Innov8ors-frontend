@@ -188,7 +188,7 @@
     font-weight: 700;
     line-height: 24px;
 }
-@media screen and (min-width: 780px) {
+@media screen and (min-width: 768px) {
     .modalWrap {
         width: 704px;
         height: 504px;

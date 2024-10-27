@@ -1,6 +1,16 @@
 import { useState, useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors";
+import {
+  updateUserPhoto,
+  updateUserInfo,
+  updateUserPassword,
+} from "../../redux/auth/operationUpdate";
+
+// шаблоны валидации
+import { emailRegExp, nameRegExp } from "../../constants";
+import { defaultMan, defaultWoman } from "../../constants";
 
 import { MdOutlineFileUpload } from "react-icons/md";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
@@ -9,33 +19,17 @@ import * as Yup from "yup";
 
 import css from "./SettingForm.module.css";
 
-const initialValues = {
-  selectedOptions: [],
-  name: "",
-  email: "",
-  password: "",
-  newPassword: "",
-  repeatNewPassword: "",
-};
-
-// паттерн для валидации имени
-const nameRegExp =
-  "^[a-zA-Zа-яА-Я0-9]+(([' \\-][a-zA-Zа-яА-Я0-9 ])?[a-zA-Zа-яА-Я0-9]*)*$";
-
-// шаблон для валидации email
-const emailRegexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-
 // шаблон валидации полей
 let ValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "too short, min 3!")
     .max(30, "too long, max 30!")
     .matches(nameRegExp, "invalid input!")
-    .required("enter your name!"),
+    .required("enter name"),
   email: Yup.string()
     .min(8, "format example@mail.com")
-    .matches(emailRegexp, "format example@mail.com")
-    .required("enter your email!"),
+    .matches(emailRegExp, "format example@mail.com")
+    .required("enter email"),
   password: Yup.string()
     .nullable() // Поле может быть пустым (null)
     .min(8, "min 8 characters")
@@ -77,19 +71,60 @@ let ValidationSchema = Yup.object().shape({
 });
 
 const SettingForm = ({ closeModal }) => {
-  const id = useId();
-  const dispatch = useDispatch();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatNewPassword, setRepeatNewPassword] = useState(false);
 
+  const id = useId();
+  const dispatch = useDispatch();
+
+  // дефолтные значения
+  const { username, email, photo, gender } = useSelector(selectUser);
+  const name = username ?? "David";
+  const useremail = email ?? "email@gmail.com";
+  const userGender = gender ?? "woman";
+  const userphoto = photo ?? (gender === "man" ? defaultMan : defaultWoman);
+
+  // начальные значения в формике
+  const initialValues = {
+    selectedOptions: userGender,
+    name: `${name}`,
+    email: `${useremail}`,
+    password: "",
+    newPassword: "",
+    repeatNewPassword: "",
+  };
+
+  // функція вибору файлу
+  const handleFileChange = event => {
+    const file = event.target.files[0];
+    dispatch(updateUserPhoto(file));
+  };
+
+  // сабміт форми
   const submit = (values, actions) => {
-    //добавляем контакт
-    // dispatch(addContact(values));
+    // проверка на пароль - нет пароля - отправляем почту
+    if (!values.password) {
+      const { name, email, selectedOptions = "woman" } = values;
+      const data = {
+        username: name,
+        email,
+        gender: selectedOptions,
+      };
+      dispatch(updateUserInfo(data));
+      actions.resetForm();
+      return;
+    }
 
-    console.log(values);
-
+    // если есть пароли - отправляем их
+    const { password, newPassword, repeatNewPassword } = values;
+    dispatch(
+      updateUserPassword({
+        password,
+        newPassword,
+        repeatNewPassword,
+      })
+    );
     actions.resetForm();
   };
 
@@ -98,7 +133,8 @@ const SettingForm = ({ closeModal }) => {
       initialValues={initialValues}
       onSubmit={submit}
       validationSchema={ValidationSchema}
-      validateOnChange={true}
+      enableReinitialize={true} // перезапись начальных значений при их изменении 
+      validateOnChange={true} // валидации при изменении 
       validateOnBlur={false}
     >
       {({ errors, touched }) => (
@@ -117,7 +153,7 @@ const SettingForm = ({ closeModal }) => {
                 <div className={css.photoCard}>
                   <img
                     className={css.photo}
-                    src={`https://img.freepik.com/free-photo/photorealistic-view-tree-nature-with-branches-trunk_23-2151478039.jpg`}
+                    src={userphoto}
                     alt={`modal photo`}
                   />
                 </div>
@@ -131,6 +167,7 @@ const SettingForm = ({ closeModal }) => {
                     type="file"
                     id="fileInput"
                     accept="image/*"
+                    onChange={handleFileChange}
                   />
                 </div>
               </div>
@@ -143,15 +180,22 @@ const SettingForm = ({ closeModal }) => {
                   <div className={css.checkGender}>
                     <label className={css.genderLabel}>
                       <Field
+                        className={css.realRadioButton}
                         type="radio"
                         name="selectedOptions"
                         value="woman"
-                        checked
                       />
+                      <span className={css.customRadioButton}></span>
                       <span className={css.checkboxText}>Woman</span>
                     </label>
                     <label className={css.genderLabel}>
-                      <Field type="radio" name="selectedOptions" value="man" />
+                      <Field
+                        className={css.realRadioButton}
+                        type="radio"
+                        name="selectedOptions"
+                        value="man"
+                      />
+                      <span className={css.customRadioButton}></span>
                       <span className={css.checkboxText}>Man</span>
                     </label>
                   </div>
@@ -172,7 +216,8 @@ const SettingForm = ({ closeModal }) => {
                             ? `${css.inputError} ${css.placeholderError}`
                             : ""
                         }`}
-                        placeholder="Name"
+                        placeholder={`${name}`}
+                        autoComplete={"current-name"}
                       />
                       <ErrorMessage
                         name="name"
@@ -196,7 +241,8 @@ const SettingForm = ({ closeModal }) => {
                             ? `${css.inputError} ${css.placeholderError}`
                             : ""
                         }`}
-                        placeholder="Email"
+                        placeholder={`${useremail}`}
+                        autoComplete={"current-email"}
                       />
                       <ErrorMessage
                         name="email"
@@ -223,7 +269,7 @@ const SettingForm = ({ closeModal }) => {
                       name="password"
                       id={`password-${id}`}
                       placeholder="Password"
-                      autoComplete="new-password"
+                      autoComplete={"new-password"}
                     />
                     <ErrorMessage
                       name="password"
@@ -259,6 +305,7 @@ const SettingForm = ({ closeModal }) => {
                       name="newPassword"
                       id={`newPassword-${id}`}
                       placeholder="Password"
+                      autoComplete={"new-password"}
                     />
                     <ErrorMessage
                       name="newPassword"
@@ -298,6 +345,7 @@ const SettingForm = ({ closeModal }) => {
                       name="repeatNewPassword"
                       id={`repeatNewPassword-${id}`}
                       placeholder="Password"
+                      autoComplete={"new-password"}
                     />
                     <ErrorMessage
                       name="repeatNewPassword"

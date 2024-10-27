@@ -20,7 +20,6 @@ export const login = createAsyncThunk(
       const response = await axios.post("/auth/login", credentials);
       notifySuccessToast("Successfully logged in!");
       setAuthHeader(response.data.data.accessToken);
-
       return response.data;
     } catch (error) {
       notifyOnlogginError(error.response.data.message);
@@ -33,7 +32,12 @@ export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkApi) => {
     const reduxState = thunkApi.getState();
+
     setAuthHeader(reduxState.auth.accessToken);
+
+    const res = await axios.get(`/user/userInfo`);
+
+    return res.data;
   },
   {
     condition: (_, thunkAPI) => {
