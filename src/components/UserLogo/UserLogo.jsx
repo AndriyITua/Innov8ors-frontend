@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
+import { fetchUserById } from "../../redux/auth/operationUserId";
 import UserLogoModal from "../UserLogoModal/UserLogoModal";
 import Modal from "react-modal";
 import { GoChevronDown } from "react-icons/go";
@@ -9,7 +11,11 @@ Modal.setAppElement("#root");
 
 const UserLogo = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userId = useSelector(selectUser);
   const user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
+
   const buttonRef = useRef(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
@@ -22,7 +28,6 @@ const UserLogo = () => {
         top: screenWidth >= 1440 ? buttonRect.bottom + 6 : buttonRect.bottom,
         left: buttonRect.right - 118,
       });
-
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -54,6 +59,18 @@ const UserLogo = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn && userId) {
+      dispatch(fetchUserById(userId));
+    }
+  }, [isLoggedIn, userId, dispatch]);
+
+  const getEmailLocalPart = email => {
+    if (!email) return "";
+    const atIndex = email.indexOf("@");
+    return atIndex !== -1 ? email.slice(0, atIndex) : email;
+  };
+
   return (
     <>
       <button
@@ -62,15 +79,22 @@ const UserLogo = () => {
         onClick={handleToggleModal}
         style={{ position: "relative" }}
       >
-        <span className={css.userName}>{user?.fullName || user?.email}</span>
-        {user?.avatar ? (
-          <img src={user.avatar} alt={user.fullName} className={css.avatar} />
+        <span className={css.userName}>
+          {user.username || getEmailLocalPart(user.email)}
+        </span>
+        {user.photo ? (
+          <img
+            src={user.photo}
+            alt={user.username || user.email}
+            className={css.avatar}
+          />
         ) : (
           <span className={css.initial}>
-            {user?.fullName?.[0]?.toUpperCase() ||
-              user?.email?.[0]?.toUpperCase()}
+            {user.username?.[0]?.toUpperCase() ||
+              user.email?.[0]?.toUpperCase()}
           </span>
         )}
+
         <GoChevronDown className={css.icon} />
       </button>
 
@@ -78,9 +102,7 @@ const UserLogo = () => {
         isOpen={isModalOpen}
         onRequestClose={handleToggleModal}
         style={{
-          overlay: {
-            backgroundColor: "transparent",
-          },
+          overlay: { backgroundColor: "transparent" },
           content: {
             width: "118px",
             height: "88px",
