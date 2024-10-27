@@ -4,17 +4,30 @@ import { IoCloseOutline, IoAddOutline } from "react-icons/io5";
 import { FiMinus } from "react-icons/fi";
 import Loader from "../Loader/Loader.jsx";
 import Glasses from "../../assets/icons/Glasses.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { selectWaterRecords } from "../../redux/water/selectors.js";
+import { patchWater } from "../../redux/water/opertionsEditWater.js";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
 
-export default function ModalAddWater({ isOpen, onClose }) {
-  const [water, setWater] = useState(50);
+export default function ModalAddWater({ isOpen, onClose, idRecord}) {
+  const dispatch = useDispatch();
+  const waterRecords = useSelector(selectWaterRecords);
+
+  const record = waterRecords.find((rec) => rec._id === idRecord)
+
+  const [water, setWater] = useState(record?.amount || 50);
   const [disableButtonPluse, setDisableButtonPluse] = useState(false);
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
   const [disableButtonSave, setDisableButtonSave] = useState(false);
   const [loading, setLoading] = useState(false);
   const backdropRef = useRef(null);
+
+  useEffect(() => {
+    setWater(record?.amount || 50);
+    setLocalTime(record?.createdAt || "");
+  }, [idRecord, record]);
 
   const onPlusClickedHandler = () => {
     const newWaterAmount = water + ADD_WATER;
@@ -26,12 +39,12 @@ export default function ModalAddWater({ isOpen, onClose }) {
     setWater(newWaterAmount);
   };
 
-  const time = new Date();
-  const hours = time.getHours();
-  const minutes = time.getMinutes();
-  const formattedTime = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
+  // const time = new Date();
+  // const hours = time.getHours();
+  // const minutes = time.getMinutes();
+  // const formattedTime = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
 
-  const [localTime, setLocalTime] = useState(formattedTime);
+  const [localTime, setLocalTime] = useState(record?.createdAt || "");
 
   const handleTimeChange = event => {
     setLocalTime(event.target.value);
@@ -90,13 +103,15 @@ export default function ModalAddWater({ isOpen, onClose }) {
   }, [water]);
 
   const handleSave = () => {
-    console.log("На сервер:", { water, localTime });
     setLoading(true);
+    dispatch(patchWater({ id: idRecord, data: { amount: water, createdAt: localTime } }))
+    setLoading(false);
+    onClose();
 
-    setTimeout(() => {
-      setLoading(false);
-      onClose();
-    }, 800);
+  };
+  const formatTime = isoString => {
+    const date = new Date(isoString);
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit",});
   };
 
   if (!isOpen) return null;
@@ -122,8 +137,8 @@ export default function ModalAddWater({ isOpen, onClose }) {
                   <Glasses />
                 </div>
                 <div className={css.time}>
-                  <li className={css.water}>200 ml</li>
-                  <li className={css.am}>14:00 PM</li>
+                  <li className={css.water}>{water} ml</li>
+                  <li className={css.am}>{formatTime(localTime)} PM</li>
                 </div>
               </ul>
               <h3 className={css.h3}>Choose a value:</h3>
@@ -136,7 +151,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
                 >
                   <FiMinus className={css.circleButton} />
                 </button>
-                <div className={css.waterMl}>200ml</div>
+                <div className={css.waterMl}>{water}ml</div>
                 <button
                   className={css.circle}
                   onClick={onPlusClickedHandler}
@@ -151,7 +166,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
               <p className={css.p}>Recording time:</p>
               <input
                 type="text"
-                value={localTime}
+                value={formatTime(localTime)}
                 onChange={handleTimeChange}
                 className={css.input}
               />
@@ -168,7 +183,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
             </div>
 
             <div className={css.boxButton}>
-              <p className={css.infoWater}>200ml</p>
+              <p className={css.infoWater}>{water}ml</p>
               <button
                 className={`${css.buttonSave} ${
                   disableButtonSave ? css.buttonDisabled : ""

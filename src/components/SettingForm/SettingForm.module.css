@@ -119,8 +119,43 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  align-items: center;
+  gap: 6px;
+}
+
+.checkGender > label > .realRadioButton {
+  display: none;
+}
+
+.customRadioButton {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--primary-color-blue);
+  border-radius: 50%;
+  display: inline-block;
+  background-color: var(--primary-color-white);
+  cursor: pointer;
+  vertical-align: text-top;
+  box-sizing: border-box;
+}
+
+.customRadioButton::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background-color: var(--primary-color-blue);
+  border-radius: 50%;
+  display: inline-block;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 0.2s ease-in;
+}
+
+.realRadioButton:checked + .customRadioButton::before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .checkboxText {
@@ -295,12 +330,11 @@ form {
   }
 }
 
-
 .placeholderError::placeholder {
   color: var(--secondary-color-red);
 }
 
 .inputError {
   border-color: var(--secondary-color-red);
-  color: var(--secondary-color-red)
+  color: var(--secondary-color-red);
 }

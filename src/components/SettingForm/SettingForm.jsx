@@ -78,17 +78,18 @@ const SettingForm = ({ closeModal }) => {
   const id = useId();
   const dispatch = useDispatch();
 
+  // дефолтные значения
   const { username, email, photo, gender } = useSelector(selectUser);
   const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
   const userGender = gender ?? "woman";
   const userphoto = photo ?? (gender === "man" ? defaultMan : defaultWoman);
-  
 
+  // начальные значения в формике
   const initialValues = {
     selectedOptions: userGender,
-    name: "",
-    email: "",
+    name: `${name}`,
+    email: `${useremail}`,
     password: "",
     newPassword: "",
     repeatNewPassword: "",
@@ -132,7 +133,8 @@ const SettingForm = ({ closeModal }) => {
       initialValues={initialValues}
       onSubmit={submit}
       validationSchema={ValidationSchema}
-      validateOnChange={true}
+      enableReinitialize={true} // перезапись начальных значений при их изменении 
+      validateOnChange={true} // валидации при изменении 
       validateOnBlur={false}
     >
       {({ errors, touched }) => (
@@ -178,14 +180,22 @@ const SettingForm = ({ closeModal }) => {
                   <div className={css.checkGender}>
                     <label className={css.genderLabel}>
                       <Field
+                        className={css.realRadioButton}
                         type="radio"
                         name="selectedOptions"
                         value="woman"
                       />
+                      <span className={css.customRadioButton}></span>
                       <span className={css.checkboxText}>Woman</span>
                     </label>
                     <label className={css.genderLabel}>
-                      <Field type="radio" name="selectedOptions" value="man" />
+                      <Field
+                        className={css.realRadioButton}
+                        type="radio"
+                        name="selectedOptions"
+                        value="man"
+                      />
+                      <span className={css.customRadioButton}></span>
                       <span className={css.checkboxText}>Man</span>
                     </label>
                   </div>
