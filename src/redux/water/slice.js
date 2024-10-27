@@ -85,6 +85,23 @@ const waterSlice = createSlice({
         state.isloading = false;
         state.error = action.payload;
       });
+
+    // DailyWater =>
+    // .addCase(dailyRate.pending, state => {
+    //   // state.isModalOpen = true;
+    //   state.isLoading = true;
+    //   state.error = null;
+    // })
+    // .addCase(dailyRate.fulfilled, (state, action) => {
+    //   // state.isModalOpen = true;
+    //   state.user.dailyNorma = action.payload.data.dailyNorma;
+    //   state.isLoading = false;
+    // })
+    // .addCase(dailyRate.rejected, (state, action) => {
+    //   // state.isModalOpen = true;
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // });
   },
 });
 export const waterReducer = waterSlice.reducer;

@@ -1,20 +1,21 @@
 import { useState } from "react";
-import css from "../DailyNorma/DailyNorma.module.css";
-import { DailyNormaModal } from "../DailyNormaModal/DailyNormaModal";
+import css from "./DailyNorma.module.css";
+import { DailyNormaModal } from "../DailyNormaModal/DailyNormaModal.jsx";
+import { selectDailyRate } from "../../redux/water/selectors.js";
+import { useSelector } from "react-redux";
 
 export default function DailyNorma() {
+  const user = useSelector(selectDailyRate);
   const [openDailyNormaModal, setOpenDailyNormaModal] = useState(false);
 
   const closeModal = () => {
-    // document.body.classList.remove("modal-open");
     setOpenDailyNormaModal(false);
   };
   const openModal = () => {
-    // document.body.classList.add("modal-open");
     setOpenDailyNormaModal(true);
   };
 
-  const dailyNorma = 1.5;
+  const dailyNorma = user.dailyNorma / 1000;
   return (
     <div className={css.divDaily}>
       <h3 className={css.title}>My daily norma</h3>
@@ -27,6 +28,7 @@ export default function DailyNorma() {
         >
           Edit
         </button>
+        <DailyNormaModal isOpen={openDailyNormaModal} onClose={closeModal} />
       </div>
     </div>
   );
