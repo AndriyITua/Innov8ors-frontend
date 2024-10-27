@@ -51,9 +51,8 @@ export default function TodayWaterList() {
       try {
         await dispatch(deleteWaterRecord(selectedEntry)).unwrap();
         dispatch(featchWater());
-      } catch (error) {
-        console.error("Failed to delete entry:", error);
-      } finally {
+      } catch  {
+      // } finally {
         closeModal();
       }
     }
@@ -82,39 +81,42 @@ export default function TodayWaterList() {
     <div className={css.container}>
       <p className={css.title}>Today</p>
       <div className={css.contItem}>
-        {records.length > 0 &&
-          records.map(record => (
+        {records.length > 0 && records.some(record => record && record.amount) ?(
+         records.map(record => (
+          record && record.amount && ( 
             <div key={record._id}>
-              <ul className={css.item}>
-                <li>
-                  <img className={css.img} src={glassWater} alt="glass water" />
-                </li>
-                <div className={css.time}>
-                  <li className={css.water}>{record.amount} ml</li>
-                  <li className={css.am}>{formatTime(record.createdAt)} PM</li>
-                </div>
-                <div className={css.editDel}>
-                  <li>
-                    <button
-                      className={css.buttonIcon}
-                      onClick={()=> handleOpenModalEntr(record._id)}
-                    >
-                      <HiOutlinePencilSquare />
-                    </button>
+                <ul className={css.item}>
+                  <li >
+                    <img className={css.img} src={glassWater} alt="glass water" />
                   </li>
-                  <li>
-                    <button
-                      onClick={() => openModal(record._id)}
-                      className={css.buttonDel}
-                    >
-                      <img src={deleteW} alt="Delete" />
-                    </button>
-                  </li>
-                </div>
-              </ul>
-              <hr className={css.divider} />
-            </div>
-          ))}
+                  <div className={css.time}>
+                    <li  className={css.water}>{record.amount} ml</li>
+                    <li   className={css.am}>{formatTime(record.createdAt)} PM</li>
+                  </div>
+                  <div className={css.editDel}>
+                    <li  >
+                      <button
+                        className={css.buttonIcon}
+                        onClick={()=> handleOpenModalEntr(record._id)}
+                      >
+                        <HiOutlinePencilSquare />
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => openModal(record._id)}
+                        className={css.buttonDel}
+                      >
+                        <img src={deleteW} alt="Delete" />
+                      </button>
+                    </li>
+                  </div>
+                </ul>
+                <hr className={css.divider} />
+              </div>
+          )
+          ))
+        ): null}
         <div className={css.buttonAddWaterCont}>
           <button
             type="submit"

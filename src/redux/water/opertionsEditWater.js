@@ -43,9 +43,9 @@ export const patchWater = createAsyncThunk(
     "water/patchWater",
     async ({id, data}, thunkAPI)=>{
         try {
-            
-            const response = await axios.patch(`/water/${id}`, data);
-            return response.data.id;
+            const response = await axios.patch(`https://innov8ors-backend.onrender.com/water/${id}`, data);
+            // const response = await axios.patch(`/water/${id}`, data);
+            return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }

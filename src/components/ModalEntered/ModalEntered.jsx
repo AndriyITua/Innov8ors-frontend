@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader.jsx";
 import Glasses from "../../assets/icons/Glasses.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectWaterRecords } from "../../redux/water/selectors.js";
-import { patchWater } from "../../redux/water/opertionsEditWater.js";
+import { featchWater, patchWater } from "../../redux/water/opertionsEditWater.js";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
@@ -47,7 +47,16 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
   const [localTime, setLocalTime] = useState(record?.createdAt || "");
 
   const handleTimeChange = event => {
-    setLocalTime(event.target.value);
+    const inputTime = event.target.value;
+    const [hours, minutes] = inputTime.split(':').map(Number);
+    
+    // Створіть новий об'єкт Date з вибраним часом
+    const now = new Date();
+    now.setHours(hours, minutes, 0);
+  const formattedTime = now.toISOString()
+    console.log("Formatted Time:", formattedTime);
+    setLocalTime(formattedTime);
+    // setLocalTime(event.target.value);
   };
 
   const handleWaterChange = event => {
@@ -104,12 +113,15 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
 
   const handleSave = () => {
     setLoading(true);
-    dispatch(patchWater({ id: idRecord, data: { amount: water, createdAt: localTime } }))
+    dispatch(patchWater({ id: idRecord, data: { amount: water}}))
+    dispatch(featchWater())
     setLoading(false);
     onClose();
 
   };
+  // , createdAt: localTime 
   const formatTime = isoString => {
+    if (!isoString) return '';
     const date = new Date(isoString);
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit",});
   };
@@ -151,7 +163,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
                 >
                   <FiMinus className={css.circleButton} />
                 </button>
-                <div className={css.waterMl}>{water}ml</div>
+                <div className={css.waterMl}>50ml</div>
                 <button
                   className={css.circle}
                   onClick={onPlusClickedHandler}
@@ -165,7 +177,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
             <div>
               <p className={css.p}>Recording time:</p>
               <input
-                type="text"
+                type="time"
                 value={formatTime(localTime)}
                 onChange={handleTimeChange}
                 className={css.input}
