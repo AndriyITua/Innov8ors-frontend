@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import { fetchUserById } from "../../redux/auth/operationUserId";
 import UserLogoModal from "../UserLogoModal/UserLogoModal";
 import Modal from "react-modal";
@@ -10,7 +11,8 @@ Modal.setAppElement("#root");
 
 const UserLogo = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const userId = useSelector(state => state.auth.user.id);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userId = useSelector(selectUser);
   const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
 
@@ -58,10 +60,10 @@ const UserLogo = () => {
   }, []);
 
   useEffect(() => {
-    if (userId) {
+    if (isLoggedIn && userId) {
       dispatch(fetchUserById(userId));
     }
-  }, [userId, dispatch]);
+  }, [isLoggedIn, userId, dispatch]);
 
   const getEmailLocalPart = email => {
     if (!email) return "";

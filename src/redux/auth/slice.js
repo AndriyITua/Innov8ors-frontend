@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, refreshAccessToken, refreshUser } from "./operationLogin.js";
 import { logout } from "./operationLogout.js";
-import { fetchUserById, getUserData } from "./operationUserId.js";
+import { fetchUserById } from "./operationUserId.js";
 
 import {
   updateUserPhoto,
@@ -129,17 +129,14 @@ const authSlice = createSlice({
       })
       .addCase(fetchUserById.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.id = payload._id;
-        state.username = payload.data.username;
-        state.email = payload.data.email;
-        state.photo = payload.data.userphoto || null;
+        state.user.id = payload.data._id;
+        state.user.username = payload.data.username;
+        state.user.email = payload.data.email;
+        state.user.photo = payload.data.userphoto || null;
       })
       .addCase(fetchUserById.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
-      })
-      .addCase(getUserData.fulfilled, (state, { payload }) => {
-        state.user = payload.data;
       });
   },
 });
