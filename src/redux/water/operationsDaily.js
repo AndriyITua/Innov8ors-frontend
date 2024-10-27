@@ -1,20 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.baseURL = "https://innov8ors-backend.onrender.com";
-axios.defaults.withCredentials = true;
 
-export const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-export const dailyRate = createAsyncThunk(
-  "water/dailyRate",
-  async (dailyNorma, thunkAPI) => {
+export const putWaterRate = createAsyncThunk(
+  "water/putWaterRate",
+  async (dailynormwater, thunkApi) => {
     try {
-      const response = await axios.put("/waterRate", dailyNorma);
+      const response = await axios.put("/water/water-rate", { dailynormwater });
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );

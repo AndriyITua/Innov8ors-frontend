@@ -29,6 +29,7 @@
   align-items: flex-start;
   padding-top: 50px;
   z-index: 1000;
+  /* overflow: hidden; */
 }
 
 @media (min-width: 768px) {

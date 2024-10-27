@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import { CgClose } from "react-icons/cg";
 import css from "./DailyNormaModal.module.css";
-import { dailyRate } from "../../redux/water/operationsDaily.js";
+import { putWaterRate } from "../../redux/water/operationsDaily.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast, Toaster } from "react-hot-toast";
+import { useEffect } from "react";
 
 // const customStyles = {
 //   overlay: {
@@ -11,7 +12,7 @@ import { toast, Toaster } from "react-hot-toast";
 //   },
 // };
 
-const DailyNormaModal = ({ isOpen, onClose }) => {
+export default function DailyNormaModal({ isOpen, onClose }) {
   const dispatch = useDispatch();
 
   const calculateWaterIntake = (weight, activityTime, gender) => {
@@ -27,6 +28,18 @@ const DailyNormaModal = ({ isOpen, onClose }) => {
     return V;
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+  }, [isOpen]);
+
   const handleSubmit = async values => {
     const waterAmount =
       parseFloat(
@@ -37,8 +50,8 @@ const DailyNormaModal = ({ isOpen, onClose }) => {
             values.gender
           )
       ) * 1000;
-    const result = await dispatch(dailyRate({ dailyNorma: waterAmount }));
-    if (dailyRate.fulfilled.match(result)) {
+    const result = await dispatch(putWaterRate({ dailyNorma: waterAmount }));
+    if (putWaterRate.fulfilled.match(result)) {
       toast.success("Data saved successfully!");
     } else {
       toast.error(result.payload || "Failed to save data.");
@@ -176,6 +189,6 @@ const DailyNormaModal = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
-};
+}
 
-export default DailyNormaModal;
+// export default DailyNormaModal;
