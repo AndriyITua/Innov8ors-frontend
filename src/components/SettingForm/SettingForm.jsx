@@ -108,8 +108,7 @@ const SettingForm = ({ closeModal }) => {
 
   // сабміт форми
   const submit = (values, actions) => {
-    console.dir(actions);
-    
+        
     // проверка на пароль - нет пароля - отправляем почту
     if (!values.password) {
       const { name, selectedOptions = "woman" } = values;
