@@ -16,7 +16,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
   const dispatch = useDispatch();
   const waterRecords = useSelector(selectWaterRecords);
 
-  const record = waterRecords.find((rec) => rec._id === idRecord)
+     const record = waterRecords.find((rec) => rec._id === idRecord)
   
 
   const [water, setWater] = useState(record?.amount || 50);
