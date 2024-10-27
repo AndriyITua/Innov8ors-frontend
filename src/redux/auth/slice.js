@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, refreshAccessToken, refreshUser } from "./operationLogin.js";
 import { logout } from "./operationLogout.js";
+import { fetchUserById } from "./operationUserId.js";
 
 import {
   updateUserPhoto,
@@ -54,6 +55,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isError = null;
         state.user = payload.data;
+        state.user.photo = payload.data.userphoto;
       })
       .addCase(refreshUser.rejected, (state, { payload }) => {
         state.isError = payload;
@@ -106,6 +108,7 @@ const authSlice = createSlice({
 
       // блок для оновлення юзера
       .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
+        console.log(payload);
         state.isError = false;
         state.user.username = payload.data.username;
         state.user.email = payload.data.email;
@@ -118,6 +121,22 @@ const authSlice = createSlice({
       // блок для оновлення пароля
       .addCase(updateUserPassword.rejected, (state, { payload }) => {
         state.isError = payload;
+      })
+
+      .addCase(fetchUserById.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserById.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.user.id = payload.data._id;
+        state.user.username = payload.data.username;
+        state.user.email = payload.data.email;
+        state.user.photo = payload.data.userphoto || null;
+      })
+      .addCase(fetchUserById.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       });
   },
 });

@@ -20,7 +20,6 @@ export const login = createAsyncThunk(
       const response = await axios.post("/auth/login", credentials);
       notifySuccessToast("Successfully logged in!");
       setAuthHeader(response.data.data.accessToken);
-
       return response.data;
     } catch (error) {
       notifyOnlogginError(error.response.data.message);
@@ -36,8 +35,7 @@ export const refreshUser = createAsyncThunk(
 
     setAuthHeader(reduxState.auth.accessToken);
 
-    const userId = reduxState.auth.userId;
-    const res = await axios.get(`/user/${userId}`);
+    const res = await axios.get(`/user/userInfo`);
 
     return res.data;
   },
