@@ -122,11 +122,6 @@ const authSlice = createSlice({
         state.isError = payload;
       })
 
-      // блок для оновлення пароля
-      .addCase(updateUserPassword.rejected, (state, { payload }) => {
-        state.isError = payload;
-      })
-
       // блок для оновлення пароля - логика логаута, возвращает на страницу sign in
       .addCase(updateUserPassword.fulfilled, state => {
         state.user = {
