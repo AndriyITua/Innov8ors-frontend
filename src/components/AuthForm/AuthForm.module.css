@@ -92,11 +92,10 @@
 }
 .error {
     display: block;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--secondary-color-red);
     line-height: 18px;
     position: absolute;
-    margin-top: 4px;
 }
 
 .button {
