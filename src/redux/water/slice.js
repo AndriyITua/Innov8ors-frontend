@@ -3,6 +3,7 @@ import { addWater } from "./opertionsEditWater.js";
 import { featchWater } from "./opertionsEditWater";
 import { deleteWaterRecord } from "./operationsDelete.js";
 import { patchWater } from "./opertionsEditWater.js";
+import { fethceWaterMonth } from "./operationsMonth.js";
 // import { dailyRate } from "./operationsDaily";
 
 const waterSlice = createSlice({
@@ -11,6 +12,8 @@ const waterSlice = createSlice({
     water: {
       totalConsumed: 0,
       dailyRate: 1500,
+      consumptionCount: 0,
+      percentage: 0,
       records: [
         {
           amount: null,
@@ -84,24 +87,42 @@ const waterSlice = createSlice({
       .addCase(patchWater.rejected, (state, action) => {
         state.isloading = false;
         state.error = action.payload;
+      })
+      .addCase(fethceWaterMonth.pending, state => {
+        console.log("Fetching water month data...");
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fethceWaterMonth.fulfilled, (state, action) => {
+        console.log("Fetched water month data:", action.payload.data);
+        state.isLoading = false;
+        state.error = null;
+        state.water.consumptionCount = action.payload.data.consumptionCount;
+        state.water.dailyRate = action.payload.data.dailyRate;
+        state.water.percentage = action.payload.data.percentage;
+      })
+      .addCase(fethceWaterMonth.rejected, (state, action) => {
+        console.error("Error fetching water month data:", action.payload);
+        state.isLoading = false;
+        state.error = action.payload;
       });
-
-    // DailyWater =>
-    // .addCase(dailyRate.pending, state => {
-    //   // state.isModalOpen = true;
-    //   state.isLoading = true;
-    //   state.error = null;
-    // })
-    // .addCase(dailyRate.fulfilled, (state, action) => {
-    //   // state.isModalOpen = true;
-    //   state.user.dailyNorma = action.payload.data.dailyNorma;
-    //   state.isLoading = false;
-    // })
-    // .addCase(dailyRate.rejected, (state, action) => {
-    //   // state.isModalOpen = true;
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // });
   },
 });
+// DailyWater =>
+// .addCase(dailyRate.pending, state => {
+//   // state.isModalOpen = true;
+//   state.isLoading = true;
+//   state.error = null;
+// })
+// .addCase(dailyRate.fulfilled, (state, action) => {
+//   // state.isModalOpen = true;
+//   state.user.dailyNorma = action.payload.data.dailyNorma;
+//   state.isLoading = false;
+// })
+// .addCase(dailyRate.rejected, (state, action) => {
+//   // state.isModalOpen = true;
+//   state.isLoading = false;
+//   state.error = action.payload;
+// });
+
 export const waterReducer = waterSlice.reducer;

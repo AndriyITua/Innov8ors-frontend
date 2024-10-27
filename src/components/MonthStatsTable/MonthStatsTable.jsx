@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
 import { DaysGeneralStats } from "../DaysGeneralStats/DaysGeneralStats";
+import { selectWaterPercentage } from "../../redux/water/selectors.js";
 import styles from "./MonthStatsTable.module.css";
+import { useSelector } from "react-redux";
 
 const MonthStatsTable = () => {
+  const waterPerc = useSelector(selectWaterPercentage);
   const [days, setDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
   const [modalPosition, setModalPosition] = useState(null);
@@ -22,13 +25,17 @@ const MonthStatsTable = () => {
       date: i + 1,
       month: month,
       year: year,
-      progress: Math.floor(Math.random() * 101),
+      progress: waterPerc,
     }));
     setDays(daysArray);
   };
 
   const handleSelectDay = (day, event) => {
-    setSelectedDay(day);
+    setSelectedDay({
+      ...day,
+      year: currentYear,
+      waterPerc: day.progress,
+    });
 
     const mobileScreen = window.innerWidth >= 320 && window.innerWidth < 768;
     const tabletScreen = window.innerWidth >= 768 && window.innerWidth < 1440;

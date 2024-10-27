@@ -243,6 +243,7 @@ const SettingForm = ({ closeModal }) => {
                         }`}
                         placeholder={`${useremail}`}
                         autoComplete={"current-email"}
+                        disabled
                       />
                       <ErrorMessage
                         name="email"
