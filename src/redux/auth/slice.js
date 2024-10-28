@@ -8,6 +8,7 @@ import {
   updateUserInfo,
   updateUserPassword,
 } from "./operationUpdate.js";
+import { register } from "./operationRegister.js";
 
 const authSlice = createSlice({
   name: "auth",
@@ -162,6 +163,20 @@ const authSlice = createSlice({
       .addCase(fetchUserById.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
+      })
+      .addCase(register.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.accessToken = payload.accessToken;
+        state.user = payload.data;
+      })
+      .addCase(register.rejected, (state, { payload }) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.accessToken = null;
+        state.isError = payload;
       });
   },
 });
