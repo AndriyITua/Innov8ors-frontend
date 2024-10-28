@@ -1,14 +1,17 @@
 import Modal from "react-modal";
 import { CgClose } from "react-icons/cg";
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import css from "./DailyNormaModal.module.css";
+import { putWaterRate } from "../../redux/water/operationsDaily";
+import toast from "react-hot-toast";
+// import { selectDailyRate } from "../../redux/water/selectors";
 
 const customStyles = {
   content: {
-    width: "280px",
+    // width: "280px",
     height: "auto",
-    padding: "24px 12px",
+    // padding: "24px 12px",
     top: "50%",
     left: "50%",
     right: "auto",
@@ -25,7 +28,37 @@ const customStyles = {
 };
 
 export default function DailyNormaModal({ modalIsOpen, closeModal }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const [selectedGender, setSelectedGender] = useState("woman");
+  const [weight, setWeight] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [waterAmount, setWaterAmount] = useState(0);
+
+  const calculateWater = () => {
+    const weight = document.querySelector("#weight").value;
+    const hours = document.querySelector("#hours").value;
+    if (document.querySelector("input[name='gender'][value='woman']").checked) {
+      return weight * 0.03 + hours * 0.4;
+    }
+    if (document.querySelector("input[name='gender'][value='man']").checked) {
+      return weight * 0.04 + hours * 0.6;
+    }
+    return 2;
+  };
+
+  const handleWeightChange = e => {
+    const newWeight = e.target.value;
+
+    setWeight(newWeight);
+    setWaterAmount(calculateWater(newWeight, hours));
+  };
+
+  const handleHoursChange = e => {
+    const newHours = e.target.value;
+
+    setHours(newHours);
+    setWaterAmount(calculateWater(weight, newHours));
+  };
 
   const handleBackdropClick = e => {
     if (e.target === e.currentTarget) {
@@ -33,10 +66,28 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
     }
   };
 
-  // result =
-  //   formik.values.gender === "woman"
-  //     ? (weight * 0.03 + time * 0.4).toFixed(1)
-  //     : (weight * 0.04 + time * 0.6).toFixed(1);
+  const updateDailyNorma = async () => {
+    const water = document.querySelector("#water");
+    try {
+      await dispatch(putWaterRate(water.value * 1000));
+      closeModal();
+      resetForm;
+    } catch (error) {
+      toast.error(
+        error.message || "An error occurred when updating the water rate."
+      );
+    }
+  };
+
+  const resetForm = () => {
+    setWeight(0);
+    setHours(0);
+    setWaterAmount(0);
+  };
+
+  const handleChange = e => {
+    setSelectedGender(e.target.value);
+  };
 
   return (
     <Modal
@@ -48,13 +99,14 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
       onClick={handleBackdropClick}
     >
       <div className={css.modalContent}>
-        <h2 className={css.title}>My daily norma</h2>
-        <button className={css.clsButton} onClick={closeModal}>
-          {/* <span>&times;</span> */}
-          <CgClose />
-        </button>
+        <div className={css.modalHeader}>
+          <h2 className={css.title}>My daily norma</h2>
+          <button className={css.clsButton} onClick={closeModal}>
+            <CgClose />
+          </button>
+        </div>
         <p className={css.gender}>
-          For woman:{" "}
+          For woman:
           <span className={css.genderSpan}>V=(M*0,03) + (T*0,4)</span>
         </p>
         <p className={css.gender}>
@@ -75,40 +127,36 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
                 type="radio"
                 name="gender"
                 value="woman"
-                // checked={selectedGender === "woman"}
-                // onChange={handleGenderChange}
-              />{" "}
+                checked={selectedGender === "woman"}
+                onChange={handleChange}
+              />
               For woman
             </label>
-            <label>
+            <label className={css.radioBtn}>
               <input
                 type="radio"
                 name="gender"
                 value="man"
-                // checked={selectedGender === "man"}
-                // onChange={handleGenderChange}
+                checked={selectedGender === "man"}
+                onChange={handleChange}
               />{" "}
               For man
             </label>
           </div>
 
           <div className={css.wrap}>
-            <label htmlFor="weight">
+            <label htmlFor="weight" className={css.kiloHours}>
               Your weight in kilograms:
               <input
-                type="number"
+                type="text"
                 id="weight"
                 name="weight"
                 min="0"
                 max="200"
-                // onChange={}
-                // value={}
+                onChange={handleWeightChange}
                 placeholder="0"
                 className={css.inputNumber}
               ></input>
-              {/* {formik.touched.weight && formik.errors.weight ? (
-                <div className={css.error}>{formik.errors.weight}</div>
-              ) : null} */}
             </label>
           </div>
 
@@ -118,13 +166,12 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
               with high physical load in hours:
             </label>
             <input
-              type="number"
+              type="text"
               id="hours"
               name="time"
               min="0"
               max="24"
-              // onChange={}
-              // value={}
+              onChange={handleHoursChange}
               placeholder="0"
               className={css.inputNumber}
             ></input>
@@ -135,7 +182,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
               The required amount of water in liters per day:
             </p>
             <p className={css.litres}>
-              <span className={css.litresSpan}>1.5 L</span>
+              <span className={css.litresSpan}>{waterAmount.toFixed(1)} L</span>
             </p>
           </div>
 
@@ -144,22 +191,20 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
               Write down how much water you will drink:
             </label>
             <input
-              type="number"
+              type="text"
               id="water"
               name="amountOfWater"
               min="0"
               max="5"
-              // onChange={}
-              // value={}
               placeholder="0"
-              className={css.inputNumber}
+              className={css.waterInput}
             ></input>
           </div>
 
           <button
-            type="submit"
-            // disabled={isLoading}
+            type="button"
             className={css.saveBtn}
+            onClick={updateDailyNorma}
           >
             Save
           </button>
