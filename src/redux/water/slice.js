@@ -4,6 +4,8 @@ import { featchWater } from "./opertionsEditWater";
 import { deleteWaterRecord } from "./operationsDelete.js";
 import { patchWater } from "./opertionsEditWater.js";
 import { fethceWaterMonth } from "./operationsMonth.js";
+import { putWaterRate } from "./operationsDaily.js";
+import { fetchUserById } from "../auth/operationUserId.js";
 
 const waterSlice = createSlice({
   name: "water",
@@ -102,6 +104,34 @@ const waterSlice = createSlice({
       })
       .addCase(fethceWaterMonth.rejected, (state, action) => {
         console.error("Error fetching water month data:", action.payload);
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(putWaterRate.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(putWaterRate.fulfilled, (state, action) => {
+        console.log(action.payload);
+
+        state.water.dailyRate = action.payload.data.dailynormwater;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(putWaterRate.rejected, (state, payload) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(fetchUserById.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserById.fulfilled, (state, action) => {
+        state.water.dailyRate = action.payload.data.dailynormwater;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(fetchUserById.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
