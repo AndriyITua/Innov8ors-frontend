@@ -4,6 +4,11 @@ import { featchWater } from "./opertionsEditWater";
 import { deleteWaterRecord } from "./operationsDelete.js";
 import { patchWater } from "./opertionsEditWater.js";
 import { fethceWaterMonth } from "./operationsMonth.js";
+import { putWaterRate } from "./operationsDaily.js";
+import { fetchUserById } from "../auth/operationUserId.js";
+// блок импортов для логаута та смены пароля 
+import { logout } from "../auth/operationLogout.js";
+import { updateUserPassword } from "../auth/operationUpdate.js";
 
 const waterSlice = createSlice({
   name: "water",
@@ -102,6 +107,72 @@ const waterSlice = createSlice({
         console.error("Error fetching water month data:", action.payload);
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(putWaterRate.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(putWaterRate.fulfilled, (state, action) => {
+        console.log(action.payload);
+
+        state.water.dailyRate = action.payload.data.dailynormwater;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(putWaterRate.rejected, (state, payload) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(fetchUserById.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserById.fulfilled, (state, action) => {
+        state.water.dailyRate = action.payload.data.dailynormwater;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(fetchUserById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      // блок для логаута - возвращает initial state
+      .addCase(logout.fulfilled, state => {
+        state.water = {
+          totalConsumed: 0,
+          dailyRate: 1500,
+          consumptionCount: 0,
+          percentage: 0,
+          records: [
+            {
+              amount: null,
+              consumptionTime: null,
+              updatedAt: 0,
+            },
+          ],
+        };
+        state.isLoading = false;
+        state.error = null;
+      })
+
+      // блок для изменения пароля
+      // логика логаута - возвращает initial state
+      .addCase(updateUserPassword.fulfilled, state => {
+        state.water = {
+          totalConsumed: 0,
+          dailyRate: 1500,
+          consumptionCount: 0,
+          percentage: 0,
+          records: [
+            {
+              amount: null,
+              consumptionTime: null,
+              updatedAt: 0,
+            },
+          ],
+        };
+        state.isLoading = false;
+        state.error = null;
       });
   },
 });
