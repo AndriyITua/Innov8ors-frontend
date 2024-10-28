@@ -4,6 +4,8 @@ import { featchWater } from "./opertionsEditWater";
 import { deleteWaterRecord } from "./operationsDelete.js";
 import { patchWater } from "./opertionsEditWater.js";
 import { fethceWaterMonth } from "./operationsMonth.js";
+import { logout } from "../auth/operationLogout.js";
+import { updateUserPassword } from "../auth/operationUpdate.js";
 
 const waterSlice = createSlice({
   name: "water",
@@ -102,6 +104,45 @@ const waterSlice = createSlice({
         console.error("Error fetching water month data:", action.payload);
         state.isLoading = false;
         state.error = action.payload;
+      })
+      
+      // блок для логаута - возвращает initial state
+      .addCase(logout.fulfilled, state => {
+        state.water = {
+          totalConsumed: 0,
+          dailyRate: 1500,
+          consumptionCount: 0,
+          percentage: 0,
+          records: [
+            {
+              amount: null,
+              consumptionTime: null,
+              updatedAt: 0,
+            },
+          ],
+        };
+        state.isLoading = false;
+        state.error = null;
+      })
+
+      // блок для изменения пароля
+      // логика логаута - возвращает initial state
+      .addCase(updateUserPassword.fulfilled, state => {
+        state.water = {
+          totalConsumed: 0,
+          dailyRate: 1500,
+          consumptionCount: 0,
+          percentage: 0,
+          records: [
+            {
+              amount: null,
+              consumptionTime: null,
+              updatedAt: 0,
+            },
+          ],
+        };
+        state.isLoading = false;
+        state.error = null;
       });
   },
 });
