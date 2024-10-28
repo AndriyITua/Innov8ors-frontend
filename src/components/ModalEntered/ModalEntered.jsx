@@ -6,18 +6,20 @@ import Loader from "../Loader/Loader.jsx";
 import Glasses from "../../assets/icons/Glasses.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectWaterRecords } from "../../redux/water/selectors.js";
-import { featchWater, patchWater } from "../../redux/water/opertionsEditWater.js";
+import {
+  featchWater,
+  patchWater,
+} from "../../redux/water/opertionsEditWater.js";
 // import { asyncThunkCreator } from "@reduxjs/toolkit";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
 
-export default function ModalAddWater({ isOpen, onClose, idRecord}) {
+export default function ModalAddWater({ isOpen, onClose, idRecord }) {
   const dispatch = useDispatch();
   const waterRecords = useSelector(selectWaterRecords);
 
-     const record = waterRecords.find((rec) => rec._id === idRecord)
-  
+  const record = waterRecords.find(rec => rec._id === idRecord);
 
   const [water, setWater] = useState(record?.amount || 50);
   const [localTime, setLocalTime] = useState(record?.consumptionTime || "");
@@ -25,10 +27,9 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
   const [disableButtonSave, setDisableButtonSave] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const [waterInput, setWaterInput] = useState(record?.amount)
   const backdropRef = useRef(null);
-  
+
   useEffect(() => {
     if (record) {
       setWater(record.amount|| 50);
@@ -36,17 +37,17 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
       setLocalTime(record.consumptionTime || "");
     }
   }, [idRecord, record]);
-  
+
   const onPlusClickedHandler = () => {
     const newWaterAmount = waterInput+ ADD_WATER;
     setWaterInput(newWaterAmount);
   };
-  
+
   const onMinusClickedHandler = () => {
     const newWaterAmount = waterInput- ADD_WATER;
     setWaterInput(newWaterAmount)
   };
-  
+
   useEffect(() => {
     setDisableButtonPluse(waterInput>= WATER_MAX_LIMIT);
     setDisableButtonMinuse(waterInput <= 0);
@@ -57,8 +58,8 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
     const times = [];
     for (let hour = 0; hour < 24; hour++) {
       for (let minute = 0; minute < 60; minute += 5) {
-        const hourString = hour.toString().padStart(2, '0');
-        const minuteString = minute.toString().padStart(2, '0');
+        const hourString = hour.toString().padStart(2, "0");
+        const minuteString = minute.toString().padStart(2, "0");
         times.push(`${hourString}:${minuteString}`);
       }
     }
@@ -76,7 +77,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
   useEffect(() => {}, [localTiInput]);
 
   const handleTimeChange = event => {
-    setLocalTimeInput(event.target.value)
+    setLocalTimeInput(event.target.value);
   };
 
   const handleWaterChange = event => {
@@ -111,7 +112,6 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
     }
   }, [isOpen]);
 
-
   const handleSave = () => {
     setLoading(true);
     const [hour, minute] = localTiInput.split(":");
@@ -119,13 +119,13 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
     const period = hourInt >= 12 ? "PM" : "AM";
     const adjustedHour = hourInt % 12 || 12;
     const formattedLocalTime = `${adjustedHour}:${minute} ${period}`;
-
+    
     dispatch(patchWater({ id: idRecord, data: { amount: waterInput, consumptionTime: formattedLocalTime}}))
     setLoading(false);
     dispatch(featchWater())
     onClose();
-  };
 
+  };
 
   if (!isOpen) return null;
 
@@ -177,7 +177,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
 
             <div>
               <p className={css.p}>Recording time:</p>
-              
+
               <input
                 type="time"
                 value={localTiInput}
@@ -186,10 +186,10 @@ export default function ModalAddWater({ isOpen, onClose, idRecord}) {
                 list="time-options" // Прив’язка до datalist
               />
               <datalist id="time-options">
-      {timeOptions.map((time) => (
-        <option key={time} value={time} />
-      ))}
-    </datalist>
+                {timeOptions.map(time => (
+                  <option key={time} value={time} />
+                ))}
+              </datalist>
             </div>
 
             <div>

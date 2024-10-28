@@ -10,7 +10,7 @@ const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
 
 export default function ModalAddWater({ isOpen, onClose }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [water, setWater] = useState(50);
   const [disableButtonPluse, setDisableButtonPluse] = useState(false);
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
@@ -78,12 +78,12 @@ export default function ModalAddWater({ isOpen, onClose }) {
     const adjustedHour = hourInt % 12 || 12;
     const formattedLocalTime = `${adjustedHour}:${minute} ${period}`;
 
-
-    dispatch(addWater({amount: water, consumptionTime: formattedLocalTime}));
-    dispatch(featchWater())
-    setLoading(false);
-    onClose();
-
+    dispatch(addWater({ amount: water, consumptionTime: formattedLocalTime }));
+    dispatch(featchWater());
+    setTimeout(() => {
+      setLoading(false);
+      onClose();
+    }, 500);
   };
 
   useEffect(() => {
@@ -156,7 +156,8 @@ export default function ModalAddWater({ isOpen, onClose }) {
                 type="text"
                 value={localTime}
                 onChange={handleTimeChange}
-                className={css.input}/>
+                className={css.input}
+              />
             </div>
 
             <div>
