@@ -29,12 +29,23 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
   const [loading, setLoading] = useState(false);
   const [waterInput, setWaterInput] = useState(record?.amount)
   const backdropRef = useRef(null);
+  const convertTo24HourFormat = (time) => {
+    const [timePart, modifier] = time.split(" ");
+    let [hours, minutes] = timePart.split(":");
 
+    if (modifier === "PM" && hours !== "12") {
+      hours = String(parseInt(hours, 10) + 12);
+    } else if (modifier === "AM" && hours === "12") {
+      hours = "00";
+    }
+    return `${hours}:${minutes}`;
+  };
+  
   useEffect(() => {
     if (record) {
       setWater(record.amount|| 50);
       setWaterInput(record.amount); 
-      setLocalTime(record.consumptionTime || "");
+      setLocalTime(convertTo24HourFormat(record.consumptionTime) || "");
     }
   }, [idRecord, record]);
 
@@ -67,13 +78,18 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
   };
   const timeOptions = generateTimeOptions();
 
-  
-  const time = new Date();
-  const hours = time.getHours();
-  const minutes = time.getMinutes();
-  const formattedTime = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
 
-  const [localTiInput, setLocalTimeInput] = useState(formattedTime);
+  useEffect(() => {
+    if (isOpen) {
+      const time = new Date();
+      const hours = time.getHours().toString().padStart(2, '0');
+      const minutes = time.getMinutes().toString().padStart(2, '0');
+      const formattedTime = `${hours}:${minutes}`;
+      setLocalTimeInput(formattedTime);
+    }
+  }, [isOpen]);
+
+  const [localTiInput, setLocalTimeInput] = useState("");
   useEffect(() => {}, [localTiInput]);
 
   const handleTimeChange = event => {

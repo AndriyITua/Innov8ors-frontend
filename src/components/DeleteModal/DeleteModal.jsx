@@ -14,13 +14,13 @@ export default function DeleteModal({ isOpen, onClose, onDelete }) {
     setLoading(false); 
     onClose(); 
   };
-  const handleClose = async () => {
-    setLoading(true); 
-    setTimeout(() => {
-      onClose(); 
-      setLoading(false); 
-    }, 300); 
-  };
+  // const handleClose = async () => {
+  //   setLoading(true); 
+  //   setTimeout(() => {
+  //     onClose(); 
+  //     setLoading(false); 
+  //   }, 300); 
+  // };
   
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -61,7 +61,7 @@ export default function DeleteModal({ isOpen, onClose, onDelete }) {
               <div className={css.deleleClose}>
                 <h2 className={css.title}>Delete entry</h2>
                 <div className={css.buttonIcon}>
-                  <button className={css.button} onClick={ handleClose}>
+                  <button className={css.button} onClick={ onClose}>
                     <CgClose className={css.iconClose} />
                   </button>
                 </div>
@@ -74,7 +74,7 @@ export default function DeleteModal({ isOpen, onClose, onDelete }) {
               <button className={css.delete} onClick={handleDelete}>
                 Delete
               </button>
-              <button className={css.cancel} onClick={ handleClose}>
+              <button className={css.cancel} onClick={ onClose}>
                 Cancel
               </button>
             </div>

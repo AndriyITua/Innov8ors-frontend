@@ -22,7 +22,19 @@ export default function TodayWaterList() {
   const [ModalOpen, setModalOpen] = useState(false);
 
   const [isModalOpenEntr, setModalOpenEntr] = useState(false);
-  const [isSetectedEntery, isSetSelectedEntery] = useState(null);
+  const [isSetectedEntery, isSetSelectedEntery] = useState(null)
+
+  const convertTo24HourFormat = (time) => {
+    const [timePart, modifier] = time.split(" ");
+    let [hours, minutes] = timePart.split(":");
+
+    if (modifier === "PM" && hours !== "12") {
+      hours = String(parseInt(hours, 10) + 12);
+    } else if (modifier === "AM" && hours === "12") {
+      hours = "00";
+    }
+    return `${hours}:${minutes}`;
+  };
 
   useEffect(() => {
     const lastUpdateDate = localStorage.getItem("lastUpdateDate");
@@ -78,48 +90,42 @@ export default function TodayWaterList() {
     <div className={css.container}>
       <p className={css.title}>Today</p>
       <div className={css.contItem}>
-        {records.length > 0 && records.some(record => record && record.amount)
-          ? records.map(
-              record =>
-                record &&
-                record.amount && (
-                  <div key={record._id}>
-                    <ul className={css.item}>
-                      <li>
-                        <img
-                          className={css.img}
-                          src={glassWater}
-                          alt="glass water"
-                        />
-                      </li>
-                      <div className={css.time}>
-                        <li className={css.water}>{record.amount} ml</li>
-                        <li className={css.am}>{record.consumptionTime}</li>
-                      </div>
-                      <div className={css.editDel}>
-                        <li>
-                          <button
-                            className={css.buttonIcon}
-                            onClick={() => handleOpenModalEntr(record._id)}
-                          >
-                            <HiOutlinePencilSquare />
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            onClick={() => openModal(record._id)}
-                            className={css.buttonDel}
-                          >
-                            <img src={deleteW} alt="Delete" />
-                          </button>
-                        </li>
-                      </div>
-                    </ul>
-                    <hr className={css.divider} />
+        {records.length > 0 && records.some(record => record && record.amount) ?(
+         records.map(record => (
+          record && record.amount && ( 
+            <div key={record._id}>
+                <ul className={css.item}>
+                  <li >
+                    <img className={css.img} src={glassWater} alt="glass water" />
+                  </li>
+                  <div className={css.time}>
+                    <li  className={css.water}>{record.amount} ml</li>
+                    <li   className={css.am}>{convertTo24HourFormat(record.consumptionTime) }</li>
                   </div>
-                )
-            )
-          : null}
+                  <div className={css.editDel}>
+                    <li  >
+                      <button
+                        className={css.buttonIcon}
+                        onClick={()=> handleOpenModalEntr(record._id)}
+                      >
+                        <HiOutlinePencilSquare />
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => openModal(record._id)}
+                        className={css.buttonDel}
+                      >
+                        <img src={deleteW} alt="Delete" />
+                      </button>
+                    </li>
+                  </div>
+                </ul>
+                <hr className={css.divider} />
+              </div>
+          )
+          ))
+        ): null}
         <div className={css.buttonAddWaterCont}>
           <button
             type="submit"
