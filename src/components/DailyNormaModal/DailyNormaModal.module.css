@@ -1,142 +1,246 @@
-.modalDaily {
-  position: fixed;
-  width: "280px";
-  height: "auto";
-  padding: "24px 12px";
-  top: "50%";
-  left: "50%";
-  right: "auto";
-  bottom: "auto";
-  margin-right: "-50%";
-  border-radius: "10px";
-  overflow: "auto";
-  scrollbar-width: none;
-}
-
-@media (min-width: 768px) {
+@media screen and (min-width: 320px) {
   .modalDaily {
-    width: 704px;
+    position: fixed;
+    width: 280px;
+    height: auto;
+    padding: 24px 12px;
+    /* top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%; */
+    border-radius: 10px;
+    overflow: auto;
+    scrollbar-width: none;
+  }
+
+  .modalContent {
+    max-height: 80vh;
+  }
+
+  .title {
+    display: inline;
+    font-weight: 500;
+    font-size: 26px;
+    margin-right: 52px;
+  }
+
+  .clsButton {
+    background-color: transparent;
+    color: var(--primary-color-blue);
+    margin: 0;
+    padding: 0;
+  }
+
+  .gender {
+    margin-top: 24px;
+    display: flex;
+  }
+
+  .radioBtn input[type="radio"] {
+    accent-color: var(--primary-color-blue);
+  }
+
+  .genderSpan {
+    margin-left: 2px;
+    font-size: 18px;
+    color: var(--primary-color-blue);
+  }
+
+  .description {
+    font-size: 12px;
+    line-height: 1.5;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 12px;
+  }
+
+  .rate {
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+
+  label input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  .radioBtn {
+    margin-right: 24px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* .wrap {
+  } */
+
+  .label {
+    line-height: 1.5;
+  }
+
+  .inputNumber {
+    margin-top: 8px;
+    padding: 12px 10px;
+    width: 254px;
+    height: 44px;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    color: var(--primary-color-blue);
+  }
+
+  .inputNumber:focus {
+    outline: none;
+  }
+
+  input::placeholder {
+    color: var(--primary-color-blue);
+    opacity: 1;
+  }
+
+  .wrapLitres {
+    display: flex;
+    align-items: center;
+  }
+
+  .amount {
+    line-height: 1.5;
+    display: block;
+    width: 190px;
+  }
+
+  .litres {
+    display: inline;
+  }
+
+  .litresSpan {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--primary-color-blue);
+  }
+
+  .resultWrap {
+    margin-top: 8px;
+  }
+
+  .waterInput {
+    margin-top: 8px;
+    padding: 12px 10px;
+    width: 254px;
+    height: 44px;
+    border: 1px solid var(--secondary-color-light-gray);
+    border-radius: 6px;
+    color: var(--primary-color-blue);
+  }
+
+  .waterInput:focus {
+    outline: none;
+  }
+
+  .result {
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .saveBtn {
+    width: 254px;
+    height: 36px;
+    margin-top: 24px;
+    /* margin-bottom: 24px; */
+    background-color: var(--primary-color-blue);
+    color: var(--primary-color-white);
+    border-radius: 10px;
   }
 }
 
-@media (min-width: 1440px) {
+@media screen and (min-width: 768px) {
+  .modalDaily {
+    width: 704px;
+    padding: 32px 24px;
+  }
+
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .title {
+    margin-right: 0;
+    margin-bottom: 24px;
+  }
+
+  .gender {
+    display: inline;
+  }
+
+  .gender:not(:nth-last-child(odd)) {
+    margin-right: 24px;
+  }
+
+  .inputNumber {
+    display: block;
+    width: 100%;
+  }
+
+  .form {
+    display: block;
+  }
+
+  .wrap {
+    margin-top: 16px;
+  }
+
+  .label {
+    line-height: 125%;
+  }
+
+  .wrapLitres {
+    margin-top: 16px;
+  }
+
+  .amount {
+    width: auto;
+    margin-right: 6px;
+  }
+
+  .resultWrap {
+    margin-top: 24px;
+  }
+
+  .waterInput {
+    margin-top: 16px;
+    display: block;
+    width: 100%;
+  }
+
+  .saveBtn {
+    /* margin-bottom: 32px; */
+    width: 160px;
+    height: 44px;
+    /* margin-left: auto; */
+    float: right;
+  }
+}
+
+@media screen and (min-width: 1440px) {
   .modalDaily {
     width: 592px;
   }
-}
 
-.modalContent {
-  max-height: 80vh;
-}
+  .saveBtn {
+    box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  }
 
-.title {
-  display: inline;
-  font-weight: 500;
-  font-size: 26px;
-  margin-right: 52px;
-}
+  .saveBtn:hover {
+    box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+  }
 
-.clsButton {
-  background-color: transparent;
-  color: var(--primary-color-blue);
-  margin: 0;
-  padding: 0;
-}
-
-.gender {
-  margin-top: 24px;
-  display: flex;
-}
-
-.genderSpan {
-  margin-left: 2px;
-  font-size: 18px;
-  color: var(--primary-color-blue);
-}
-
-.description {
-  font-size: 12px;
-  line-height: 1.5;
-  border: 1px solid var(--secondary-color-light-gray);
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 12px;
-}
-
-.rate {
-  font-weight: 500;
-  font-size: 18px;
-  margin-top: 24px;
-  margin-bottom: 16px;
-}
-
-label input[type="radio"] {
-  margin-right: 8px;
-}
-
-.radioBtn {
-  margin-right: 24px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* .wrap {
-} */
-
-.label {
-  line-height: 1.5;
-}
-
-.inputNumber {
-  margin-top: 8px;
-  padding: 12px 10px;
-  width: 254px;
-  height: 44px;
-  border: 1px solid var(--secondary-color-light-gray);
-  border-radius: 6px;
-  color: var(--primary-color-blue);
-}
-
-.wrapLitres {
-  display: flex;
-  align-items: center;
-}
-
-.amount {
-  line-height: 1.5;
-  display: block;
-  width: 190px;
-}
-
-.litres {
-  display: inline;
-}
-
-.litresSpan {
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--primary-color-blue);
-}
-
-.resultWrap {
-  margin-top: 8px;
-}
-
-.result {
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.saveBtn {
-  width: 254px;
-  height: 36px;
-  margin-top: 24px;
-  margin-bottom: 24px;
-  background-color: var(--primary-color-blue);
-  color: var(--primary-color-white);
-  border-radius: 10px;
+  .saveBtn:active {
+    box-shadow: none;
+  }
 }
