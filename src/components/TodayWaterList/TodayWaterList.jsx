@@ -22,12 +22,12 @@ export default function TodayWaterList() {
   const [ModalOpen, setModalOpen] = useState(false);
 
   const [isModalOpenEntr, setModalOpenEntr] = useState(false);
-  const [isSetectedEntery, isSetSelectedEntery] = useState(null)
+  const [isSetectedEntery, isSetSelectedEntery] = useState(null);
 
   useEffect(() => {
-    const lastUpdateDate = localStorage.getItem("lastUpdateDate")
+    const lastUpdateDate = localStorage.getItem("lastUpdateDate");
     const today = new Date().toDateString();
-    
+
     if (lastUpdateDate !== today) {
       localStorage.setItem("lastUpdateDate", today);
       dispatch(featchWater());
@@ -36,7 +36,7 @@ export default function TodayWaterList() {
     }
   }, [dispatch]);
 
-  //модалка видаленння води 
+  //модалка видаленння води
   const openModal = entryId => {
     setselectedEntry(entryId);
     setIsModalOpen(true);
@@ -51,69 +51,75 @@ export default function TodayWaterList() {
       try {
         await dispatch(deleteWaterRecord(selectedEntry)).unwrap();
         dispatch(featchWater());
-      } catch  {
-      // } finally {
+      } catch {
+        // } finally {
         closeModal();
       }
     }
   };
-// модалка додавання води 
+  // модалка додавання води
   const handleOpenModal = () => {
     setModalOpen(true);
   };
   const handleCloseModal = () => {
     setModalOpen(false);
   };
-//модалка редагування води
-  const handleOpenModalEntr = (idEntery) => {
-    isSetSelectedEntery(idEntery)
+  //модалка редагування води
+  const handleOpenModalEntr = idEntery => {
+    isSetSelectedEntery(idEntery);
     setModalOpenEntr(true);
   };
   const handleCloseModalEntr = () => {
-    isSetSelectedEntery(null)
+    isSetSelectedEntery(null);
     setModalOpenEntr(false);
   };
-  
+
   return (
     <div className={css.container}>
       <p className={css.title}>Today</p>
       <div className={css.contItem}>
-        {records.length > 0 && records.some(record => record && record.amount) ?(
-         records.map(record => (
-          record && record.amount && ( 
-            <div key={record._id}>
-                <ul className={css.item}>
-                  <li >
-                    <img className={css.img} src={glassWater} alt="glass water" />
-                  </li>
-                  <div className={css.time}>
-                    <li  className={css.water}>{record.amount} ml</li>
-                    <li   className={css.am}>{record.consumptionTime }</li>
+        {records.length > 0 && records.some(record => record && record.amount)
+          ? records.map(
+              record =>
+                record &&
+                record.amount && (
+                  <div key={record._id}>
+                    <ul className={css.item}>
+                      <li>
+                        <img
+                          className={css.img}
+                          src={glassWater}
+                          alt="glass water"
+                        />
+                      </li>
+                      <div className={css.time}>
+                        <li className={css.water}>{record.amount} ml</li>
+                        <li className={css.am}>{record.consumptionTime}</li>
+                      </div>
+                      <div className={css.editDel}>
+                        <li>
+                          <button
+                            className={css.buttonIcon}
+                            onClick={() => handleOpenModalEntr(record._id)}
+                          >
+                            <HiOutlinePencilSquare />
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            onClick={() => openModal(record._id)}
+                            className={css.buttonDel}
+                          >
+                            <img src={deleteW} alt="Delete" />
+                          </button>
+                        </li>
+                      </div>
+                    </ul>
+                    <hr className={css.divider} />
                   </div>
-                  <div className={css.editDel}>
-                    <li  >
-                      <button
-                        className={css.buttonIcon}
-                        onClick={()=> handleOpenModalEntr(record._id)}
-                      >
-                        <HiOutlinePencilSquare />
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        onClick={() => openModal(record._id)}
-                        className={css.buttonDel}
-                      >
-                        <img src={deleteW} alt="Delete" />
-                      </button>
-                    </li>
-                  </div>
-                </ul>
-                <hr className={css.divider} />
-              </div>
-          )
-          ))
-        ): null}
+                )
+            )
+          : null}
         <div className={css.buttonAddWaterCont}>
           <button
             type="submit"
@@ -128,10 +134,10 @@ export default function TodayWaterList() {
           </button>
         </div>
       </div>
-      <ModalEntered 
-      isOpen={isModalOpenEntr} 
-      onClose={handleCloseModalEntr}
-      idRecord={isSetectedEntery}
+      <ModalEntered
+        isOpen={isModalOpenEntr}
+        onClose={handleCloseModalEntr}
+        idRecord={isSetectedEntery}
       />
       <ModalAddWater isOpen={ModalOpen} onClose={handleCloseModal} />
       <DeleteModal

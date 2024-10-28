@@ -13,6 +13,7 @@ export const selectWaterRecords = state => state.water.water.records;
 // Селектор для отримання відсотку від дейлі норми
 export const selectWaterPercentage = state => state.water.water.percentage;
 
+export const selectWaterInfo = state => state.water.monthlyData;
 // Селектор для отримання кількості порцій
 export const selectServingsCount = state => state.water.water.consumptionCount;
 
