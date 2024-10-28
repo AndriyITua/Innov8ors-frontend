@@ -22,7 +22,7 @@ export const DaysGeneralStats = ({
 
   useEffect(() => {
     if (onShow) {
-      const { year } = selectedDay; // Додайте рік
+      const { year } = selectedDay;
     }
   }, [dispatch, onShow, selectedDay]);
 
@@ -112,15 +112,18 @@ export const DaysGeneralStats = ({
           <p className={styles.date}>{formattedDate}</p>
         </li>
         <li className={styles.item}>
-          Daily norma: <span className={styles.info}>{dailyNorm} L</span>
+          Daily norma:{" "}
+          <span className={styles.info}>{selectedDay.dailyNorm} L</span>
         </li>
         <li className={styles.item}>
           Fulfillment of the daily norm:
-          <span className={styles.info}>{waterPerc}%</span>
+          <span className={styles.info}>{selectedDay.waterPerc}%</span>
         </li>
         <li className={styles.item}>
           How many servings of water:
-          <span className={styles.info}>{servingsCount || 0}</span>
+          <span className={styles.info}>
+            {selectedDay.consumptionCount || 0}
+          </span>
         </li>
       </ul>
     </div>

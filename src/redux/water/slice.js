@@ -3,10 +3,9 @@ import { addWater } from "./opertionsEditWater.js";
 import { featchWater } from "./opertionsEditWater";
 import { deleteWaterRecord } from "./operationsDelete.js";
 import { patchWater } from "./opertionsEditWater.js";
-import { fethceWaterMonth } from "./operationsMonth.js";
+import { fetchWaterMonth } from "./operationsMonth.js";
 import { putWaterRate } from "./operationsDaily.js";
 import { fetchUserById } from "../auth/operationUserId.js";
-// блок импортов для логаута та смены пароля 
 import { logout } from "../auth/operationLogout.js";
 import { updateUserPassword } from "../auth/operationUpdate.js";
 
@@ -26,6 +25,14 @@ const waterSlice = createSlice({
         },
       ],
     },
+    monthlyData: [
+      {
+        consumptionCount: 0,
+        dailyRate: 1500,
+        date: null,
+        percentage: 0,
+      },
+    ],
     isLoading: false,
     error: null,
   },
@@ -84,26 +91,24 @@ const waterSlice = createSlice({
           record => record._id === action.payload._id
         );
         if (updatedRecordIndex !== -1) {
-          // Оновлення запису у стані
           state.water.records[updatedRecordIndex] = action.payload;
         }
       })
       .addCase(patchWater.rejected, (state, action) => {
-        state.isloading = false;
+        state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(fethceWaterMonth.pending, state => {
+      .addCase(fetchWaterMonth.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fethceWaterMonth.fulfilled, (state, action) => {
+
+      .addCase(fetchWaterMonth.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.water.consumptionCount = action.payload.data.consumptionCount;
-        state.water.dailyRate = action.payload.data.dailyRate;
-        state.water.percentage = action.payload.data.percentage;
+        state.monthlyData = action.payload.data;
       })
-      .addCase(fethceWaterMonth.rejected, (state, action) => {
+      .addCase(fetchWaterMonth.rejected, (state, action) => {
         console.error("Error fetching water month data:", action.payload);
         state.isLoading = false;
         state.error = action.payload;
@@ -136,7 +141,7 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      // блок для логаута - возвращает initial state
+
       .addCase(logout.fulfilled, state => {
         state.water = {
           totalConsumed: 0,
@@ -155,8 +160,6 @@ const waterSlice = createSlice({
         state.error = null;
       })
 
-      // блок для изменения пароля
-      // логика логаута - возвращает initial state
       .addCase(updateUserPassword.fulfilled, state => {
         state.water = {
           totalConsumed: 0,
