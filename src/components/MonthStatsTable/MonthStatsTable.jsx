@@ -18,7 +18,6 @@ const MonthStatsTable = () => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [modalPosition, setModalPosition] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
-  console.log("currentMonth: ", currentMonth);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const modalRef = useRef(null);
   const dispatch = useDispatch();
