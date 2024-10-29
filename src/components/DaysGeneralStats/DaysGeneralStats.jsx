@@ -113,7 +113,7 @@ export const DaysGeneralStats = ({
         </li>
         <li className={styles.item}>
           Daily norma:{" "}
-          <span className={styles.info}>{selectedDay.dailyNorm} L</span>
+          <span className={styles.info}>{selectedDay.dailyRate} L</span>
         </li>
         <li className={styles.item}>
           Fulfillment of the daily norm:

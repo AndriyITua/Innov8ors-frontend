@@ -56,6 +56,7 @@ const MonthStatsTable = () => {
         year,
         progress: waterInfo.percentage || 0,
         consumptionCount: waterInfo.consumptionCount || 0,
+        dailyRate: waterInfo.dailyRate,
       };
     });
 
