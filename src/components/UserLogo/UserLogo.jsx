@@ -71,6 +71,11 @@ const UserLogo = () => {
     return atIndex !== -1 ? email.slice(0, atIndex) : email;
   };
 
+  const getDisplayName = () => {
+    const name = user.username || getEmailLocalPart(user.email);
+    return name.length > 12 ? name.slice(0, 12) + "..." : name;
+  };
+
   return (
     <>
       <button
@@ -79,9 +84,7 @@ const UserLogo = () => {
         onClick={handleToggleModal}
         style={{ position: "relative" }}
       >
-        <span className={css.userName}>
-          {user.username || getEmailLocalPart(user.email)}
-        </span>
+        <span className={css.userName}>{getDisplayName()}</span>
         {user.photo ? (
           <img
             src={user.photo}
