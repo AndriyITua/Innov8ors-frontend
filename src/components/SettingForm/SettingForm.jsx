@@ -12,6 +12,7 @@ import {
   updateUserPassword,
 } from "../../redux/auth/operationUpdate";
 
+// Loader
 import { RotatingLines } from "react-loader-spinner";
 
 // шаблоны валидации
@@ -88,8 +89,8 @@ const SettingForm = ({ closeModal }) => {
   const isLoading = useSelector(selectLoading);
   const isLoadingpinnerPhoto = useSelector(selectLoadingSpinnerPhoto);
   const { username, email, photo, gender } = useSelector(selectUser);
-  const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
+  const name = username ?? useremail.split('@')[0]; // обрезка почты для имени
   const userGender = gender ?? "woman";
   const userphoto = photo ?? (gender === "man" ? defaultMan : defaultWoman);
 
