@@ -1,12 +1,18 @@
 import { useState, useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLoading, selectUser } from "../../redux/auth/selectors";
+import {
+  selectLoading,
+  selectUser,
+  selectLoadingSpinnerPhoto,
+} from "../../redux/auth/selectors";
 import {
   updateUserPhoto,
   updateUserInfo,
   updateUserPassword,
 } from "../../redux/auth/operationUpdate";
+
+import { RotatingLines } from "react-loader-spinner";
 
 // шаблоны валидации
 import { emailRegExp, nameRegExp } from "../../constants";
@@ -79,10 +85,11 @@ const SettingForm = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   // дефолтные значения
+  const isLoadingSpinnerPhoto = useSelector(selectLoadingSpinnerPhoto);
   const isLoading = useSelector(selectLoading);
   const { username, email, photo, gender } = useSelector(selectUser);
-  const name = username ?? "David";
   const useremail = email ?? "email@gmail.com";
+  const name = username ?? useremail.split("@")[0];
   const userGender = gender ?? "woman";
   const userphoto = photo ?? (gender === "man" ? defaultMan : defaultWoman);
 
@@ -108,7 +115,6 @@ const SettingForm = ({ closeModal }) => {
 
   // сабміт форми
   const submit = (values, actions) => {
-        
     // проверка на пароль - нет пароля - отправляем почту
     if (!values.password) {
       const { name, selectedOptions = "woman" } = values;
@@ -163,18 +169,37 @@ const SettingForm = ({ closeModal }) => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="fileInput" className={css.uploadLabel}>
-                    <MdOutlineFileUpload />
-                    <span className={css.uploadPhotoText}>Upload photo</span>
-                  </label>
-                  <input
-                    className={css.uploadInput}
-                    type="file"
-                    id="fileInput"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    disabled={isLoading}
-                  />
+                  {isLoadingSpinnerPhoto ? (
+                    <RotatingLines
+                      visible={true}
+                      height="18"
+                      width="18"
+                      stroke="grey"
+                      strokeColor="#407bff"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      ariaLabel="rotating-lines-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                    />
+                  ) : (
+                    <>
+                      <label htmlFor="fileInput" className={css.uploadLabel}>
+                        <MdOutlineFileUpload />
+                        <span className={css.uploadPhotoText}>
+                          Upload photo
+                        </span>
+                      </label>
+                      <input
+                        className={css.uploadInput}
+                        type="file"
+                        id="fileInput"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        disabled={isLoading}
+                      />
+                    </>
+                  )}
                 </div>
               </div>
             </div>

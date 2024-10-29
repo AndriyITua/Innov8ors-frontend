@@ -8,4 +8,6 @@ export const selectIsRefreshing = state => state.auth.isRefreshing;
 
 export const selectLoading = state => state.auth.isLoading;
 
+export const selectLoadingSpinnerPhoto = state => state.auth.isLoadingSpinnerPhoto;
+
 export const selectError = state => state.auth.isError;
