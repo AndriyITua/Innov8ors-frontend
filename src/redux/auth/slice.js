@@ -26,6 +26,7 @@ const authSlice = createSlice({
     isLoggedIn: false,
     isRefreshing: false,
     isLoading: false,
+    isLoadingSpinnerPhoto: false,
     isError: null,
   },
   extraReducers: builder => {
@@ -105,12 +106,12 @@ const authSlice = createSlice({
 
       // блок для оновлення фото
       .addCase(updateUserPhoto.pending, state => {
-        state.isLoading = true;
+        state.isLoadingSpinnerPhoto = true;
       })
       .addCase(updateUserPhoto.fulfilled, (state, { payload }) => {
         state.isError = false;
         state.user.photo = payload.data.userphoto;
-        state.isLoading = false;
+        state.isLoadingSpinnerPhoto = false;
       })
       .addCase(updateUserPhoto.rejected, (state, { payload }) => {
         state.isError = payload;
@@ -144,6 +145,7 @@ const authSlice = createSlice({
         state.userId = null;
         state.accessToken = null;
         state.isLoggedIn = false;
+        state.isLoading = false;
         state.isLoading = false;
         state.isError = null;
       })
