@@ -1,5 +1,5 @@
 .container{
-    background-color: #ecf2ff;
+    background-color: var(--secondary-color-2, #ecf2ff);
     width: 264px;
     height: 258px;
 }
@@ -15,7 +15,7 @@
 font-weight: 500;
 font-size: 24px;
 line-height: 1.2;
-color:  #2f2f2f;
+color: var(--color-2, #2f2f2f);
 margin-bottom: 16px;
 }
 .item{
@@ -50,7 +50,7 @@ margin-bottom: 16px;
     background: none; 
     border: none; 
     padding: 0; 
-    color:  #9ebbff;
+    color:  var(--secondary-color-4, #9ebbff);
 }
 .buttonIcon::after {
     content: '';
@@ -66,7 +66,7 @@ margin-bottom: 16px;
 }
 
 .buttonIcon:hover::after {
-    background-color:  #9ebbff;
+    background-color: var(--secondary-color-4, #9ebbff);
 }
 .buttonDel {
     position: relative; 
@@ -75,7 +75,7 @@ margin-bottom: 16px;
     background: none; 
     border: none; 
     padding: 0; 
-    color:  #ef5050;
+    color: var(--secondary-color-3, #ef5050);
 }
 .buttonDel::after {
     content: '';
@@ -90,35 +90,31 @@ margin-bottom: 16px;
     transition: background-color 0.3s ease;
 }
 .buttonDel:hover::after {
-    background-color:  #ef5050;
+    background-color: var(--secondary-color-3, #ef5050);
 }
 
 .button{
-    background-color: #ecf2ff;
+    background-color:var(--secondary-color-2, #ecf2ff);
     padding: 2px 0px ;
     width: 97px;
     height: 20px;
 font-weight: 500;
 font-size: 16px;
 line-height: 1.2;
-color: #407bff;
+color: var(--primery-color-blue, #407bff);
 text-decoration: none;
     display: flex;
     align-items: center;
-    /* justify-content: flex-start; */
-    /* gap: 8px; */
-    /* padding: 0 0 0 4px; */
     cursor: pointer;
 }  
 .buttonAddWaterCont{
     position: sticky;
     overflow: hidden;
     bottom: 0; 
-    background-color: #ecf2ff; 
-    /* z-index: 10; */
+    background-color:var(--secondary-color-2, #ecf2ff); 
 }
 .button:hover{
-    color:#ff9d43;
+    color:var(--secondary-color-5, #ff9d43);
 }
     
 .icon{
@@ -134,7 +130,7 @@ text-decoration: none;
     border: 1px solid ;
     width: 254px;
     height: 0px;
-    color: #d7e3ff;
+    color: var(--secondary-color---5, #d7e3ff);
     margin: 12px 0;
 }
 .water{
@@ -142,13 +138,13 @@ text-decoration: none;
 font-weight: 400;
 font-size: 18px;
 line-height: 1.3;
-color: #407bff;
+color:var(--primery-color-blue, #407bff);
 }
 .am{
 font-weight: 400;
 font-size: 12px;
 line-height: 200%;
-color: #2f2f2f;
+color: var(--color-2, #2f2f2f);
 }
 ::-webkit-scrollbar {
     width: 4px; 
@@ -156,14 +152,14 @@ color: #2f2f2f;
 }
 
 ::-webkit-scrollbar-track {
-    background: #d7e3ff; 
+    background: var(--secondary-color---5, #d7e3ff); 
     margin-top: 11px; 
-    margin-bottom: 8px; 
+    margin-bottom: 32px; 
     border-radius: 8px; 
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #9ebbff; 
+    background-color:var(--secondary-color-4, #9ebbff); 
     border-radius: 8px;
     width: 4px;
     height: 100px;
@@ -192,7 +188,6 @@ color: #2f2f2f;
     }
     .contItem{
         width: 656px;
-        /* height: 188px; */
     }
     .item{
         width: 646px;
@@ -217,7 +212,6 @@ color: #2f2f2f;
     }
     .contItem{
         width: 544px;
-        /* height: 212px; */
     }
     .item{
         width: 534px;
