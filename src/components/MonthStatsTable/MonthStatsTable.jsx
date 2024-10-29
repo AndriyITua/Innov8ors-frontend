@@ -31,8 +31,10 @@ const MonthStatsTable = () => {
     );
   }, [currentYear, currentMonth, dispatch]);
 
+  console.log(waterInfo);
+
   useEffect(() => {
-    if (!waterInfo[0].date) return;
+    if (waterInfo.length < 1 || !waterInfo[0].date) return;
     generateDays(currentYear, currentMonth, waterInfo);
   }, [currentYear, currentMonth, waterInfo]);
 
