@@ -101,6 +101,7 @@ const authSlice = createSlice({
         state.accessToken = null;
         state.isLoggedIn = false;
         state.isLoading = false;
+        state.isLoadingSpinnerPhoto = false;
         state.isError = null;
       })
 
@@ -147,6 +148,7 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isLoading = false;
         state.isLoading = false;
+        state.isLoadingSpinnerPhoto = false;
         state.isError = null;
       })
 
