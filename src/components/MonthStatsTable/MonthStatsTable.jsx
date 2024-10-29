@@ -32,7 +32,7 @@ const MonthStatsTable = () => {
   }, [currentYear, currentMonth, dispatch]);
 
   useEffect(() => {
-    if (waterInfo.length < 1 || !waterInfo[0].date) return;
+    if (!waterInfo[0]?.date) return;
     generateDays(currentYear, currentMonth, waterInfo);
   }, [currentYear, currentMonth, waterInfo]);
 
@@ -134,8 +134,10 @@ const MonthStatsTable = () => {
   };
 
   const goPrevMonth = () => {
-    const newMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-    const newYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+    const newMonth = currentMonth === 1 ? 11 : currentMonth - 1;
+    console.log("goPrevMonth ~ newMonth:", newMonth);
+    const newYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+    console.log("goPrevMonth ~ newYear:", newYear);
     setCurrentMonth(newMonth);
     setCurrentYear(newYear);
     dispatch(fetchWaterMonth({ year: newYear, month: newMonth }));
