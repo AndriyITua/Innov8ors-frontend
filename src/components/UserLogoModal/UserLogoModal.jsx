@@ -15,21 +15,40 @@ export const UserLogoModal = () => {
   function openSettingModal() {
     document.body.classList.add("modal-open");
     setSettingModalIsOpen(true);
+
+    const userLogoModal = document.getElementById("UserLogo");
+    if (userLogoModal) {
+      userLogoModal.style.display = "none";
+    }
   }
 
   function closeSettingModal() {
     document.body.classList.remove("modal-open");
     setSettingModalIsOpen(false);
-  }
 
+    const userLogoModal = document.getElementById("UserLogo");
+    if (userLogoModal) {
+      userLogoModal.style.display = "flex";
+    }
+  }
   function openLogoutModal() {
     document.body.classList.add("modal-open");
     setLogoutModalIsOpen(true);
+
+    const userLogoModal = document.getElementById("UserLogo");
+    if (userLogoModal) {
+      userLogoModal.style.display = "none";
+    }
   }
 
   function closeLogoutModal() {
     document.body.classList.remove("modal-open");
     setLogoutModalIsOpen(false);
+
+    const userLogoModal = document.getElementById("UserLogo");
+    if (userLogoModal) {
+      userLogoModal.style.display = "flex";
+    }
   }
 
   return (
