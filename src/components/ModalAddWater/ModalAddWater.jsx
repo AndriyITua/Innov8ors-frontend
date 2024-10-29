@@ -10,7 +10,6 @@ const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
 
 export default function ModalAddWater({ isOpen, onClose }) {
-  console.log("🚀 ~ ModalAddWater ~ isOpen:", isOpen);
   const dispatch = useDispatch();
   const [water, setWater] = useState(50);
   const [disableButtonPluse, setDisableButtonPluse] = useState(false);
