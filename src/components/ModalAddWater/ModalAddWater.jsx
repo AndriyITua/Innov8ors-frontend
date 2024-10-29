@@ -85,7 +85,6 @@ export default function ModalAddWater({ isOpen, onClose }) {
       onClose();
     }, 500);
   };
-
   useEffect(() => {
     const handleEscape = event => {
       if (event.key === "Escape") {
@@ -98,10 +97,11 @@ export default function ModalAddWater({ isOpen, onClose }) {
         onClose();
       }
     };
+
     if (isOpen) {
       setLocalTime(formattedTime);
       setWater(50);
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden"; 
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleEscape);
     } else {
@@ -109,7 +109,13 @@ export default function ModalAddWater({ isOpen, onClose }) {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     }
+
+    
+    return () => {
+      document.body.style.overflow = ""; 
+    };
   }, [isOpen, formattedTime, onClose]);
+
 
   if (!isOpen) return null;
 
@@ -139,7 +145,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
                 >
                   <FiMinus className={css.circleButton} />
                 </button>
-                <div className={css.waterMl}>50ml</div>
+                <div className={css.waterMl}>{water} ml</div>
                 <button
                   className={css.circle}
                   onClick={onPlusClickedHandler}

@@ -10,7 +10,6 @@ import {
   featchWater,
   patchWater,
 } from "../../redux/water/opertionsEditWater.js";
-// import { asyncThunkCreator } from "@reduxjs/toolkit";
 
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
@@ -18,7 +17,6 @@ const WATER_MAX_LIMIT = 5000;
 export default function ModalAddWater({ isOpen, onClose, idRecord }) {
   const dispatch = useDispatch();
   const waterRecords = useSelector(selectWaterRecords);
-
   const record = waterRecords.find(rec => rec._id === idRecord);
 
   const [water, setWater] = useState(record?.amount || 50);
@@ -27,7 +25,10 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
   const [disableButtonSave, setDisableButtonSave] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [waterInput, setWaterInput] = useState(record?.amount)
+  const [waterInput, setWaterInput] = useState(record?.amount || 50)
+  const [localTiInput, setLocalTimeInput] = useState("");
+
+
   const backdropRef = useRef(null);
   const convertTo24HourFormat = (time) => {
     const [timePart, modifier] = time.split(" ");
@@ -45,7 +46,9 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
     if (record) {
       setWater(record.amount|| 50);
       setWaterInput(record.amount); 
-      setLocalTime(convertTo24HourFormat(record.consumptionTime) || "");
+      const time = convertTo24HourFormat(record.consumptionTime) || "";
+      setLocalTime(time);
+      setLocalTimeInput(time);
     }
   }, [idRecord, record]);
 
@@ -79,18 +82,6 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
   const timeOptions = generateTimeOptions();
 
 
-  useEffect(() => {
-    if (isOpen) {
-      const time = new Date();
-      const hours = time.getHours().toString().padStart(2, '0');
-      const minutes = time.getMinutes().toString().padStart(2, '0');
-      const formattedTime = `${hours}:${minutes}`;
-      setLocalTimeInput(formattedTime);
-    }
-  }, [isOpen]);
-
-  const [localTiInput, setLocalTimeInput] = useState("");
-  useEffect(() => {}, [localTiInput]);
 
   const handleTimeChange = event => {
     setLocalTimeInput(event.target.value);
@@ -128,7 +119,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
     }
   }, [isOpen]);
 
-  const handleSave = () => {
+  const handleSave = async() => {
     setLoading(true);
     const [hour, minute] = localTiInput.split(":");
     const hourInt = parseInt(hour, 10);
@@ -136,11 +127,12 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
     const adjustedHour = hourInt % 12 || 12;
     const formattedLocalTime = `${adjustedHour}:${minute} ${period}`;
     
-    dispatch(patchWater({ id: idRecord, data: { amount: waterInput, consumptionTime: formattedLocalTime}}))
-    setLoading(false);
-    dispatch(featchWater())
-    onClose();
-
+    await dispatch(patchWater({ id: idRecord, data: { amount: waterInput, consumptionTime: formattedLocalTime}}))
+    setTimeout(() => {
+      setLoading(false);
+      dispatch(featchWater());
+      onClose();
+    }, 1500);
   };
 
   if (!isOpen) return null;
@@ -180,7 +172,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
                 >
                   <FiMinus className={css.circleButton} />
                 </button>
-                <div className={css.waterMl}>50ml</div>
+                <div className={css.waterMl}>{waterInput}ml</div>
                 <button
                   className={css.circle}
                   onClick={onPlusClickedHandler}
@@ -199,7 +191,7 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
                 value={localTiInput}
                 onChange={handleTimeChange}
                 className={css.input}
-                list="time-options" // Прив’язка до datalist
+                list="time-options"
               />
               <datalist id="time-options">
                 {timeOptions.map(time => (
