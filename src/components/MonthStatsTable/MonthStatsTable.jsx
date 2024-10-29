@@ -135,9 +135,7 @@ const MonthStatsTable = () => {
 
   const goPrevMonth = () => {
     const newMonth = currentMonth === 1 ? 11 : currentMonth - 1;
-    console.log("goPrevMonth ~ newMonth:", newMonth);
     const newYear = currentMonth === 1 ? currentYear - 1 : currentYear;
-    console.log("goPrevMonth ~ newYear:", newYear);
     setCurrentMonth(newMonth);
     setCurrentYear(newYear);
     dispatch(fetchWaterMonth({ year: newYear, month: newMonth }));
