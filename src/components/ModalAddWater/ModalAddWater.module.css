@@ -193,13 +193,13 @@
         width: 704px;
         padding: 32px 24px;
         gap: 24px;
-        height: 85vh;
+        max-height: 504px;
         overflow-y: auto;
         scrollbar-width: none;
     }
     .modalContent {
         width: 656px;
-        height: 372px;
+        height: 383px;
     }
     .input {
         width: 656px;
