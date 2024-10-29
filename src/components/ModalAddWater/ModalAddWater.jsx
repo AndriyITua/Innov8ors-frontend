@@ -139,7 +139,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
                 >
                   <FiMinus className={css.circleButton} />
                 </button>
-                <div className={css.waterMl}>50ml</div>
+                <div className={css.waterMl}>{water}ml</div>
                 <button
                   className={css.circle}
                   onClick={onPlusClickedHandler}
