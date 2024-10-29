@@ -40,12 +40,9 @@ export default function TodayWaterList() {
     const lastUpdateDate = localStorage.getItem("lastUpdateDate");
     const today = new Date().toDateString();
 
-    if (lastUpdateDate !== today) {
+    if (lastUpdateDate !== today) 
       localStorage.setItem("lastUpdateDate", today);
       dispatch(featchWater());
-    } else {
-      dispatch(featchWater());
-    }
   }, [dispatch]);
 
   //модалка видаленння води
@@ -85,6 +82,18 @@ export default function TodayWaterList() {
     isSetSelectedEntery(null);
     setModalOpenEntr(false);
   };
+
+  useEffect(() => {
+    if (isModalOpen || ModalOpen || isModalOpenEntr) {
+      document.body.style.overflow = "hidden"; 
+    } else {
+      document.body.style.overflow = ""; 
+    }
+
+    return () => {
+      document.body.style.overflow = ""; 
+    };
+  }, [isModalOpen, ModalOpen, isModalOpenEntr]);
 
   return (
     <div className={css.container}>
