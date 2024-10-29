@@ -134,7 +134,7 @@ const MonthStatsTable = () => {
   };
 
   const goPrevMonth = () => {
-    const newMonth = currentMonth === 1 ? 11 : currentMonth - 1;
+    const newMonth = currentMonth === 1 ? 12 : currentMonth - 1;
     const newYear = currentMonth === 1 ? currentYear - 1 : currentYear;
     setCurrentMonth(newMonth);
     setCurrentYear(newYear);
@@ -142,8 +142,8 @@ const MonthStatsTable = () => {
   };
 
   const goNextMonth = () => {
-    const newMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-    const newYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+    const newMonth = currentMonth === 12 ? 1 : currentMonth + 1;
+    const newYear = currentMonth === 12 ? currentYear + 1 : currentYear;
     setCurrentMonth(newMonth);
     setCurrentYear(newYear);
     dispatch(fetchWaterMonth({ year: newYear, month: newMonth }));
