@@ -57,8 +57,8 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(featchWater.fulfilled, (state, action) => {
-        state.water.records = action.payload.data.records || [];
-        state.water.totalConsumed = action.payload.data.totalConsumed;
+        state.water.records = action.payload.data?.records || [];
+        state.water.totalConsumed = action.payload.data?.totalConsumed || 0;
         state.isLoading = false;
         state.error = null;
       })
