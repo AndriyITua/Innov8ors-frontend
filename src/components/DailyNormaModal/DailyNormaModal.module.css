@@ -3,7 +3,7 @@
     inset: 47% auto auto 50%;
     position: fixed;
     width: 280px;
-    max-height: 85vh;
+    /* max-height: 85vh; */
     padding: 24px 12px;
     border-radius: 10px;
     overflow: auto;
@@ -258,7 +258,7 @@
 
 @media screen and (min-width: 1440px) {
   .modalDaily {
-    inset: 44% auto auto 50%;
+    inset: 50% auto auto 50%;
     width: 592px;
   }
 
@@ -272,6 +272,7 @@
 
   .saveBtn {
     box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+    /* margin-bottom: 32px; */
   }
 
   .saveBtn:hover {

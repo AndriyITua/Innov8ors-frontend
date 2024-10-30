@@ -218,7 +218,6 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
                     component="div"
                   />
                 </div>
-
                 <button
                   type="submit"
                   // className={`${css.saveBtn} ${
