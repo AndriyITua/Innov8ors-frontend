@@ -75,30 +75,14 @@ const MonthStatsTable = () => {
 
     const rect = event.target.getBoundingClientRect();
 
-    if (desktopScreen) {
-      if (
-        (day.date > 0 && day.date < 5) ||
-        (day.date > 10 && day.date < 15) ||
-        (day.date > 20 && day.date < 25) ||
-        day.date > 30
-      ) {
-        setModalPosition({
-          top: rect.top + window.scrollY - 8,
-          left: rect.left + window.scrollX + 48,
-          width: rect.width,
-        });
-      } else if (
-        (day.date > 4 && day.date < 11) ||
-        (day.date > 14 && day.date < 21) ||
-        (day.date > 24 && day.date < 31)
-      ) {
-        setModalPosition({
-          top: rect.top + window.scrollY - 8,
-          left: rect.left + window.scrollX - 236,
-          width: rect.width,
-        });
-      }
+    if (mobileScreen) {
+      setModalPosition({
+        top: rect.top + window.scrollY - 2,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+      });
     }
+
     if (tabletScreen) {
       if (
         (day.date > 0 && day.date < 5) ||
@@ -123,12 +107,31 @@ const MonthStatsTable = () => {
         });
       }
     }
-    if (mobileScreen) {
-      setModalPosition({
-        top: rect.top + window.scrollY - 2,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-      });
+    if (desktopScreen) {
+      if (
+        (day.date > 0 && day.date < 5) ||
+        (day.date > 10 && day.date < 15) ||
+        (day.date > 20 && day.date < 25) ||
+        day.date > 30
+      ) {
+        setModalPosition({
+          top: rect.top + window.scrollY - 8,
+          left:
+            rect.left + window.scrollX + 48 - (window.innerWidth - 1440) / 2,
+          width: rect.width,
+        });
+      } else if (
+        (day.date > 4 && day.date < 11) ||
+        (day.date > 14 && day.date < 21) ||
+        (day.date > 24 && day.date < 31)
+      ) {
+        setModalPosition({
+          top: rect.top + window.scrollY - 8,
+          left:
+            rect.left + window.scrollX - 236 - (window.innerWidth - 1440) / 2,
+          width: rect.width,
+        });
+      }
     }
   };
 
