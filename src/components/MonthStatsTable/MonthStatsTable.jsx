@@ -32,35 +32,34 @@ const MonthStatsTable = () => {
   }, [currentYear, currentMonth, dispatch]);
 
   useEffect(() => {
+    const generateDays = (year, month, waterInfo = []) => {
+      const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+      const waterInfoByDate = waterInfo.reduce((acc, record) => {
+        const day = parseInt(record?.date?.split(",")[0], 10);
+
+        acc[day] = record;
+        return acc;
+      }, {});
+
+      const daysArray = Array.from({ length: daysInMonth }, (_, i) => {
+        const day = i + 1;
+        const waterInfo = waterInfoByDate[day] || {};
+
+        return {
+          date: day,
+          month: month,
+          year,
+          progress: waterInfo.percentage || 0,
+          consumptionCount: waterInfo.consumptionCount || 0,
+          dailyRate: waterInfo.dailyRate,
+        };
+      });
+
+      setDays(daysArray);
+    };
     generateDays(currentYear, currentMonth, waterInfo);
   }, [currentYear, currentMonth, waterInfo]);
-
-  const generateDays = (year, month, waterInfo = []) => {
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    const waterInfoByDate = waterInfo.reduce((acc, record) => {
-      const day = parseInt(record?.date?.split(",")[0], 10);
-
-      acc[day] = record;
-      return acc;
-    }, {});
-
-    const daysArray = Array.from({ length: daysInMonth }, (_, i) => {
-      const day = i + 1;
-      const waterInfo = waterInfoByDate[day] || {};
-
-      return {
-        date: day,
-        month: month,
-        year,
-        progress: waterInfo.percentage || 0,
-        consumptionCount: waterInfo.consumptionCount || 0,
-        dailyRate: waterInfo.dailyRate,
-      };
-    });
-
-    setDays(daysArray);
-  };
 
   const handleSelectDay = (day, event) => {
     setSelectedDay({
