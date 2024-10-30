@@ -2,11 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
 import { DaysGeneralStats } from "../DaysGeneralStats/DaysGeneralStats";
-import {
-  // selectWaterPercentage,
-  // selectWaterRecords,
-  selectWaterInfo,
-} from "../../redux/water/selectors.js";
+import { selectWaterInfo } from "../../redux/water/selectors.js";
 import styles from "./MonthStatsTable.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWaterMonth } from "../../redux/water/operationsMonth.js";
@@ -32,34 +28,35 @@ const MonthStatsTable = () => {
   }, [currentYear, currentMonth, dispatch]);
 
   useEffect(() => {
-    const generateDays = (year, month, waterInfo = []) => {
-      const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
-
-      const waterInfoByDate = waterInfo.reduce((acc, record) => {
-        const day = parseInt(record?.date?.split(",")[0], 10);
-
-        acc[day] = record;
-        return acc;
-      }, {});
-
-      const daysArray = Array.from({ length: daysInMonth }, (_, i) => {
-        const day = i + 1;
-        const waterInfo = waterInfoByDate[day] || {};
-
-        return {
-          date: day,
-          month: month,
-          year,
-          progress: waterInfo.percentage || 0,
-          consumptionCount: waterInfo.consumptionCount || 0,
-          dailyRate: waterInfo.dailyRate,
-        };
-      });
-
-      setDays(daysArray);
-    };
     generateDays(currentYear, currentMonth, waterInfo);
   }, [currentYear, currentMonth, waterInfo]);
+
+  const generateDays = (year, month, waterInfo = []) => {
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const waterInfoByDate = waterInfo.reduce((acc, record) => {
+      const day = parseInt(record?.date?.split(",")[0], 10);
+
+      acc[day] = record;
+      return acc;
+    }, {});
+
+    const daysArray = Array.from({ length: daysInMonth }, (_, i) => {
+      const day = i + 1;
+      const waterInfo = waterInfoByDate[day] || {};
+
+      return {
+        date: day,
+        month: month,
+        year,
+        progress: waterInfo.percentage || 0,
+        consumptionCount: waterInfo.consumptionCount || 0,
+        dailyRate: waterInfo.dailyRate,
+      };
+    });
+
+    setDays(daysArray);
+  };
 
   const handleSelectDay = (day, event) => {
     setSelectedDay({
@@ -72,33 +69,17 @@ const MonthStatsTable = () => {
     const mobileScreen = window.innerWidth >= 320 && window.innerWidth < 768;
     const tabletScreen = window.innerWidth >= 768 && window.innerWidth < 1440;
     const desktopScreen = window.innerWidth >= 1440;
+    console.log("window.innerWidth: ", window.innerWidth);
 
     const rect = event.target.getBoundingClientRect();
-
-    if (desktopScreen) {
-      if (
-        (day.date > 0 && day.date < 5) ||
-        (day.date > 10 && day.date < 15) ||
-        (day.date > 20 && day.date < 25) ||
-        day.date > 30
-      ) {
-        setModalPosition({
-          top: rect.top + window.scrollY - 8,
-          left: rect.left + window.scrollX + 48,
-          width: rect.width,
-        });
-      } else if (
-        (day.date > 4 && day.date < 11) ||
-        (day.date > 14 && day.date < 21) ||
-        (day.date > 24 && day.date < 31)
-      ) {
-        setModalPosition({
-          top: rect.top + window.scrollY - 8,
-          left: rect.left + window.scrollX - 236,
-          width: rect.width,
-        });
-      }
+    if (mobileScreen) {
+      setModalPosition({
+        top: rect.top + window.scrollY - 2,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+      });
     }
+    console.log("rect.left", rect.left);
     if (tabletScreen) {
       if (
         (day.date > 0 && day.date < 5) ||
@@ -123,26 +104,48 @@ const MonthStatsTable = () => {
         });
       }
     }
-    if (mobileScreen) {
-      setModalPosition({
-        top: rect.top + window.scrollY - 2,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-      });
+    if (desktopScreen) {
+      if (
+        (day.date > 0 && day.date < 5) ||
+        (day.date > 10 && day.date < 15) ||
+        (day.date > 20 && day.date < 25) ||
+        day.date > 30
+      ) {
+        console.log("window.scrollX", window.scrollX);
+
+        setModalPosition({
+          top: rect.top + window.scrollY - 8,
+          left:
+            rect.left + window.scrollX + 48 - (window.innerWidth - 1440) / 2,
+          width: rect.width,
+        });
+      } else if (
+        (day.date > 4 && day.date < 11) ||
+        (day.date > 14 && day.date < 21) ||
+        (day.date > 24 && day.date < 31)
+      ) {
+        setModalPosition({
+          top: rect.top + window.scrollY - 8,
+          left:
+            rect.left + window.scrollX - 236 - (window.innerWidth - 1440) / 2,
+          width: rect.width,
+        });
+      }
     }
+    console.log(window.scrollX);
   };
 
   const goPrevMonth = () => {
-    const newMonth = currentMonth === 1 ? 12 : currentMonth - 1;
-    const newYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+    const newMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    const newYear = currentMonth === 0 ? currentYear - 1 : currentYear;
     setCurrentMonth(newMonth);
     setCurrentYear(newYear);
     dispatch(fetchWaterMonth({ year: newYear, month: newMonth }));
   };
 
   const goNextMonth = () => {
-    const newMonth = currentMonth === 12 ? 1 : currentMonth + 1;
-    const newYear = currentMonth === 12 ? currentYear + 1 : currentYear;
+    const newMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+    const newYear = currentMonth === 11 ? currentYear + 1 : currentYear;
     setCurrentMonth(newMonth);
     setCurrentYear(newYear);
     dispatch(fetchWaterMonth({ year: newYear, month: newMonth }));
