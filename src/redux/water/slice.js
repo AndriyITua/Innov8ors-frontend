@@ -135,8 +135,6 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(putWaterRate.fulfilled, (state, action) => {
-        console.log(action.payload);
-
         state.water.dailyRate = action.payload.data.dailynormwater;
         state.isLoading = false;
         state.error = null;

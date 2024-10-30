@@ -19,7 +19,7 @@
 
 .modalWrap {
     position: relative;
-    background: white;
+    background: var(--primery-color-white, #fff);
     width: 280px;
     max-height: 540px;
     padding: 24px 12px;
@@ -43,7 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: var(--primery-color-white, #fff);
     width: 280px;
     height: 540px;
     padding: 24px 12px;
@@ -92,7 +92,7 @@
     height: 44px;
     gap: 10px;
     border-radius: 50%;
-    border: 1px solid #9ebbff;
+    border: 1px solid var(--color-6, #9ebbff);
     box-shadow: 0px 2px 4px 0px #407bff33;
 }
 
@@ -110,8 +110,8 @@
     gap: 10px;
     border-radius: 40px;
     opacity: 0px;
-    background: #d7e3ff;
-    color: #407bff;
+    background:var(--secondary-color---5, #d7e3ff);
+    color: var(--primery-color-blue, #407bff);
     font-family: Roboto;
     font-size: 18px;
     font-weight: 700;
@@ -125,12 +125,12 @@
     gap: 10px;
     border-radius: 6px;
     opacity: 0px;
-    border: 1px solid #d7e3ff;
+    border: 1px solid var(--secondary-color---5, #d7e3ff);
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
     text-align: left;
-    color: #407bff;
+    color: var(--primery-color-blue, #407bff);
 }
 
 .boxButton {
@@ -149,14 +149,14 @@
     gap: 10px;
     border-radius: 10px;
     opacity: 0px;
-    background: #407bff;
+    background: var(--primery-color-blue, #407bff);
     box-shadow: 0px 4px 8px 0px #407bff57;
     font-family: Roboto;
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
     text-align: center;
-    color: #ffffff;
+    color:var(--primery-color-white, #fff);
     cursor: pointer;
 }
 .buttonSave:hover:not([disabled]) {
@@ -165,7 +165,7 @@
 
 .buttonSave:active:not([disabled]) {
     box-shadow: none;
-    background: #407bff;
+    background:var(--primery-color-blue, #407bff);
 }
 
 .buttonSave[disabled] {
@@ -182,7 +182,7 @@
     margin: 0;
     align-items: center;
     justify-content: center;
-    color: #407bff;
+    color: var(--primery-color-blue, #407bff);
     font-family: Roboto;
     font-size: 18px;
     font-weight: 700;

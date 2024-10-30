@@ -21,6 +21,11 @@ const UserLogo = () => {
 
   const handleToggleModal = () => {
     if (!isModalOpen) {
+      const scrollBarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollBarWidth}px`;
+
       const buttonRect = buttonRef.current.getBoundingClientRect();
       const screenWidth = window.innerWidth;
 
@@ -28,14 +33,13 @@ const UserLogo = () => {
         top: screenWidth >= 1440 ? buttonRect.bottom + 6 : buttonRect.bottom,
         left: buttonRect.right - 118,
       });
-      document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
+      document.body.style.paddingRight = "0px";
     }
 
     setModalOpen(!isModalOpen);
   };
-
   useEffect(() => {
     const handleResize = () => {
       if (isModalOpen && buttonRef.current) {
@@ -71,6 +75,11 @@ const UserLogo = () => {
     return atIndex !== -1 ? email.slice(0, atIndex) : email;
   };
 
+  const getDisplayName = () => {
+    const name = user.username || getEmailLocalPart(user.email);
+    return name.length > 12 ? name.slice(0, 12) + "..." : name;
+  };
+
   return (
     <>
       <button
@@ -79,9 +88,7 @@ const UserLogo = () => {
         onClick={handleToggleModal}
         style={{ position: "relative" }}
       >
-        <span className={css.userName}>
-          {user.username || getEmailLocalPart(user.email)}
-        </span>
+        <span className={css.userName}>{getDisplayName()}</span>
         {user.photo ? (
           <img
             src={user.photo}
@@ -99,6 +106,7 @@ const UserLogo = () => {
       </button>
 
       <Modal
+        id={"UserLogo"}
         isOpen={isModalOpen}
         onRequestClose={handleToggleModal}
         style={{

@@ -1,21 +1,16 @@
 import Modal from "react-modal";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { CgClose } from "react-icons/cg";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./DailyNormaModal.module.css";
 import { putWaterRate } from "../../redux/water/operationsDaily";
 import toast from "react-hot-toast";
-// import { selectDailyRate } from "../../redux/water/selectors";
+import { selectDailyRate } from "../../redux/water/selectors";
 
 const customStyles = {
   content: {
-    // width: "280px",
-    height: "auto",
-    // padding: "24px 12px",
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     borderRadius: "10px",
@@ -27,90 +22,79 @@ const customStyles = {
   },
 };
 
+const validationSchema = Yup.object().shape({
+  weight: Yup.number().min(0, "Weight must be above 0"),
+  hours: Yup.number()
+    .min(0, "Hours cant be negative")
+    .max(24, "Maximum 24 hour"),
+  water: Yup.number().min(1, "Water must be above 0"),
+});
+
 export default function DailyNormaModal({ modalIsOpen, closeModal }) {
   const dispatch = useDispatch();
   const [selectedGender, setSelectedGender] = useState("woman");
-  const [weight, setWeight] = useState(0);
-  const [hours, setHours] = useState(0);
   const [waterAmount, setWaterAmount] = useState(0);
+  const dailyRate = useSelector(selectDailyRate);
 
-  const calculateWater = () => {
-    const weight = document.querySelector("#weight").value;
-    const hours = document.querySelector("#hours").value;
-    if (document.querySelector("input[name='gender'][value='woman']").checked) {
+  const calculateWater = (weight, hours, gender) => {
+    if (gender === "woman") {
       return weight * 0.03 + hours * 0.4;
     }
-    if (document.querySelector("input[name='gender'][value='man']").checked) {
+    if (gender === "man") {
       return weight * 0.04 + hours * 0.6;
     }
     return 2;
   };
 
-  const handleWeightChange = e => {
-    const newWeight = e.target.value;
-
-    setWeight(newWeight);
-    setWaterAmount(calculateWater(newWeight, hours));
+  const handleGenderChange = e => {
+    setSelectedGender(e.target.value);
   };
 
-  const handleHoursChange = e => {
-    const newHours = e.target.value;
-
-    setHours(newHours);
-    setWaterAmount(calculateWater(weight, newHours));
-  };
-
-  const handleBackdropClick = e => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
-  const updateDailyNorma = async () => {
-    const water = document.querySelector("#water");
-    try {
-      await dispatch(putWaterRate(water.value * 1000));
-      closeModal();
-      resetForm;
-    } catch (error) {
-      toast.error(
-        error.message || "An error occurred when updating the water rate."
-      );
-    }
-  };
-
-  const resetForm = () => {
-    setWeight(0);
-    setHours(0);
+  const handleModalClose = () => {
+    closeModal();
     setWaterAmount(0);
   };
 
-  const handleChange = e => {
-    setSelectedGender(e.target.value);
+  const updateDailyNorma = async values => {
+    const waterValue = values.water || waterAmount;
+
+    if (waterValue === 0) return;
+    try {
+      const response = await dispatch(putWaterRate(waterValue * 1000));
+
+      if (putWaterRate.rejected.match(response)) {
+        throw new Error(response.payload);
+      }
+      handleModalClose();
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
     <Modal
       isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      contentLabel="Example Modal"
+      onRequestClose={handleModalClose}
+      contentLabel="Daily Water Norm Modal"
       style={customStyles}
       className={css.modalDaily}
-      onClick={handleBackdropClick}
+      onClick={e => {
+        if (e.target === e.currentTarget) handleModalClose();
+      }}
     >
       <div className={css.modalContent}>
         <div className={css.modalHeader}>
           <h2 className={css.title}>My daily norma</h2>
-          <button className={css.clsButton} onClick={closeModal}>
-            <CgClose />
+          <button className={css.clsButton} onClick={handleModalClose}>
+            <CgClose className={css.svg} />
           </button>
         </div>
         <p className={css.gender}>
-          For woman:
-          <span className={css.genderSpan}>V=(M*0,03) + (T*0,4)</span>
+          For woman:{" "}
+          <span className={css.genderSpan}>V=(M*0.03) + (T*0.4)</span>
         </p>
         <p className={css.gender}>
-          For man: <span className={css.genderSpan}>V=(M*0,04) + (T*0,6)</span>
+          For man: <span className={css.genderSpan}>V=(M*0.04) + (T*0.6)</span>
         </p>
         <p className={css.description}>
           * V is the volume of the water norm in liters per day, M is your body
@@ -119,96 +103,136 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
           0)
         </p>
 
-        <form className={css.form}>
-          <div>
-            <legend className={css.rate}>Calculate your rate:</legend>
-            <label className={css.radioBtn}>
-              <input
-                type="radio"
-                name="gender"
-                value="woman"
-                checked={selectedGender === "woman"}
-                onChange={handleChange}
-              />
-              For woman
-            </label>
-            <label className={css.radioBtn}>
-              <input
-                type="radio"
-                name="gender"
-                value="man"
-                checked={selectedGender === "man"}
-                onChange={handleChange}
-              />{" "}
-              For man
-            </label>
-          </div>
+        <Formik
+          initialValues={{
+            weight: "",
+            hours: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={updateDailyNorma}
+        >
+          {({ values }) => {
+            const newWaterAmount = calculateWater(
+              values.weight,
+              values.hours,
+              selectedGender
+            );
+            if (newWaterAmount !== waterAmount) {
+              setWaterAmount(newWaterAmount);
+            }
+            return (
+              <Form className={css.form}>
+                <div>
+                  <legend className={css.rate}>Calculate your rate:</legend>
+                  <label className={css.radioBtn}>
+                    <Field
+                      type="radio"
+                      name="gender"
+                      value="woman"
+                      checked={selectedGender === "woman"}
+                      onChange={handleGenderChange}
+                    />
+                    For woman
+                  </label>
+                  <label className={css.radioBtn}>
+                    <Field
+                      type="radio"
+                      name="gender"
+                      value="man"
+                      checked={selectedGender === "man"}
+                      onChange={handleGenderChange}
+                    />
+                    For man
+                  </label>
+                </div>
 
-          <div className={css.wrap}>
-            <label htmlFor="weight" className={css.kiloHours}>
-              Your weight in kilograms:
-              <input
-                type="text"
-                id="weight"
-                name="weight"
-                min="0"
-                max="200"
-                onChange={handleWeightChange}
-                placeholder="0"
-                className={css.inputNumber}
-              ></input>
-            </label>
-          </div>
+                <div className={css.wrap}>
+                  <label htmlFor="weight" className={css.label}>
+                    Your weight in kilograms:
+                    <Field
+                      type="number"
+                      id="weight"
+                      name="weight"
+                      placeholder="0"
+                      className={css.inputNumber}
+                    />
+                    <ErrorMessage
+                      className={css.error}
+                      name="weight"
+                      component="div"
+                    />
+                  </label>
+                </div>
+                <div className={css.wrapHours}>
+                  <label htmlFor="hours" className={css.label}>
+                    <p>
+                      {" "}
+                      The time of active participation in sports or other
+                      activities with high physical load in hours:
+                    </p>
 
-          <div className={css.wrap}>
-            <label htmlFor="hours" className={css.label}>
-              The time of active participation in sports or other activities
-              with high physical load in hours:
-            </label>
-            <input
-              type="text"
-              id="hours"
-              name="time"
-              min="0"
-              max="24"
-              onChange={handleHoursChange}
-              placeholder="0"
-              className={css.inputNumber}
-            ></input>
-          </div>
+                    <Field
+                      type="number"
+                      id="hours"
+                      name="hours"
+                      placeholder="0"
+                      className={css.inputNumber}
+                    />
+                    <ErrorMessage
+                      className={css.error}
+                      name="hours"
+                      component="div"
+                    />
+                  </label>
+                </div>
+                <div className={css.wrapLitres}>
+                  <p className={css.amount}>
+                    The required amount of water in liters per day:
+                  </p>
+                  <p className={css.litres}>
+                    <span className={css.litresSpan}>
+                      {waterAmount.toFixed(1)} L
+                    </span>
+                  </p>
+                </div>
 
-          <div className={css.wrapLitres}>
-            <p className={css.amount}>
-              The required amount of water in liters per day:
-            </p>
-            <p className={css.litres}>
-              <span className={css.litresSpan}>{waterAmount.toFixed(1)} L</span>
-            </p>
-          </div>
+                <div className={css.resultWrap}>
+                  <label htmlFor="water" className={css.result}>
+                    <p> Write down how much water you will drink:</p>
+                  </label>
+                  <Field
+                    type="text"
+                    id="water"
+                    name="water"
+                    // placeholder={waterAmount.toFixed(1)}
+                    placeholder={
+                      waterAmount
+                        ? waterAmount.toFixed(1)
+                        : (dailyRate / 1000).toFixed(1)
+                    }
+                    className={css.waterInput}
+                  />
+                  <ErrorMessage
+                    className={css.error}
+                    name="water"
+                    component="div"
+                  />
+                </div>
 
-          <div className={css.resultWrap}>
-            <label htmlFor="water" className={css.result}>
-              Write down how much water you will drink:
-            </label>
-            <input
-              type="text"
-              id="water"
-              name="amountOfWater"
-              min="0"
-              max="5"
-              placeholder="0"
-              className={css.waterInput}
-            ></input>
-          </div>
-
-          <button
-            type="button"
-            className={css.saveBtn}
-            onClick={updateDailyNorma}
-          >
-            Save
-          </button>
-        </form>
+                <button
+                  type="submit"
+                  // className={`${css.saveBtn} ${
+                  //   waterAmount === 0 ? css.unactive : ""
+                  // }`}
+                  className={css.saveBtn}
+                  // disabled={waterAmount === 0}
+                >
+                  Save
+                </button>
+              </Form>
+            );
+          }}
+        </Formik>
       </div>
     </Modal>
   );

@@ -6,6 +6,7 @@ import {
   selectWaterPercentage,
   selectServingsCount,
 } from "../../redux/water/selectors.js";
+import { defaultDailyNorma } from "../../constants/index.js";
 
 export const DaysGeneralStats = ({
   selectedDay,
@@ -113,7 +114,12 @@ export const DaysGeneralStats = ({
         </li>
         <li className={styles.item}>
           Daily norma:{" "}
-          <span className={styles.info}>{selectedDay.dailyNorm} L</span>
+          <span className={styles.info}>
+            {selectedDay.dailyRate
+              ? (selectedDay.dailyRate / 1000).toFixed(1)
+              : defaultDailyNorma}
+            L
+          </span>
         </li>
         <li className={styles.item}>
           Fulfillment of the daily norm:

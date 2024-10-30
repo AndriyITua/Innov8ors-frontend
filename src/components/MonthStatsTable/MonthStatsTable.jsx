@@ -32,7 +32,6 @@ const MonthStatsTable = () => {
   }, [currentYear, currentMonth, dispatch]);
 
   useEffect(() => {
-    if (!waterInfo[0]?.date) return;
     generateDays(currentYear, currentMonth, waterInfo);
   }, [currentYear, currentMonth, waterInfo]);
 
@@ -40,7 +39,7 @@ const MonthStatsTable = () => {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     const waterInfoByDate = waterInfo.reduce((acc, record) => {
-      const day = parseInt(record.date.split(",")[0], 10);
+      const day = parseInt(record?.date?.split(",")[0], 10);
 
       acc[day] = record;
       return acc;
@@ -56,6 +55,7 @@ const MonthStatsTable = () => {
         year,
         progress: waterInfo.percentage || 0,
         consumptionCount: waterInfo.consumptionCount || 0,
+        dailyRate: waterInfo.dailyRate,
       };
     });
 
