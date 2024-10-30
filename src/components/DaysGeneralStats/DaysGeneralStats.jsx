@@ -44,7 +44,7 @@ export const DaysGeneralStats = ({
     "December",
   ];
 
-  const formattedDate = `${date}, ${monthNames[month]}`;
+  const formattedDate = `${date}, ${monthNames[month - 1]}`;
 
   useEffect(() => {
     const handleClickOutside = event => {
