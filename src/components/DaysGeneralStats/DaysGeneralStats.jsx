@@ -94,9 +94,6 @@ export const DaysGeneralStats = ({
       modal.style.left = `${left + width}px`;
     } else if (rightDirection < 0) {
       modal.style.left = `${window.innerWidth - modalWidth}px`;
-    } else {
-      modal.style.left = "50%";
-      modal.style.transform = "translateX(-50%)";
     }
 
     modal.style.top = `${top - modalHeight}px`;
