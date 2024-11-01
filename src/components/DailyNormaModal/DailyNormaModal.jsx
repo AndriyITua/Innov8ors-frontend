@@ -30,7 +30,11 @@ const validationSchema = Yup.object().shape({
   water: Yup.number().min(1, "Water must be above 0"),
 });
 
-export default function DailyNormaModal({ modalIsOpen, closeModal }) {
+export default function DailyNormaModal({
+  modalIsOpen,
+  closeModal,
+  updateCalender,
+}) {
   const dispatch = useDispatch();
   const [selectedGender, setSelectedGender] = useState("woman");
   const [waterAmount, setWaterAmount] = useState(0);
@@ -66,6 +70,7 @@ export default function DailyNormaModal({ modalIsOpen, closeModal }) {
         throw new Error(response.payload);
       }
       handleModalClose();
+      updateCalender();
     } catch (error) {
       toast.error(error.message);
     }

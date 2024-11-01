@@ -9,7 +9,7 @@ import { addWater, featchWater } from "../../redux/water/opertionsEditWater.js";
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
 
-export default function ModalAddWater({ isOpen, onClose }) {
+export default function ModalAddWater({ isOpen, onClose, updateCalender }) {
   const dispatch = useDispatch();
   const [water, setWater] = useState(50);
   const [disableButtonPluse, setDisableButtonPluse] = useState(false);
@@ -70,7 +70,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
     }
   }, [water]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setLoading(true);
     const [hour, minute] = localTime.split(":");
     const hourInt = parseInt(hour, 10);
@@ -78,8 +78,12 @@ export default function ModalAddWater({ isOpen, onClose }) {
     const adjustedHour = hourInt % 12 || 12;
     const formattedLocalTime = `${adjustedHour}:${minute} ${period}`;
 
-    dispatch(addWater({ amount: water, consumptionTime: formattedLocalTime }));
-    dispatch(featchWater());
+    await dispatch(
+      addWater({ amount: water, consumptionTime: formattedLocalTime })
+    );
+    await dispatch(featchWater());
+
+    updateCalender();
     setTimeout(() => {
       setLoading(false);
       onClose();
@@ -101,7 +105,7 @@ export default function ModalAddWater({ isOpen, onClose }) {
     if (isOpen) {
       setLocalTime(formattedTime);
       setWater(50);
-      document.body.style.overflow = "hidden"; 
+      document.body.style.overflow = "hidden";
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleEscape);
     } else {
@@ -110,12 +114,10 @@ export default function ModalAddWater({ isOpen, onClose }) {
       document.removeEventListener("keydown", handleEscape);
     }
 
-    
     return () => {
-      document.body.style.overflow = ""; 
+      document.body.style.overflow = "";
     };
   }, [isOpen, formattedTime, onClose]);
-
 
   if (!isOpen) return null;
 

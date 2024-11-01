@@ -8,7 +8,7 @@ import { fetchUserById } from "../../redux/auth/operationUserId";
 
 Modal.setAppElement("#root");
 
-export default function DailyNorma() {
+export default function DailyNorma({ updateCalender }) {
   const dispatch = useDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dailyRate = useSelector(selectDailyRate);
@@ -43,7 +43,11 @@ export default function DailyNorma() {
           Edit
         </button>
       </div>
-      <DailyNormaModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
+      <DailyNormaModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        updateCalender={updateCalender}
+      />
     </>
   );
 }

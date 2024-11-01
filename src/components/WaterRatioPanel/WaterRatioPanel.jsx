@@ -3,20 +3,24 @@ import { PiLineVertical } from "react-icons/pi";
 import css from "./WaterRatioPanel.module.css";
 import { useEffect, useState } from "react";
 import ModalAddWater from "../../components/ModalAddWater/ModalAddWater";
-import { selectTotalConsumed, selectDailyRate } from "../../redux/water/selectors";
+import {
+  selectTotalConsumed,
+  selectDailyRate,
+} from "../../redux/water/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { featchWater } from "../../redux/water/opertionsEditWater";
 
-export default function WaterRatioPanel() {
+export default function WaterRatioPanel({ updateCalender }) {
   const dispatch = useDispatch();
   const totalConsumed = useSelector(selectTotalConsumed);
-  const dailyRate  = useSelector(selectDailyRate);
+  const dailyRate = useSelector(selectDailyRate);
 
-  const percentage = dailyRate ? (totalConsumed/dailyRate)*100:0;
+  const percentage = dailyRate ? (totalConsumed / dailyRate) * 100 : 0;
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(featchWater());
-  },[dispatch])
+    updateCalender();
+  }, [dispatch]);
 
   const [value, setValue] = useState(0);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -29,8 +33,8 @@ export default function WaterRatioPanel() {
   };
   const getFontStyle = (currentValue, targetValue) => {
     return {
-      fontSize: currentValue === targetValue ? '16px' : '12px',
-      fontWeight: currentValue === targetValue ? '500' : '400',
+      fontSize: currentValue === targetValue ? "16px" : "12px",
+      fontWeight: currentValue === targetValue ? "500" : "400",
     };
   };
   return (
@@ -52,16 +56,27 @@ export default function WaterRatioPanel() {
         ></input>
         <ul className={css.item}>
           <li className={css.lineContainer}>
-            <div><PiLineVertical className={css.line} /></div>
-            <span className={css.startEnd} style={ getFontStyle(percentage, 0)}>0%</span>
+            <div>
+              <PiLineVertical className={css.line} />
+            </div>
+            <span className={css.startEnd} style={getFontStyle(percentage, 0)}>
+              0%
+            </span>
           </li>
           <li className={css.lineContainer}>
             <PiLineVertical className={css.line} />
-            <span className={css.startEnd} style={ getFontStyle(percentage, 50) }>50%</span>
+            <span className={css.startEnd} style={getFontStyle(percentage, 50)}>
+              50%
+            </span>
           </li>
           <li className={css.lineContainer}>
             <PiLineVertical className={css.line} />
-            <span className={css.startEnd}  style={ getFontStyle(percentage, 100)}>100%</span>
+            <span
+              className={css.startEnd}
+              style={getFontStyle(percentage, 100)}
+            >
+              100%
+            </span>
           </li>
         </ul>
       </div>
@@ -69,7 +84,11 @@ export default function WaterRatioPanel() {
         <CiCirclePlus className={css.icon} />
         Add Water
       </button>
-      <ModalAddWater isOpen={isModalOpen} onClose={handleCloseModal} />
+      <ModalAddWater
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        updateCalender={updateCalender}
+      />
     </div>
   );
 }
