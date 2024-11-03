@@ -2,11 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
 import { DaysGeneralStats } from "../DaysGeneralStats/DaysGeneralStats";
-import {
-  // selectWaterPercentage,
-  // selectWaterRecords,
-  selectWaterInfo,
-} from "../../redux/water/selectors.js";
+import { selectWaterInfo } from "../../redux/water/selectors.js";
 import styles from "./MonthStatsTable.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWaterMonth } from "../../redux/water/operationsMonth.js";

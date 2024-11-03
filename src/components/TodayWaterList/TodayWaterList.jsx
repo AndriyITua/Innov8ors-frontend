@@ -162,6 +162,7 @@ export default function TodayWaterList({ updateCalender }) {
         isOpen={isModalOpenEntr}
         onClose={handleCloseModalEntr}
         idRecord={isSetectedEntery}
+        updateCalender={updateCalender}
       />
       <ModalAddWater
         isOpen={ModalOpen}
