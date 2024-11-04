@@ -14,7 +14,12 @@ import {
 const ADD_WATER = 50;
 const WATER_MAX_LIMIT = 5000;
 
-export default function ModalAddWater({ isOpen, onClose, idRecord }) {
+export default function ModalAddWater({
+  isOpen,
+  onClose,
+  idRecord,
+  updateCalender,
+}) {
   const dispatch = useDispatch();
   const waterRecords = useSelector(selectWaterRecords);
   const record = waterRecords.find(rec => rec._id === idRecord);
@@ -25,12 +30,11 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
   const [disableButtonMinuse, setDisableButtonMinuse] = useState(false);
   const [disableButtonSave, setDisableButtonSave] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [waterInput, setWaterInput] = useState(record?.amount || 50)
+  const [waterInput, setWaterInput] = useState(record?.amount || 50);
   const [localTiInput, setLocalTimeInput] = useState("");
 
-
   const backdropRef = useRef(null);
-  const convertTo24HourFormat = (time) => {
+  const convertTo24HourFormat = time => {
     const [timePart, modifier] = time.split(" ");
     let [hours, minutes] = timePart.split(":");
 
@@ -41,11 +45,11 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
     }
     return `${hours}:${minutes}`;
   };
-  
+
   useEffect(() => {
     if (record) {
-      setWater(record.amount|| 50);
-      setWaterInput(record.amount); 
+      setWater(record.amount || 50);
+      setWaterInput(record.amount);
       const time = convertTo24HourFormat(record.consumptionTime) || "";
       setLocalTime(time);
       setLocalTimeInput(time);
@@ -53,17 +57,17 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
   }, [idRecord, record]);
 
   const onPlusClickedHandler = () => {
-    const newWaterAmount = waterInput+ ADD_WATER;
+    const newWaterAmount = waterInput + ADD_WATER;
     setWaterInput(newWaterAmount);
   };
 
   const onMinusClickedHandler = () => {
-    const newWaterAmount = waterInput- ADD_WATER;
-    setWaterInput(newWaterAmount)
+    const newWaterAmount = waterInput - ADD_WATER;
+    setWaterInput(newWaterAmount);
   };
 
   useEffect(() => {
-    setDisableButtonPluse(waterInput>= WATER_MAX_LIMIT);
+    setDisableButtonPluse(waterInput >= WATER_MAX_LIMIT);
     setDisableButtonMinuse(waterInput <= 0);
     setDisableButtonSave(waterInput > WATER_MAX_LIMIT || water <= 0);
   }, [waterInput]);
@@ -80,8 +84,6 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
     return times;
   };
   const timeOptions = generateTimeOptions();
-
-
 
   const handleTimeChange = event => {
     setLocalTimeInput(event.target.value);
@@ -119,20 +121,26 @@ export default function ModalAddWater({ isOpen, onClose, idRecord }) {
     }
   }, [isOpen]);
 
-  const handleSave = async() => {
+  const handleSave = async () => {
     setLoading(true);
     const [hour, minute] = localTiInput.split(":");
     const hourInt = parseInt(hour, 10);
     const period = hourInt >= 12 ? "PM" : "AM";
     const adjustedHour = hourInt % 12 || 12;
     const formattedLocalTime = `${adjustedHour}:${minute} ${period}`;
-    
-    await dispatch(patchWater({ id: idRecord, data: { amount: waterInput, consumptionTime: formattedLocalTime}}))
+
+    await dispatch(
+      patchWater({
+        id: idRecord,
+        data: { amount: waterInput, consumptionTime: formattedLocalTime },
+      })
+    );
     setTimeout(() => {
       setLoading(false);
       dispatch(featchWater());
       onClose();
     }, 1500);
+    updateCalender();
   };
 
   if (!isOpen) return null;
